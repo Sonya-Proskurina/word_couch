@@ -12,7 +12,7 @@ class WordModel with _$WordModel {
   const factory WordModel({
     required List<WordMeaningModel> results,
     required SyllablesModel? syllables,
-    required Map<String,String>? pronunciation,
+    required Map<String, String>? pronunciation,
   }) = _WordModel;
 
   factory WordModel.fromJson(Map<String, Object?> json) =>
