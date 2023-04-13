@@ -6,7 +6,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-  final theme = (Brightness brightness) => ThemeData(
+
+  ThemeData themeWithBrightness(Brightness brightness) => ThemeData(
       brightness: brightness,
       useMaterial3: true,
       colorSchemeSeed: Colors.orangeAccent);
@@ -16,18 +17,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       themeMode: ThemeMode.system,
-      darkTheme: theme(Brightness.dark),
-      theme: theme(Brightness.light),
+      darkTheme: themeWithBrightness(Brightness.dark),
+      theme: themeWithBrightness(Brightness.light),
       home: Material(
         child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar.large(
               leading:
                   IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
-              title: const Text('Large App Bar'),
-              actions: <Widget>[
-                IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
-              ],
+              title: const Text('Word Couch'),
             ),
             SliverToBoxAdapter(
               child: Card(
