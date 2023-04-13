@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:word_couch/word_search/presentation/widgets/main_screen_list.dart';
+import 'package:word_couch/word_search/presentation/widgets/search_bar.dart';
 
 void main() async {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   ThemeData themeWithBrightness(Brightness brightness) => ThemeData(
       brightness: brightness,
@@ -19,91 +21,33 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       darkTheme: themeWithBrightness(Brightness.dark),
       theme: themeWithBrightness(Brightness.light),
-      home: Material(
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar.large(
-              leading:
-                  IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
-              title: const Text('Word Couch'),
-            ),
-            SliverToBoxAdapter(
-              child: Card(
-                child: Column(
-                  children: [
-                    PlayGameCard(),
-                    Column(
-                        children: List.generate(10, (_) => const CardWidget())),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class PlayGameCard extends StatelessWidget {
-  const PlayGameCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(6.0)),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
+      home: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: Material(
+          child: Stack(
             children: [
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Test your knowledge!",
-                    style: Theme.of(context).textTheme.titleLarge,
+              CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar.large(
+                    leading: IconButton(
+                        icon: const Icon(Icons.menu), onPressed: () {}),
+                    title: const Text('Word Couch'),
                   ),
-                  Text("Play a game where you guess words meaning",
-                      style: Theme.of(context).textTheme.bodyMedium)
+                  const SliverToBoxAdapter(
+                    child: Card(child: MainScreenList()),
+                  )
                 ],
-              )),
-              const Icon(Icons.keyboard_arrow_right_outlined)
+              ),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Align(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  child: SearchBar(),
+                ),
+              )
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class CardWidget extends StatelessWidget {
-  const CardWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        children: [
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "word",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Text("This is the word description",
-                  style: Theme.of(context).textTheme.bodyMedium)
-            ],
-          )),
-          const Icon(Icons.keyboard_arrow_right_outlined)
-        ],
       ),
     );
   }
