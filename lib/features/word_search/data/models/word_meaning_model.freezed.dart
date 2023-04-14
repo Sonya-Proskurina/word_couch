@@ -20,29 +20,53 @@ WordMeaningModel _$WordMeaningModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WordMeaningModel {
+  @JsonKey(name: 'definition')
   String? get definition => throw _privateConstructorUsedError;
+  @JsonKey(name: 'partOfSpeech')
   String? get partOfSpeech => throw _privateConstructorUsedError;
+  @JsonKey(name: 'synonyms')
   List<String>? get synonyms => throw _privateConstructorUsedError;
+  @JsonKey(name: 'antonyms')
   List<String>? get antonyms => throw _privateConstructorUsedError;
+  @JsonKey(name: 'typeOf')
   List<String>? get typeOf => throw _privateConstructorUsedError;
+  @JsonKey(name: 'derivation')
   List<String>? get derivation => throw _privateConstructorUsedError;
+  @JsonKey(name: 'pertainsTo')
   List<String>? get pertainsTo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'regionOf')
   List<String>? get regionOf => throw _privateConstructorUsedError;
+  @JsonKey(name: 'inRegion')
   List<String>? get inRegion => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasUsages')
   List<String>? get hasUsages => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasCategories')
   List<String>? get hasCategories => throw _privateConstructorUsedError;
+  @JsonKey(name: 'inCategory')
   List<String>? get inCategory => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasSubstances')
   List<String>? get hasSubstances => throw _privateConstructorUsedError;
+  @JsonKey(name: 'substanceOf')
   List<String>? get substanceOf => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasMembers')
   List<String>? get hasMembers => throw _privateConstructorUsedError;
+  @JsonKey(name: 'memberOf')
   List<String>? get memberOf => throw _privateConstructorUsedError;
+  @JsonKey(name: 'entails')
   List<String>? get entails => throw _privateConstructorUsedError;
+  @JsonKey(name: 'also')
   List<String>? get also => throw _privateConstructorUsedError;
+  @JsonKey(name: 'similarTo')
   List<String>? get similarTo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasInstances')
   List<String>? get hasInstances => throw _privateConstructorUsedError;
+  @JsonKey(name: 'instanceOf')
   List<String>? get instanceOf => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasParts')
   List<String>? get hasParts => throw _privateConstructorUsedError;
+  @JsonKey(name: 'partOf')
   List<String>? get partOf => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasTypes')
   List<String>? get hasTypes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,30 +82,30 @@ abstract class $WordMeaningModelCopyWith<$Res> {
       _$WordMeaningModelCopyWithImpl<$Res, WordMeaningModel>;
   @useResult
   $Res call(
-      {String? definition,
-      String? partOfSpeech,
-      List<String>? synonyms,
-      List<String>? antonyms,
-      List<String>? typeOf,
-      List<String>? derivation,
-      List<String>? pertainsTo,
-      List<String>? regionOf,
-      List<String>? inRegion,
-      List<String>? hasUsages,
-      List<String>? hasCategories,
-      List<String>? inCategory,
-      List<String>? hasSubstances,
-      List<String>? substanceOf,
-      List<String>? hasMembers,
-      List<String>? memberOf,
-      List<String>? entails,
-      List<String>? also,
-      List<String>? similarTo,
-      List<String>? hasInstances,
-      List<String>? instanceOf,
-      List<String>? hasParts,
-      List<String>? partOf,
-      List<String>? hasTypes});
+      {@JsonKey(name: 'definition') String? definition,
+      @JsonKey(name: 'partOfSpeech') String? partOfSpeech,
+      @JsonKey(name: 'synonyms') List<String>? synonyms,
+      @JsonKey(name: 'antonyms') List<String>? antonyms,
+      @JsonKey(name: 'typeOf') List<String>? typeOf,
+      @JsonKey(name: 'derivation') List<String>? derivation,
+      @JsonKey(name: 'pertainsTo') List<String>? pertainsTo,
+      @JsonKey(name: 'regionOf') List<String>? regionOf,
+      @JsonKey(name: 'inRegion') List<String>? inRegion,
+      @JsonKey(name: 'hasUsages') List<String>? hasUsages,
+      @JsonKey(name: 'hasCategories') List<String>? hasCategories,
+      @JsonKey(name: 'inCategory') List<String>? inCategory,
+      @JsonKey(name: 'hasSubstances') List<String>? hasSubstances,
+      @JsonKey(name: 'substanceOf') List<String>? substanceOf,
+      @JsonKey(name: 'hasMembers') List<String>? hasMembers,
+      @JsonKey(name: 'memberOf') List<String>? memberOf,
+      @JsonKey(name: 'entails') List<String>? entails,
+      @JsonKey(name: 'also') List<String>? also,
+      @JsonKey(name: 'similarTo') List<String>? similarTo,
+      @JsonKey(name: 'hasInstances') List<String>? hasInstances,
+      @JsonKey(name: 'instanceOf') List<String>? instanceOf,
+      @JsonKey(name: 'hasParts') List<String>? hasParts,
+      @JsonKey(name: 'partOf') List<String>? partOf,
+      @JsonKey(name: 'hasTypes') List<String>? hasTypes});
 }
 
 /// @nodoc
@@ -232,30 +256,30 @@ abstract class _$$_WordMeaningModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? definition,
-      String? partOfSpeech,
-      List<String>? synonyms,
-      List<String>? antonyms,
-      List<String>? typeOf,
-      List<String>? derivation,
-      List<String>? pertainsTo,
-      List<String>? regionOf,
-      List<String>? inRegion,
-      List<String>? hasUsages,
-      List<String>? hasCategories,
-      List<String>? inCategory,
-      List<String>? hasSubstances,
-      List<String>? substanceOf,
-      List<String>? hasMembers,
-      List<String>? memberOf,
-      List<String>? entails,
-      List<String>? also,
-      List<String>? similarTo,
-      List<String>? hasInstances,
-      List<String>? instanceOf,
-      List<String>? hasParts,
-      List<String>? partOf,
-      List<String>? hasTypes});
+      {@JsonKey(name: 'definition') String? definition,
+      @JsonKey(name: 'partOfSpeech') String? partOfSpeech,
+      @JsonKey(name: 'synonyms') List<String>? synonyms,
+      @JsonKey(name: 'antonyms') List<String>? antonyms,
+      @JsonKey(name: 'typeOf') List<String>? typeOf,
+      @JsonKey(name: 'derivation') List<String>? derivation,
+      @JsonKey(name: 'pertainsTo') List<String>? pertainsTo,
+      @JsonKey(name: 'regionOf') List<String>? regionOf,
+      @JsonKey(name: 'inRegion') List<String>? inRegion,
+      @JsonKey(name: 'hasUsages') List<String>? hasUsages,
+      @JsonKey(name: 'hasCategories') List<String>? hasCategories,
+      @JsonKey(name: 'inCategory') List<String>? inCategory,
+      @JsonKey(name: 'hasSubstances') List<String>? hasSubstances,
+      @JsonKey(name: 'substanceOf') List<String>? substanceOf,
+      @JsonKey(name: 'hasMembers') List<String>? hasMembers,
+      @JsonKey(name: 'memberOf') List<String>? memberOf,
+      @JsonKey(name: 'entails') List<String>? entails,
+      @JsonKey(name: 'also') List<String>? also,
+      @JsonKey(name: 'similarTo') List<String>? similarTo,
+      @JsonKey(name: 'hasInstances') List<String>? hasInstances,
+      @JsonKey(name: 'instanceOf') List<String>? instanceOf,
+      @JsonKey(name: 'hasParts') List<String>? hasParts,
+      @JsonKey(name: 'partOf') List<String>? partOf,
+      @JsonKey(name: 'hasTypes') List<String>? hasTypes});
 }
 
 /// @nodoc
@@ -399,30 +423,54 @@ class __$$_WordMeaningModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_WordMeaningModel implements _WordMeaningModel {
   const _$_WordMeaningModel(
-      {required this.definition,
-      required this.partOfSpeech,
-      required final List<String>? synonyms,
-      required final List<String>? antonyms,
-      required final List<String>? typeOf,
-      required final List<String>? derivation,
-      required final List<String>? pertainsTo,
-      required final List<String>? regionOf,
-      required final List<String>? inRegion,
-      required final List<String>? hasUsages,
-      required final List<String>? hasCategories,
-      required final List<String>? inCategory,
-      required final List<String>? hasSubstances,
-      required final List<String>? substanceOf,
-      required final List<String>? hasMembers,
-      required final List<String>? memberOf,
-      required final List<String>? entails,
-      required final List<String>? also,
-      required final List<String>? similarTo,
-      required final List<String>? hasInstances,
-      required final List<String>? instanceOf,
-      required final List<String>? hasParts,
-      required final List<String>? partOf,
-      required final List<String>? hasTypes})
+      {@JsonKey(name: 'definition')
+          required this.definition,
+      @JsonKey(name: 'partOfSpeech')
+          required this.partOfSpeech,
+      @JsonKey(name: 'synonyms')
+          required final List<String>? synonyms,
+      @JsonKey(name: 'antonyms')
+          required final List<String>? antonyms,
+      @JsonKey(name: 'typeOf')
+          required final List<String>? typeOf,
+      @JsonKey(name: 'derivation')
+          required final List<String>? derivation,
+      @JsonKey(name: 'pertainsTo')
+          required final List<String>? pertainsTo,
+      @JsonKey(name: 'regionOf')
+          required final List<String>? regionOf,
+      @JsonKey(name: 'inRegion')
+          required final List<String>? inRegion,
+      @JsonKey(name: 'hasUsages')
+          required final List<String>? hasUsages,
+      @JsonKey(name: 'hasCategories')
+          required final List<String>? hasCategories,
+      @JsonKey(name: 'inCategory')
+          required final List<String>? inCategory,
+      @JsonKey(name: 'hasSubstances')
+          required final List<String>? hasSubstances,
+      @JsonKey(name: 'substanceOf')
+          required final List<String>? substanceOf,
+      @JsonKey(name: 'hasMembers')
+          required final List<String>? hasMembers,
+      @JsonKey(name: 'memberOf')
+          required final List<String>? memberOf,
+      @JsonKey(name: 'entails')
+          required final List<String>? entails,
+      @JsonKey(name: 'also')
+          required final List<String>? also,
+      @JsonKey(name: 'similarTo')
+          required final List<String>? similarTo,
+      @JsonKey(name: 'hasInstances')
+          required final List<String>? hasInstances,
+      @JsonKey(name: 'instanceOf')
+          required final List<String>? instanceOf,
+      @JsonKey(name: 'hasParts')
+          required final List<String>? hasParts,
+      @JsonKey(name: 'partOf')
+          required final List<String>? partOf,
+      @JsonKey(name: 'hasTypes')
+          required final List<String>? hasTypes})
       : _synonyms = synonyms,
         _antonyms = antonyms,
         _typeOf = typeOf,
@@ -450,11 +498,14 @@ class _$_WordMeaningModel implements _WordMeaningModel {
       _$$_WordMeaningModelFromJson(json);
 
   @override
+  @JsonKey(name: 'definition')
   final String? definition;
   @override
+  @JsonKey(name: 'partOfSpeech')
   final String? partOfSpeech;
   final List<String>? _synonyms;
   @override
+  @JsonKey(name: 'synonyms')
   List<String>? get synonyms {
     final value = _synonyms;
     if (value == null) return null;
@@ -465,6 +516,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _antonyms;
   @override
+  @JsonKey(name: 'antonyms')
   List<String>? get antonyms {
     final value = _antonyms;
     if (value == null) return null;
@@ -475,6 +527,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _typeOf;
   @override
+  @JsonKey(name: 'typeOf')
   List<String>? get typeOf {
     final value = _typeOf;
     if (value == null) return null;
@@ -485,6 +538,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _derivation;
   @override
+  @JsonKey(name: 'derivation')
   List<String>? get derivation {
     final value = _derivation;
     if (value == null) return null;
@@ -495,6 +549,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _pertainsTo;
   @override
+  @JsonKey(name: 'pertainsTo')
   List<String>? get pertainsTo {
     final value = _pertainsTo;
     if (value == null) return null;
@@ -505,6 +560,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _regionOf;
   @override
+  @JsonKey(name: 'regionOf')
   List<String>? get regionOf {
     final value = _regionOf;
     if (value == null) return null;
@@ -515,6 +571,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _inRegion;
   @override
+  @JsonKey(name: 'inRegion')
   List<String>? get inRegion {
     final value = _inRegion;
     if (value == null) return null;
@@ -525,6 +582,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _hasUsages;
   @override
+  @JsonKey(name: 'hasUsages')
   List<String>? get hasUsages {
     final value = _hasUsages;
     if (value == null) return null;
@@ -535,6 +593,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _hasCategories;
   @override
+  @JsonKey(name: 'hasCategories')
   List<String>? get hasCategories {
     final value = _hasCategories;
     if (value == null) return null;
@@ -545,6 +604,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _inCategory;
   @override
+  @JsonKey(name: 'inCategory')
   List<String>? get inCategory {
     final value = _inCategory;
     if (value == null) return null;
@@ -555,6 +615,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _hasSubstances;
   @override
+  @JsonKey(name: 'hasSubstances')
   List<String>? get hasSubstances {
     final value = _hasSubstances;
     if (value == null) return null;
@@ -565,6 +626,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _substanceOf;
   @override
+  @JsonKey(name: 'substanceOf')
   List<String>? get substanceOf {
     final value = _substanceOf;
     if (value == null) return null;
@@ -575,6 +637,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _hasMembers;
   @override
+  @JsonKey(name: 'hasMembers')
   List<String>? get hasMembers {
     final value = _hasMembers;
     if (value == null) return null;
@@ -585,6 +648,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _memberOf;
   @override
+  @JsonKey(name: 'memberOf')
   List<String>? get memberOf {
     final value = _memberOf;
     if (value == null) return null;
@@ -595,6 +659,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _entails;
   @override
+  @JsonKey(name: 'entails')
   List<String>? get entails {
     final value = _entails;
     if (value == null) return null;
@@ -605,6 +670,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _also;
   @override
+  @JsonKey(name: 'also')
   List<String>? get also {
     final value = _also;
     if (value == null) return null;
@@ -615,6 +681,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _similarTo;
   @override
+  @JsonKey(name: 'similarTo')
   List<String>? get similarTo {
     final value = _similarTo;
     if (value == null) return null;
@@ -625,6 +692,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _hasInstances;
   @override
+  @JsonKey(name: 'hasInstances')
   List<String>? get hasInstances {
     final value = _hasInstances;
     if (value == null) return null;
@@ -635,6 +703,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _instanceOf;
   @override
+  @JsonKey(name: 'instanceOf')
   List<String>? get instanceOf {
     final value = _instanceOf;
     if (value == null) return null;
@@ -645,6 +714,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _hasParts;
   @override
+  @JsonKey(name: 'hasParts')
   List<String>? get hasParts {
     final value = _hasParts;
     if (value == null) return null;
@@ -655,6 +725,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _partOf;
   @override
+  @JsonKey(name: 'partOf')
   List<String>? get partOf {
     final value = _partOf;
     if (value == null) return null;
@@ -665,6 +736,7 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
   final List<String>? _hasTypes;
   @override
+  @JsonKey(name: 'hasTypes')
   List<String>? get hasTypes {
     final value = _hasTypes;
     if (value == null) return null;
@@ -768,81 +840,129 @@ class _$_WordMeaningModel implements _WordMeaningModel {
 
 abstract class _WordMeaningModel implements WordMeaningModel {
   const factory _WordMeaningModel(
-      {required final String? definition,
-      required final String? partOfSpeech,
-      required final List<String>? synonyms,
-      required final List<String>? antonyms,
-      required final List<String>? typeOf,
-      required final List<String>? derivation,
-      required final List<String>? pertainsTo,
-      required final List<String>? regionOf,
-      required final List<String>? inRegion,
-      required final List<String>? hasUsages,
-      required final List<String>? hasCategories,
-      required final List<String>? inCategory,
-      required final List<String>? hasSubstances,
-      required final List<String>? substanceOf,
-      required final List<String>? hasMembers,
-      required final List<String>? memberOf,
-      required final List<String>? entails,
-      required final List<String>? also,
-      required final List<String>? similarTo,
-      required final List<String>? hasInstances,
-      required final List<String>? instanceOf,
-      required final List<String>? hasParts,
-      required final List<String>? partOf,
-      required final List<String>? hasTypes}) = _$_WordMeaningModel;
+      {@JsonKey(name: 'definition')
+          required final String? definition,
+      @JsonKey(name: 'partOfSpeech')
+          required final String? partOfSpeech,
+      @JsonKey(name: 'synonyms')
+          required final List<String>? synonyms,
+      @JsonKey(name: 'antonyms')
+          required final List<String>? antonyms,
+      @JsonKey(name: 'typeOf')
+          required final List<String>? typeOf,
+      @JsonKey(name: 'derivation')
+          required final List<String>? derivation,
+      @JsonKey(name: 'pertainsTo')
+          required final List<String>? pertainsTo,
+      @JsonKey(name: 'regionOf')
+          required final List<String>? regionOf,
+      @JsonKey(name: 'inRegion')
+          required final List<String>? inRegion,
+      @JsonKey(name: 'hasUsages')
+          required final List<String>? hasUsages,
+      @JsonKey(name: 'hasCategories')
+          required final List<String>? hasCategories,
+      @JsonKey(name: 'inCategory')
+          required final List<String>? inCategory,
+      @JsonKey(name: 'hasSubstances')
+          required final List<String>? hasSubstances,
+      @JsonKey(name: 'substanceOf')
+          required final List<String>? substanceOf,
+      @JsonKey(name: 'hasMembers')
+          required final List<String>? hasMembers,
+      @JsonKey(name: 'memberOf')
+          required final List<String>? memberOf,
+      @JsonKey(name: 'entails')
+          required final List<String>? entails,
+      @JsonKey(name: 'also')
+          required final List<String>? also,
+      @JsonKey(name: 'similarTo')
+          required final List<String>? similarTo,
+      @JsonKey(name: 'hasInstances')
+          required final List<String>? hasInstances,
+      @JsonKey(name: 'instanceOf')
+          required final List<String>? instanceOf,
+      @JsonKey(name: 'hasParts')
+          required final List<String>? hasParts,
+      @JsonKey(name: 'partOf')
+          required final List<String>? partOf,
+      @JsonKey(name: 'hasTypes')
+          required final List<String>? hasTypes}) = _$_WordMeaningModel;
 
   factory _WordMeaningModel.fromJson(Map<String, dynamic> json) =
       _$_WordMeaningModel.fromJson;
 
   @override
+  @JsonKey(name: 'definition')
   String? get definition;
   @override
+  @JsonKey(name: 'partOfSpeech')
   String? get partOfSpeech;
   @override
+  @JsonKey(name: 'synonyms')
   List<String>? get synonyms;
   @override
+  @JsonKey(name: 'antonyms')
   List<String>? get antonyms;
   @override
+  @JsonKey(name: 'typeOf')
   List<String>? get typeOf;
   @override
+  @JsonKey(name: 'derivation')
   List<String>? get derivation;
   @override
+  @JsonKey(name: 'pertainsTo')
   List<String>? get pertainsTo;
   @override
+  @JsonKey(name: 'regionOf')
   List<String>? get regionOf;
   @override
+  @JsonKey(name: 'inRegion')
   List<String>? get inRegion;
   @override
+  @JsonKey(name: 'hasUsages')
   List<String>? get hasUsages;
   @override
+  @JsonKey(name: 'hasCategories')
   List<String>? get hasCategories;
   @override
+  @JsonKey(name: 'inCategory')
   List<String>? get inCategory;
   @override
+  @JsonKey(name: 'hasSubstances')
   List<String>? get hasSubstances;
   @override
+  @JsonKey(name: 'substanceOf')
   List<String>? get substanceOf;
   @override
+  @JsonKey(name: 'hasMembers')
   List<String>? get hasMembers;
   @override
+  @JsonKey(name: 'memberOf')
   List<String>? get memberOf;
   @override
+  @JsonKey(name: 'entails')
   List<String>? get entails;
   @override
+  @JsonKey(name: 'also')
   List<String>? get also;
   @override
+  @JsonKey(name: 'similarTo')
   List<String>? get similarTo;
   @override
+  @JsonKey(name: 'hasInstances')
   List<String>? get hasInstances;
   @override
+  @JsonKey(name: 'instanceOf')
   List<String>? get instanceOf;
   @override
+  @JsonKey(name: 'hasParts')
   List<String>? get hasParts;
   @override
+  @JsonKey(name: 'partOf')
   List<String>? get partOf;
   @override
+  @JsonKey(name: 'hasTypes')
   List<String>? get hasTypes;
   @override
   @JsonKey(ignore: true)

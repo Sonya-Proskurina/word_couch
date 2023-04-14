@@ -20,8 +20,11 @@ WordModel _$WordModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WordModel {
+  @JsonKey(name: 'results')
   List<WordMeaningModel> get results => throw _privateConstructorUsedError;
+  @JsonKey(name: 'syllables')
   SyllablesModel? get syllables => throw _privateConstructorUsedError;
+  @JsonKey(name: 'pronunciation')
   Map<String, String>? get pronunciation => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,9 +39,9 @@ abstract class $WordModelCopyWith<$Res> {
       _$WordModelCopyWithImpl<$Res, WordModel>;
   @useResult
   $Res call(
-      {List<WordMeaningModel> results,
-      SyllablesModel? syllables,
-      Map<String, String>? pronunciation});
+      {@JsonKey(name: 'results') List<WordMeaningModel> results,
+      @JsonKey(name: 'syllables') SyllablesModel? syllables,
+      @JsonKey(name: 'pronunciation') Map<String, String>? pronunciation});
 
   $SyllablesModelCopyWith<$Res>? get syllables;
 }
@@ -97,9 +100,9 @@ abstract class _$$_WordModelCopyWith<$Res> implements $WordModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<WordMeaningModel> results,
-      SyllablesModel? syllables,
-      Map<String, String>? pronunciation});
+      {@JsonKey(name: 'results') List<WordMeaningModel> results,
+      @JsonKey(name: 'syllables') SyllablesModel? syllables,
+      @JsonKey(name: 'pronunciation') Map<String, String>? pronunciation});
 
   @override
   $SyllablesModelCopyWith<$Res>? get syllables;
@@ -141,9 +144,12 @@ class __$$_WordModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_WordModel implements _WordModel {
   const _$_WordModel(
-      {required final List<WordMeaningModel> results,
-      required this.syllables,
-      required final Map<String, String>? pronunciation})
+      {@JsonKey(name: 'results')
+          required final List<WordMeaningModel> results,
+      @JsonKey(name: 'syllables')
+          required this.syllables,
+      @JsonKey(name: 'pronunciation')
+          required final Map<String, String>? pronunciation})
       : _results = results,
         _pronunciation = pronunciation;
 
@@ -152,6 +158,7 @@ class _$_WordModel implements _WordModel {
 
   final List<WordMeaningModel> _results;
   @override
+  @JsonKey(name: 'results')
   List<WordMeaningModel> get results {
     if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
@@ -159,9 +166,11 @@ class _$_WordModel implements _WordModel {
   }
 
   @override
+  @JsonKey(name: 'syllables')
   final SyllablesModel? syllables;
   final Map<String, String>? _pronunciation;
   @override
+  @JsonKey(name: 'pronunciation')
   Map<String, String>? get pronunciation {
     final value = _pronunciation;
     if (value == null) return null;
@@ -211,18 +220,24 @@ class _$_WordModel implements _WordModel {
 
 abstract class _WordModel implements WordModel {
   const factory _WordModel(
-      {required final List<WordMeaningModel> results,
-      required final SyllablesModel? syllables,
-      required final Map<String, String>? pronunciation}) = _$_WordModel;
+      {@JsonKey(name: 'results')
+          required final List<WordMeaningModel> results,
+      @JsonKey(name: 'syllables')
+          required final SyllablesModel? syllables,
+      @JsonKey(name: 'pronunciation')
+          required final Map<String, String>? pronunciation}) = _$_WordModel;
 
   factory _WordModel.fromJson(Map<String, dynamic> json) =
       _$_WordModel.fromJson;
 
   @override
+  @JsonKey(name: 'results')
   List<WordMeaningModel> get results;
   @override
+  @JsonKey(name: 'syllables')
   SyllablesModel? get syllables;
   @override
+  @JsonKey(name: 'pronunciation')
   Map<String, String>? get pronunciation;
   @override
   @JsonKey(ignore: true)
