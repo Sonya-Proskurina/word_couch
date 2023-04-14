@@ -20,7 +20,9 @@ SyllablesModel _$SyllablesModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SyllablesModel {
+  @JsonKey(name: 'count')
   int get count => throw _privateConstructorUsedError;
+  @JsonKey(name: 'list')
   List<String> get list => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +37,9 @@ abstract class $SyllablesModelCopyWith<$Res> {
           SyllablesModel value, $Res Function(SyllablesModel) then) =
       _$SyllablesModelCopyWithImpl<$Res, SyllablesModel>;
   @useResult
-  $Res call({int count, List<String> list});
+  $Res call(
+      {@JsonKey(name: 'count') int count,
+      @JsonKey(name: 'list') List<String> list});
 }
 
 /// @nodoc
@@ -75,7 +79,9 @@ abstract class _$$_SyllablesModelCopyWith<$Res>
       __$$_SyllablesModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int count, List<String> list});
+  $Res call(
+      {@JsonKey(name: 'count') int count,
+      @JsonKey(name: 'list') List<String> list});
 }
 
 /// @nodoc
@@ -109,16 +115,19 @@ class __$$_SyllablesModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SyllablesModel implements _SyllablesModel {
   const _$_SyllablesModel(
-      {required this.count, required final List<String> list})
+      {@JsonKey(name: 'count') required this.count,
+      @JsonKey(name: 'list') required final List<String> list})
       : _list = list;
 
   factory _$_SyllablesModel.fromJson(Map<String, dynamic> json) =>
       _$$_SyllablesModelFromJson(json);
 
   @override
+  @JsonKey(name: 'count')
   final int count;
   final List<String> _list;
   @override
+  @JsonKey(name: 'list')
   List<String> get list {
     if (_list is EqualUnmodifiableListView) return _list;
     // ignore: implicit_dynamic_type
@@ -160,15 +169,18 @@ class _$_SyllablesModel implements _SyllablesModel {
 
 abstract class _SyllablesModel implements SyllablesModel {
   const factory _SyllablesModel(
-      {required final int count,
-      required final List<String> list}) = _$_SyllablesModel;
+          {@JsonKey(name: 'count') required final int count,
+          @JsonKey(name: 'list') required final List<String> list}) =
+      _$_SyllablesModel;
 
   factory _SyllablesModel.fromJson(Map<String, dynamic> json) =
       _$_SyllablesModel.fromJson;
 
   @override
+  @JsonKey(name: 'count')
   int get count;
   @override
+  @JsonKey(name: 'list')
   List<String> get list;
   @override
   @JsonKey(ignore: true)
