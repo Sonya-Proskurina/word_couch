@@ -7,8 +7,8 @@ part 'syllables_model.g.dart';
 @freezed
 class SyllablesModel with _$SyllablesModel {
   const factory SyllablesModel({
-    required int count,
-    required List<String> list,
+    @JsonKey(name: 'count') required int count,
+    @JsonKey(name: 'list') required List<String> list,
   }) = _SyllablesModel;
 
   factory SyllablesModel.fromJson(Map<String, Object?> json) =>
