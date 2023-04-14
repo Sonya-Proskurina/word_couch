@@ -1,6 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:word_couch/features/profile/presentation/pages/test_auth_page.dart';
+
+import 'apikey.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: firebaseKey,
+      appId: firebaseMobilesdkAppId,
+      messagingSenderId: firebaseMessagingSenderId,
+      projectId: firebaseProjectId,
+      storageBucket: firebaseStorageBucket,
+    ),
+  );
   runApp(const MyApp());
 }
 
@@ -24,7 +38,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const TestAuthPage(),
     );
   }
 }
