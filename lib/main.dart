@@ -1,10 +1,24 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'core/navigation/router_path.dart';
+import 'package:word_couch/features/profile/presentation/pages/test_auth_page.dart';
+
+import 'apikey.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: firebaseKey,
+      appId: firebaseMobilesdkAppId,
+      messagingSenderId: firebaseMessagingSenderId,
+      projectId: firebaseProjectId,
+      storageBucket: firebaseStorageBucket,
+    ),
+  );
   runApp(const MyApp());
 }
 
