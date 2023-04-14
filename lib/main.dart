@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'core/navigation/router_path.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -24,7 +26,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: RouterPathContainer.mainPage,
+      routes: RouterPathContainer.routes,
     );
   }
 }
