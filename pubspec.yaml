@@ -55,6 +55,14 @@ dev_dependencies:
   freezed: ^2.3.2
   json_serializable: ^6.6.1
   build_runner: ^2.3.3
+  flutter_launcher_icons: "^0.13.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  adaptive_icon_background: "#FFAB40"
+  adaptive_icon_foreground: "assets/icon_fg.png"
+  ios: true
+  image_path: "assets/icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
