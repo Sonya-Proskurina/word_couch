@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:word_couch/word_search/presentation/widgets/play_game_card.dart';
+import 'package:word_couch/features/word_search/presentation/widgets/play_game_card.dart';
 
 class MainScreenList extends StatelessWidget {
   const MainScreenList({super.key});
