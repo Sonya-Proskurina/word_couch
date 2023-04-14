@@ -27,9 +27,13 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
 dependencies:
+  flutter_localizations:
+    sdk: flutter
   flutter:
     sdk: flutter
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -37,6 +41,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
+  dartz: ^0.10.1
+  firebase_core: ^2.9.0
+  firebase_auth: ^4.4.1
+  firebase_storage: ^11.1.0
+  firebase_messaging: ^14.4.0
+  cloud_firestore: ^4.5.1
+  intl: ^0.17.0
+  dio: ^5.1.1
+  logger: ^1.3.0
+  riverpod: ^2.3.4
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +65,14 @@ dev_dependencies:
   freezed: ^2.3.2
   json_serializable: ^6.6.1
   build_runner: ^2.3.3
+  flutter_launcher_icons: "^0.13.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  adaptive_icon_background: "#FFAB40"
+  adaptive_icon_foreground: "assets/icon_fg.png"
+  ios: true
+  image_path: "assets/icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -62,6 +84,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,0 +1,11 @@
+{
+ "testText": "Test text",
+ "parametersText" : "Text {parameter}",
+ "@parametersText":{
+ "placeholders": {
+ "parameter": {
+         "type":"String"
+         }
+       }
+    }
+}
