@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:word_couch/features/word_search/presentation/widgets/play_game_card.dart';
+import 'package:word_couch/features/word_search/presentation/widgets/start_challenge_card.dart';
 
 class MainScreenList extends StatelessWidget {
   const MainScreenList({super.key});
@@ -8,7 +8,7 @@ class MainScreenList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[const PlayGameCard()] +
+      children: <Widget>[const StartChallengeCard()] +
           ListTile.divideTiles(
               context: context,
               tiles: List.generate(
