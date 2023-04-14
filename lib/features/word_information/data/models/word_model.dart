@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:word_couch/features/word_information/data/models/word_meaning_model.dart';
 
 import 'syllables_model.dart';
-import 'word_meaning_model.dart';
 
 part 'word_model.freezed.dart';
 
