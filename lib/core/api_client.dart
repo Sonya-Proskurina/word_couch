@@ -3,24 +3,46 @@ import 'package:word_couch/apikey.dart';
 
 import 'logger.dart';
 
-class ApiClient {
-  static const baseUrl = 'https://wordsapiv1.p.rapidapi.com';
-
-  static final dio = Dio(BaseOptions(baseUrl: baseUrl, headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'X-RapidAPI-Key': APIKEY,
-    'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
-  }))
-    ..interceptors.add(LoggerInterceptor());
-
-  static Future<T?> get<T>(String request) async {
-    var res = await dio.get<T>(request);
+abstract class ApiClient {
+  Dio get dio;
+  Future<T?> get<T>(String request, { Map<String, dynamic> query = const {} }) async {
+    var res = await dio.get<T>(request, queryParameters: query);
     T? data = res.data;
     if (data != null) {
       return data;
     }
     return Future.error('Error getting data');
+  }
+}
+
+class WordsApiClient extends ApiClient {
+  static const baseUrl = 'https://wordsapiv1.p.rapidapi.com';
+
+  @override
+  Dio dio = Dio(BaseOptions(baseUrl: baseUrl, headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'X-RapidAPI-Key': wordsApiKey,
+    'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+  }))
+    ..interceptors.add(LoggerInterceptor());
+}
+
+class ImageApiClient extends ApiClient {
+  static const baseUrl = 'https://bing-image-search1.p.rapidapi.com/images/search';
+
+  @override
+  Dio dio = Dio(BaseOptions(baseUrl: baseUrl, headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'X-RapidAPI-Key': imageApiKey,
+    'X-RapidAPI-Host': 'bing-image-search1.p.rapidapi.com'
+  }))
+    ..interceptors.add(LoggerInterceptor());
+
+  @override
+  Future<T?> get<T>(String request, { Map<String, dynamic> query = const {} }) async {
+    return super.get("", query: {'q' : request, 'count': 1});
   }
 }
 
