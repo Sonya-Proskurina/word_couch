@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 abstract class UserWordsRepository {
   Future<Either<String, bool>> addFavouriteWord(String word);
 
-  Future<Either<String, bool>> addStoryWord(String word);
+  Future<Either<String, bool>> addHistoryWord(String word);
 
   /// true - если слово есть в истоии пользователя
-  Future<Either<String, bool>> getStoryWord(String word);
+  Future<Either<String, bool>> getHistoryWord(String word);
 
   /// true - если слово есть в избранном пользователя
   Future<Either<String, bool>> getFavouriteWord(String word);
@@ -16,10 +16,10 @@ abstract class UserWordsRepository {
 
 class MockWordsRepositoryImpl implements UserWordsRepository {
   List<String> favourite;
-  List<String> story;
+  List<String> history;
 
   MockWordsRepositoryImpl({
-    required this.story,
+    required this.history,
     required this.favourite,
   });
 
@@ -30,8 +30,8 @@ class MockWordsRepositoryImpl implements UserWordsRepository {
   }
 
   @override
-  Future<Either<String, bool>> addStoryWord(String word) async {
-    story.add(word);
+  Future<Either<String, bool>> addHistoryWord(String word) async {
+    history.add(word);
     return const Right(true);
   }
 
@@ -47,7 +47,7 @@ class MockWordsRepositoryImpl implements UserWordsRepository {
   }
 
   @override
-  Future<Either<String, bool>> getStoryWord(String word) async {
-    return Right(story.contains(word));
+  Future<Either<String, bool>> getHistoryWord(String word) async {
+    return Right(history.contains(word));
   }
 }

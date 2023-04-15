@@ -7,7 +7,7 @@ class UserTransformer {
       email: user.email ?? "",
       uid: user.uid,
       favourite: [],
-      story: [],
+      history: [],
       test: 0,
     );
   }

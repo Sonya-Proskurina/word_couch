@@ -22,7 +22,7 @@ class UserRegistrationDataSource {
           FirebaseConst.id: user.uid,
           FirebaseConst.test: 0,
           FirebaseConst.email: user.email,
-          FirebaseConst.story: [],
+          FirebaseConst.history: [],
           FirebaseConst.favourite: [],
         });
       }

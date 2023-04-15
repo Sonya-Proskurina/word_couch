@@ -1,6 +1,6 @@
 class FirebaseConst {
   static const pathUser = "user";
-  static const story = "story";
+  static const history = "story";
   static const favourite = "favourite";
   static const id = "id";
   static const email = "email";

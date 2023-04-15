@@ -42,7 +42,7 @@ class ProfileDrawer extends ConsumerWidget {
               children: [
                 Text(state.value.email),
                 Text(state.value.favourite.join(", ")),
-                Text(state.value.story.join(", ")),
+                Text(state.value.history.join(", ")),
                 Text(state.value.test.toString()),
               ],
             ),

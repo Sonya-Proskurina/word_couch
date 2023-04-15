@@ -30,12 +30,12 @@ class UserAuthDataSource {
       uid: uid,
       favourite:
           (res2[FirebaseConst.favourite] as List<dynamic>).cast<String>(),
-      story: (res2[FirebaseConst.story] as List<dynamic>).cast<String>(),
+      history: (res2[FirebaseConst.history] as List<dynamic>).cast<String>(),
     );
     logger.e(res2[FirebaseConst.email]);
     logger.e(res2[FirebaseConst.favourite]);
     logger.e(res2[FirebaseConst.uid]);
-    logger.e(res2[FirebaseConst.story]);
+    logger.e(res2[FirebaseConst.history]);
     logger.e(res2[FirebaseConst.test]);
     return user;
   }
