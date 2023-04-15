@@ -26,7 +26,7 @@ class WordInfoRepositoryImpl implements WordInfoRepository {
   @override
   Future<Either<String, ImageData>> getWordImage(String word) async {
     try {
-      var res = ImageData.fromJson(await _imageApiClient.get(_wordInfoUrl + word));
+      var res = ImageData.fromJson(await _imageApiClient.get(word));
     return Right(res);
     } catch (e) {
     logger.e(e);

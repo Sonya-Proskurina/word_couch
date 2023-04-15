@@ -28,8 +28,10 @@ class DI {
       StateNotifierProvider<WordInfoArgNotifier, String>(
           (ref) => WordInfoArgNotifier(""));
 
-  static final wordInfoManager =
-      Provider((ref) => WordInfoManager(ref.watch(wordInfoNotifier.notifier), ref.watch(wordInfoRepository), ref.watch(wordInfoArgNotifier.notifier)));
+  static final wordInfoManager = Provider((ref) => WordInfoManager(
+      ref.watch(wordInfoNotifier.notifier),
+      ref.watch(wordInfoRepository),
+      ref.watch(wordInfoArgNotifier.notifier)));
 
   static final wordsApiClient = Provider((ref) => WordsApiClient());
 

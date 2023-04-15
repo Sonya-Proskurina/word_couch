@@ -24,7 +24,7 @@ abstract class RouterPathContainer {
     challengePage: (context) => const ChallengePage(),
     challengeSettingsPage: (context) => const ChallengeSettingsPage(),
     profilePage: (context) => const ProfilePage(),
-    wordInformationPage: (context) => const WordInformationPage(),
+    wordInformationPage: (context) => WordInformationPage(),
     authPage: (context) => const AuthPage(),
     registratiohPage: (context) => const RegistrationPage(),
   };

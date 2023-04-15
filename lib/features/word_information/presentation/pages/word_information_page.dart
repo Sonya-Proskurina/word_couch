@@ -59,12 +59,9 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                Container(
-                  // This container represents the image showing the queried word
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(color: Colors.orangeAccent),
-                ),
+                Image.network(
+                    value.image?.value?.first.thumbnailUrl ?? "",
+                    fit: BoxFit.cover),
                 Card(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -72,7 +69,7 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
-                              value.wordInfo.results[0].definition ??
+                              value.wordInfo?.results[0].definition ??
                                   manager.argNotifier.getState(),
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
