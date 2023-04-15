@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:word_couch/features/word_search/presentation/widgets/start_challenge_card.dart';
 
+import '../../../../core/navigation/router_path.dart';
+
 class MainScreenList extends StatelessWidget {
   const MainScreenList({super.key});
 
@@ -14,6 +16,12 @@ class MainScreenList extends StatelessWidget {
               tiles: List.generate(
                   10,
                   (_) => ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            RouterPathContainer.wordInformationPage,
+                          );
+                        },
                         title: Text(
                           "word",
                           style: Theme.of(context).textTheme.titleLarge,
