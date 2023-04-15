@@ -1,21 +1,15 @@
 class UserEntity {
-  final String displayName;
   final String email;
-  final bool emailVerified;
-  final String phoneNumber;
-  final String photoURL;
-  final String refreshToken;
-  final String tenantId;
   final String uid;
+  final List<String> favourite;
+  final List<String> history;
+  final int test;
 
   UserEntity({
-    required this.displayName,
     required this.email,
-    required this.emailVerified,
-    required this.photoURL,
-    required this.phoneNumber,
-    required this.refreshToken,
-    required this.tenantId,
     required this.uid,
+    required this.history,
+    required this.favourite,
+    required this.test,
   });
 }
