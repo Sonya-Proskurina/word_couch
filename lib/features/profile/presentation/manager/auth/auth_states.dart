@@ -8,6 +8,8 @@ class AuthState {
   factory AuthState.loaded() = AuthLoadedState;
 
   factory AuthState.user() = AuthUserState;
+
+  factory AuthState.registration() = AuthRegistrationState;
 }
 
 class AuthErrorState extends AuthState {
@@ -26,4 +28,8 @@ class AuthLoadingState extends AuthState {
 
 class AuthUserState extends AuthState {
   AuthUserState() : super._();
+}
+
+class AuthRegistrationState extends AuthState {
+  AuthRegistrationState() : super._();
 }
