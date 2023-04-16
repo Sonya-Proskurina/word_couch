@@ -31,20 +31,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      themeMode: ThemeMode.system,
-      darkTheme: themeWithBrightness(Brightness.dark),
-      theme: themeWithBrightness(Brightness.light),
-      supportedLocales: const [Locale('en'), Locale('ru')],
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      initialRoute: RouterPathContainer.mainPage,
-      routes: RouterPathContainer.routes,
+    return ProviderScope(
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        themeMode: ThemeMode.system,
+        darkTheme: themeWithBrightness(Brightness.dark),
+        theme: themeWithBrightness(Brightness.light),
+        supportedLocales: const [Locale('en'), Locale('ru')],
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        initialRoute: RouterPathContainer.mainPage,
+        routes: RouterPathContainer.routes,
+      ),
     );
   }
 }

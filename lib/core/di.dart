@@ -1,4 +1,8 @@
 import 'package:riverpod/riverpod.dart';
+import 'package:word_couch/features/word_information/domain/entities/word_info_arg_notifier.dart';
+import '../features/word_information/domain/entities/word_info_state.dart';
+import 'package:word_couch/core/api_client.dart';
+import '../features/word_information/data/repositories/word_info_repository.dart';
 import 'package:word_couch/features/profile/data/data_sources/user_auth_data_source.dart';
 import 'package:word_couch/features/profile/data/repositories/user_repository_impl.dart';
 import 'package:word_couch/features/profile/presentation/manager/auth/auth_manager.dart';
@@ -11,10 +15,24 @@ import '../features/word_information/domain/manager/manager.dart';
 
 class DI {
   static final wordInfoNotifier =
-      StateNotifierProvider((ref) => WordInfoNotifier());
+      StateNotifierProvider<WordInfoNotifier, WordInfoState>(
+          (ref) => WordInfoNotifier());
 
-  static final wordInfoManager =
-      Provider((ref) => WordInfoManager(ref.watch(wordInfoNotifier.notifier)));
+  static final wordInfoArgNotifier =
+      StateNotifierProvider<WordInfoArgNotifier, String>(
+          (ref) => WordInfoArgNotifier(""));
+
+  static final wordInfoManager = Provider((ref) => WordInfoManager(
+      ref.watch(wordInfoNotifier.notifier),
+      ref.watch(wordInfoRepository),
+      ref.watch(wordInfoArgNotifier.notifier)));
+
+  static final wordsApiClient = Provider((ref) => WordsApiClient());
+
+  static final imageSearchApiClient = Provider((ref) => ImageApiClient());
+
+  static final wordInfoRepository = Provider((ref) => WordInfoRepositoryImpl(
+      ref.watch(wordsApiClient), ref.watch(imageSearchApiClient)));
 
   static final userAuthDataSource = Provider((ref) => UserAuthDataSource());
 

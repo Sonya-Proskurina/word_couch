@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:word_couch/core/di.dart';
 import 'package:word_couch/features/word_search/presentation/widgets/start_challenge_card.dart';
 
 import '../../../../core/navigation/router_path.dart';
@@ -14,6 +16,7 @@ class MainScreenList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arg = ref.read(DI.wordInfoArgNotifier.notifier);
     if (list.isEmpty) {
       return Column(
         children: [
@@ -36,10 +39,9 @@ class MainScreenList extends StatelessWidget {
                   list.length,
                   (index) => ListTile(
                         onTap: () {
+                          arg.setState("car");
                           Navigator.pushNamed(
-                            context,
-                            RouterPathContainer.wordInformationPage,
-                          );
+                              context, RouterPathContainer.wordInformationPage);
                         },
                         title: Text(
                           list[index],
