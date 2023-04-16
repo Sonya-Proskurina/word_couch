@@ -19,4 +19,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
   void setUser() {
     state = AuthState.user();
   }
+
+  void setRegistration() {
+    state = AuthState.registration();
+  }
 }

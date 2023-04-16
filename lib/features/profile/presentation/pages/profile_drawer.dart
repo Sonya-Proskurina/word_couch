@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/core/di.dart';
-import 'package:word_couch/core/navigation/router_path.dart';
 import 'package:word_couch/core/ui/loading_widget.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_manager.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_states.dart';
+import 'package:word_couch/features/profile/presentation/widgets/profile_no_user_widget.dart';
+
+import '../../../../core/ui/errors_widget.dart';
+import '../widgets/profile_user_widget.dart';
 
 class ProfileDrawer extends ConsumerWidget {
   const ProfileDrawer({Key? key}) : super(key: key);
@@ -16,53 +19,24 @@ class ProfileDrawer extends ConsumerWidget {
     if (state is ProfileLoadingState) {
       return const LoadingWidget();
     } else if (state is ProfileNoUserState) {
-      return Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, RouterPathContainer.authPage);
-                  },
-                  child: const Text("Войдите в профиль"),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
+      return const ProfileNoUserWidget();
     } else if (state is ProfileUserState) {
-      return Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                Text(state.value.email),
-                Text(state.value.favourite.join(", ")),
-                Text(state.value.history.join(", ")),
-                Text(state.value.test.toString()),
-              ],
-            ),
-          ),
-        ),
+      return ProfileUserWidget(
+        userEntity: state.value,
       );
     } else if (state is ProfileErrorState) {
-      return Scaffold(
-        body: SafeArea(
-            child: Center(
-          child: Text(state.msg),
-        )),
+      return ErrorsWidget(
+        text: state.msg,
+        restart: () {
+          manager.loading();
+        },
       );
     } else {
-      return const Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: Text("Error"),
-          ),
-        ),
+      return ErrorsWidget(
+        text: "Error",
+        restart: () {
+          manager.loading();
+        },
       );
     }
   }

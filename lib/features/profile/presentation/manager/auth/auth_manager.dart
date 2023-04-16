@@ -8,8 +8,8 @@ import 'auth_states.dart';
 class AuthManager {
   AuthNotifier notifier;
   UserRepository userRepository;
-  final TextEditingController email = TextEditingController();
-  final TextEditingController password = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   AuthManager({
     required this.notifier,
@@ -27,6 +27,38 @@ class AuthManager {
     }, (r) {
       notifier.setUser();
     });
+  }
+
+  void goToRegistration() {
+    notifier.setRegistration();
+  }
+
+  void goToAuth() {
+    notifier.setLoaded();
+  }
+
+  void loading() {
+    email = TextEditingController();
+    password = TextEditingController();
+    notifier.setLoaded();
+  }
+
+  void registration(String email) async {
+    notifier.setLoading();
+    final res = await userRepository.registration(
+      email,
+    );
+    res.fold((l) {
+      notifier.setError(l);
+    }, (r) {
+      notifier.setUser();
+    });
+  }
+
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    notifier.setLoaded();
   }
 
   StateNotifierProvider<AuthNotifier, AuthState> getNotifier() {

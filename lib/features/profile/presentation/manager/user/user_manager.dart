@@ -28,6 +28,12 @@ class ProfileManager {
     );
   }
 
+  void exit() async {
+    notifier.setLoading();
+    await userRepository.exit();
+    notifier.setNoUser();
+  }
+
   StateNotifierProvider<ProfileNotifier, ProfileState> getNotifier() {
     return StateNotifierProvider<ProfileNotifier, ProfileState>((ref) {
       return notifier;
