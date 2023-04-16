@@ -4,12 +4,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/navigation/router_path.dart';
-
 import 'apikey.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: firebaseKey,
       appId: firebaseMobilesdkAppId,
