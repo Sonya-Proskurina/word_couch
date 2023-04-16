@@ -20,7 +20,7 @@ abstract class RouterPathContainer {
     mainPage: (context) => const MainPage(),
     challengePage: (context) => const ChallengePage(),
     challengeSettingsPage: (context) => const ChallengeSettingsPage(),
-    wordInformationPage: (context) => const WordInformationPage(),
+    wordInformationPage: (context) => WordInformationPage(),
     authPage: (context) => const AuthPage(),
   };
 }

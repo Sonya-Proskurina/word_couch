@@ -6,7 +6,7 @@ import 'package:word_couch/features/word_search/presentation/widgets/start_chall
 
 import '../../../../core/navigation/router_path.dart';
 
-class MainScreenList extends StatelessWidget {
+class MainScreenList extends ConsumerWidget {
   final List<String> list;
 
   const MainScreenList({
@@ -15,7 +15,7 @@ class MainScreenList extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final arg = ref.read(DI.wordInfoArgNotifier.notifier);
     if (list.isEmpty) {
       return Column(
