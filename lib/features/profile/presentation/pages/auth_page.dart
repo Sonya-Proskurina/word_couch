@@ -46,8 +46,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           });
     } else if (state is AuthRegistrationState) {
       return const AuthRegistrationWidget();
-    }
-    else {
+    } else {
       return ErrorsWidget(
           text: "Error",
           restart: () {

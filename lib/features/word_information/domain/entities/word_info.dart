@@ -1,4 +1,3 @@
-
 import 'package:word_couch/features/word_information/data/models/word_model.dart';
 
 class WordInfo {
