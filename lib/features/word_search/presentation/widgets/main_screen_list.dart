@@ -5,17 +5,36 @@ import 'package:word_couch/features/word_search/presentation/widgets/start_chall
 import '../../../../core/navigation/router_path.dart';
 
 class MainScreenList extends StatelessWidget {
-  const MainScreenList({super.key});
+  final List<String> list;
+
+  const MainScreenList({
+    super.key,
+    required this.list,
+  });
 
   @override
   Widget build(BuildContext context) {
+    if (list.isEmpty) {
+      return Column(
+        children: [
+          const StartChallengeCard(),
+          Padding(
+            padding: const EdgeInsets.all(32),
+            child: Text(
+              "Empty search history",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+        ],
+      );
+    }
     return Column(
       children: <Widget>[const StartChallengeCard()] +
           ListTile.divideTiles(
               context: context,
               tiles: List.generate(
-                  10,
-                  (_) => ListTile(
+                  list.length,
+                  (index) => ListTile(
                         onTap: () {
                           Navigator.pushNamed(
                             context,
@@ -23,10 +42,10 @@ class MainScreenList extends StatelessWidget {
                           );
                         },
                         title: Text(
-                          "word",
+                          list[index],
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        subtitle: const Text("description"),
+                        subtitle: Text(list[index]),
                       ))).toList(),
     );
   }
