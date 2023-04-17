@@ -33,32 +33,39 @@ class _AuthLoadedWidgetState extends ConsumerState<AuthLoadedWidget> {
           ),
         ),
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                child: SignInScreen(
-                  showAuthActionSwitch: false,
-                  providers: [
-                    EmailAuthProvider(),
-                  ],
-                  actions: [
-                    AuthStateChangeAction<SignedIn>((context, state) {
-                      ref.read(DI.profileManager).loading();
-                      Navigator.pop(context);
-                    }),
-                  ],
+          child: SignInScreen(
+            // headerBuilder: (context, box, d) {
+            //   return Container(
+            //     color: Colors.red,
+            //   );
+            // },
+            subtitleBuilder: (context, action) {
+              return GestureDetector(
+                onTap: () {
+                  manager.goToRegistration();
+                },
+                child: Text(
+                  "Don't have an account? Register",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: Theme.of(context).primaryColor),
                 ),
-              ),
-              Flexible(
-                child: TextButton(
-                  onPressed: () {
-                    manager.goToRegistration();
-                  },
-                  child: const Text("Don't have an account? Register"),
-                ),
-              ),
+              );
+            },
+            showAuthActionSwitch: false,
+            providers: [
+              EmailAuthProvider(),
             ],
+            actions: [
+              AuthStateChangeAction<SignedIn>((context, state) {
+                ref.read(DI.profileManager).loading();
+                Navigator.pop(context);
+              }),
+            ],
+            styles: const {
+              EmailFormStyle(signInButtonVariant: ButtonVariant.filled),
+            },
           ),
         ),
       ),
