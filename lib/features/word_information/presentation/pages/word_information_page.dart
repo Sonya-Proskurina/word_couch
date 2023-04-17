@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/di.dart';
 import '../manager/manager.dart';
-import '../widgets/word_information_section.dart';
+import '../widgets/word_information_sections_list.dart';
 
 class WordInformationPage extends ConsumerStatefulWidget {
   WordInformationPage({Key? key}) : super(key: key);
@@ -44,8 +44,24 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                 Navigator.pop(context);
               },
             ),
-            title: Text(manager.argNotifier.getState(),
-                style: Theme.of(context).textTheme.titleLarge),
+            title: Row(
+              textBaseline: TextBaseline.alphabetic,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              children: [
+                Text(manager.argNotifier.getState(),
+                    style: Theme.of(context).textTheme.titleLarge),
+                const SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  value.wordInfo?.results.first.partOfSpeech ?? "",
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium
+                      ?.apply(color: Colors.black54),
+                )
+              ],
+            ),
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 16.0),
@@ -74,17 +90,17 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              value.wordInfo?.results[0].definition ??
-                                  manager.argNotifier.getState(),
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          )
-                        ] +
-                        List<Widget>.generate(
-                            10, (index) => const WordInformationSection()),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          value.wordInfo?.results[0].definition ??
+                              manager.argNotifier.getState(),
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ),
+                      WordInformationSectionsList(
+                          wordInfo: value.wordInfo?.results.first)
+                    ],
                   ),
                 ),
               ],
