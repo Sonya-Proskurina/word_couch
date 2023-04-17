@@ -3,14 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:word_couch/core/logger.dart';
 import 'package:word_couch/features/profile/data/data_sources/user_auth_data_source.dart';
 import 'package:word_couch/features/profile/domain/entities/user_entity.dart';
+import 'package:word_couch/features/profile/domain/entities/user_word_entity.dart';
 import 'package:word_couch/features/profile/domain/repositories/user_repository.dart';
+import 'package:word_couch/features/word_information/domain/repositories/word_info_repository.dart';
 import '../models/user_transformer.dart';
 
 class UserRepositoryImpl implements UserRepository {
   UserAuthDataSource userAuthDataSource;
+  WordInfoRepository wordInfoRepositoryImpl;
 
   UserRepositoryImpl({
     required this.userAuthDataSource,
+    required this.wordInfoRepositoryImpl,
   });
 
   @override
@@ -90,6 +94,36 @@ class UserRepositoryImpl implements UserRepository {
     try {
       await userAuthDataSource.exit();
       return const Right(true);
+    } catch (e) {
+      logger.e(e);
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, List<UserWordEntity>>> getWordsHistory() async {
+    try {
+      List<UserWordEntity> list = [];
+      final user = await userAuthDataSource.getUser();
+      if (user?.history != null) {
+        final favourite = user?.favourite ?? [];
+        for (int i = 0; i < user!.history.length; i++) {
+          final descriptionRes =
+              await wordInfoRepositoryImpl.getWordInfo(user.history[i]);
+          String description = "";
+          descriptionRes.fold((l) => description = "",
+              (r) => description = r.results[0].definition ?? "");
+          UserWordEntity userWordEntity = UserWordEntity(
+            word: user.history[i],
+            isFavourite: favourite.contains(user.history[i]),
+            isHistory: true,
+            description: description,
+          );
+          description = "";
+          list.add(userWordEntity);
+        }
+      }
+      return Right(list);
     } catch (e) {
       logger.e(e);
       return Left(e.toString());
