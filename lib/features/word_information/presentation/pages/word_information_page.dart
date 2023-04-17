@@ -18,14 +18,15 @@ class WordInformationPage extends ConsumerStatefulWidget {
 
 class WordInformationPageState extends ConsumerState<WordInformationPage> {
   late WordInfoManager manager;
-  // late String arg;
 
   @override
   void initState() {
     super.initState();
     manager = ref.read(widget.manager);
     manager.init();
-    // arg = ref.watch(widget.argsNotifier);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      manager.notifier.setLoading();
+    });
   }
 
   @override
@@ -43,9 +44,8 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                 Navigator.pop(context);
               },
             ),
-            title: Text(
-              manager.argNotifier.getState(),
-            ),
+            title: Text(manager.argNotifier.getState(),
+                style: Theme.of(context).textTheme.titleLarge),
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 16.0),
@@ -59,10 +59,17 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                if (value.image?.value?.first.thumbnailUrl != null)
-                Image.network(
-                    value.image?.value?.first.thumbnailUrl ?? "",
-                    fit: BoxFit.cover),
+                if (value.image?.value?.isNotEmpty == true &&
+                    value.image?.value?.first.thumbnailUrl != null)
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Image.network(
+                          value.image?.value?.first.thumbnailUrl ?? "",
+                          fit: BoxFit.cover),
+                    ),
+                  ),
                 Card(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,

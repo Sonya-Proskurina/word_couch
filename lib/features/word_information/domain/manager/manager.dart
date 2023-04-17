@@ -62,7 +62,6 @@ class WordInfoManager {
   }
 
   void getWordInfo(String word) {
-    // notifier.setLoading();
     _getWordInfoRes(word);
     _getWordImage(word);
   }

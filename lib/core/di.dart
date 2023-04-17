@@ -33,6 +33,7 @@ class DI {
 
   static final wordInfoRepository = Provider((ref) => WordInfoRepositoryImpl(
       ref.watch(wordsApiClient), ref.watch(imageSearchApiClient)));
+  // static final wordInfoRepository = Provider((ref) => FakeWordInfoRepository());
 
   static final userAuthDataSource = Provider((ref) => UserAuthDataSource());
 

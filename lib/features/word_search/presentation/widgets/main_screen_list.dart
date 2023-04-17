@@ -40,7 +40,7 @@ class MainScreenList extends ConsumerWidget {
                         onTap: () {
                           ref
                               .read(DI.wordInfoArgNotifier.notifier)
-                              .setState("car");
+                              .setState(list[index]);
                           Navigator.pushNamed(
                               context, RouterPathContainer.wordInformationPage);
                         },
