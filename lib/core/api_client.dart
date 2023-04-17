@@ -5,7 +5,9 @@ import 'logger.dart';
 
 abstract class ApiClient {
   Dio get dio;
-  Future<T?> get<T>(String request, { Map<String, dynamic> query = const {} }) async {
+
+  Future<T?> get<T>(String request,
+      {Map<String, dynamic> query = const {}}) async {
     var res = await dio.get<T>(request, queryParameters: query);
     T? data = res.data;
     if (data != null) {
@@ -29,7 +31,8 @@ class WordsApiClient extends ApiClient {
 }
 
 class ImageApiClient extends ApiClient {
-  static const baseUrl = 'https://bing-image-search1.p.rapidapi.com/images/search';
+  static const baseUrl =
+      'https://bing-image-search1.p.rapidapi.com/images/search';
 
   @override
   Dio dio = Dio(BaseOptions(baseUrl: baseUrl, headers: {
@@ -41,8 +44,9 @@ class ImageApiClient extends ApiClient {
     ..interceptors.add(LoggerInterceptor());
 
   @override
-  Future<T?> get<T>(String request, { Map<String, dynamic> query = const {} }) async {
-    return super.get("", query: {'q' : request, 'count': 1});
+  Future<T?> get<T>(String request, {Map<String, dynamic> query = const {}}) async {
+    return super
+        .get("", query: {'q': request, 'count': 1, 'safeSearch': 'Off'});
   }
 }
 

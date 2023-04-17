@@ -11,7 +11,7 @@ import 'package:word_couch/features/profile/presentation/manager/auth/auth_state
 import 'package:word_couch/features/profile/presentation/manager/user/user_manager.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_notifier.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_states.dart';
-import '../features/word_information/domain/manager/manager.dart';
+import '../features/word_information/presentation/manager/manager.dart';
 
 class DI {
   static final wordInfoNotifier =
