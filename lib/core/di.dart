@@ -33,6 +33,7 @@ class DI {
 
   static final wordInfoRepository = Provider((ref) => WordInfoRepositoryImpl(
       ref.watch(wordsApiClient), ref.watch(imageSearchApiClient)));
+  // static final wordInfoRepository = Provider((ref) => FakeWordInfoRepository());
 
   static final userAuthDataSource = Provider((ref) => UserAuthDataSource());
 
@@ -59,4 +60,7 @@ class DI {
   static final authManager = Provider((ref) => AuthManager(
       notifier: ref.watch(authNotifier.notifier),
       userRepository: ref.watch(userRepository)));
+
+  static final searchBarInFocusStateProvider =
+      StateProvider<bool>((ref) => false);
 }
