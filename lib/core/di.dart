@@ -1,5 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 import 'package:word_couch/features/word_information/domain/entities/word_info_arg_notifier.dart';
+import '../features/word_information/data/repositories/fake_word_info_repository.dart';
 import '../features/word_information/domain/entities/word_info_state.dart';
 import 'package:word_couch/core/api_client.dart';
 import '../features/word_information/data/repositories/word_info_repository.dart';
@@ -31,8 +32,9 @@ class DI {
 
   static final imageSearchApiClient = Provider((ref) => ImageApiClient());
 
-  static final wordInfoRepository = Provider((ref) => WordInfoRepositoryImpl(
-      ref.watch(wordsApiClient), ref.watch(imageSearchApiClient)));
+  // static final wordInfoRepository = Provider((ref) => WordInfoRepositoryImpl(
+  //     ref.watch(wordsApiClient), ref.watch(imageSearchApiClient)));
+  static final wordInfoRepository = Provider((ref) => FakeWordInfoRepository());
 
   static final userAuthDataSource = Provider((ref) => UserAuthDataSource());
 

@@ -39,7 +39,7 @@ class MainScreenList extends ConsumerWidget {
                   list.length,
                   (index) => ListTile(
                         onTap: () {
-                          arg.setState("car");
+                          arg.setState(list[index]);
                           Navigator.pushNamed(
                               context, RouterPathContainer.wordInformationPage);
                         },
