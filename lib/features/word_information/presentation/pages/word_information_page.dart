@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/di.dart';
-import '../../domain/manager/manager.dart';
+import '../manager/manager.dart';
 import '../widgets/word_information_section.dart';
 
 class WordInformationPage extends ConsumerStatefulWidget {
