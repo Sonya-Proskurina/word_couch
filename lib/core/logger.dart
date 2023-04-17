@@ -9,6 +9,6 @@ var logger = Logger(
       colors: true, // Colorful log messages
       printEmojis: true, // Print an emoji for each log message
       printTime: false // Should each log print contain a timestamp
-  ), // Use the PrettyPrinter to format and print log
+      ), // Use the PrettyPrinter to format and print log
   output: null, // Use the default LogOutput (-> send everything to console)
 );

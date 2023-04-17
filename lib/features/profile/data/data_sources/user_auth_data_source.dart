@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:word_couch/core/constants/firebase_const.dart';
-import 'package:word_couch/core/logger.dart';
 import 'package:word_couch/features/profile/domain/entities/user_entity.dart';
 
 class UserAuthDataSource {
@@ -15,28 +14,62 @@ class UserAuthDataSource {
     return user;
   }
 
-  Future<UserEntity?> getUser(String uid) async {
+  Future<UserEntity?> getUser() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? resUser = auth.currentUser;
+    if (resUser == null) {
+      return null;
+    }
+    // await firebaseFirestore.clearPersistence();
     final res = firebaseFirestore
         .collection(FirebaseConst.pathUser)
-        .where(FirebaseConst.uid, isEqualTo: uid)
+        .where(FirebaseConst.uid, isEqualTo: resUser.uid)
         .snapshots();
     UserEntity? user;
     final result = await res.first;
-    final res2 = result.docs[0].data();
+    final data = result.docs[0].data();
     user = UserEntity(
-      email: res2[FirebaseConst.email],
-      test: res2[FirebaseConst.test] as int,
-      uid: uid,
+      email: data[FirebaseConst.email],
+      test: data[FirebaseConst.test] as int,
+      uid: resUser.uid,
       favourite:
-          (res2[FirebaseConst.favourite] as List<dynamic>).cast<String>(),
-      history: (res2[FirebaseConst.history] as List<dynamic>).cast<String>(),
+          (data[FirebaseConst.favourite] as List<dynamic>).cast<String>(),
+      history: (data[FirebaseConst.history] as List<dynamic>).cast<String>(),
     );
-    logger.e(res2[FirebaseConst.email]);
-    logger.e(res2[FirebaseConst.favourite]);
-    logger.e(res2[FirebaseConst.uid]);
-    logger.e(res2[FirebaseConst.history]);
-    logger.e(res2[FirebaseConst.test]);
+    return user;
+  }
+
+  Future exit() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    auth.signOut();
+  }
+
+  Future<User?> registration(String email) async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    // FirebaseAuth auth = FirebaseAuth.instance;
+    // UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+    //     email: email, password: password);
+    User? user = auth.currentUser;
+
+    if (user != null) {
+      QuerySnapshot res = await firebaseFirestore
+          .collection(FirebaseConst.pathUser)
+          .where(FirebaseConst.id, isEqualTo: FirebaseConst.uid)
+          .get();
+      List<DocumentSnapshot> docs = res.docs;
+
+      if (docs.isEmpty) {
+        firebaseFirestore.collection(FirebaseConst.pathUser).doc(user.uid).set({
+          FirebaseConst.id: user.uid,
+          FirebaseConst.test: 0,
+          FirebaseConst.email: email,
+          FirebaseConst.history: [],
+          FirebaseConst.favourite: [],
+        });
+      }
+    }
     return user;
   }
 }

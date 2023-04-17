@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/core/di.dart';
+import 'package:word_couch/core/ui/errors_widget.dart';
+import 'package:word_couch/core/ui/loading_widget.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_manager.dart';
-import 'package:word_couch/features/profile/presentation/pages/profile_drawer.dart';
-import '../widgets/main_screen_list.dart';
-import '../widgets/search_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:word_couch/features/profile/presentation/manager/user/user_states.dart';
+import 'package:word_couch/features/word_search/presentation/widgets/main_user_widget.dart';
 
 class MainPage extends ConsumerStatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -15,92 +15,43 @@ class MainPage extends ConsumerStatefulWidget {
 }
 
 class _MainPageState extends ConsumerState<MainPage> {
-  late GlobalKey<ScaffoldState> _scaffoldKey;
+  late ProfileManager manager;
+  late ProfileState state;
 
   @override
   void initState() {
     super.initState();
-    ProfileManager manager = ref.read(DI.profileManager);
+    manager = ref.read(DI.profileManager);
     WidgetsBinding.instance.addPostFrameCallback((_) => manager.loading());
-
-    _scaffoldKey = GlobalKey<ScaffoldState>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: const Drawer(
-        child: ProfileDrawer(),
-      ),
-      resizeToAvoidBottomInset: true,
-      body: Material(
-        child: Stack(
-          children: [
-            CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar.large(
-                  leading: IconButton(
-                      icon: const Icon(Icons.menu),
-                      onPressed: () {
-                        _scaffoldKey.currentState!.openDrawer();
-                      }),
-                  title: Text(AppLocalizations.of(context)!.testText),
-                ),
-                const SliverToBoxAdapter(
-                  child: Card(child: MainScreenList()),
-                )
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: SearchBar(),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-    // return Scaffold(
-    //   body: Column(
-    //     crossAxisAlignment: CrossAxisAlignment.stretch,
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       const Text(
-    //         "MainPage",
-    //         textAlign: TextAlign.center,
-    //       ),
-    //       TextButton(
-    //         child: const Text("go to word info"),
-    //         onPressed: () {
-    //           Navigator.pushNamed(
-    //             context,
-    //             RouterPathContainer.wordInformationPage,
-    //           );
-    //         },
-    //       ),
-    //       TextButton(
-    //         child: const Text("go to profile info"),
-    //         onPressed: () {
-    //           Navigator.pushNamed(
-    //             context,
-    //             RouterPathContainer.profilePage,
-    //           );
-    //         },
-    //       ),
-    //       TextButton(
-    //         child: const Text("go to challenge settings"),
-    //         onPressed: () {
-    //           Navigator.pushNamed(
-    //             context,
-    //             RouterPathContainer.challengeSettingsPage,
-    //           );
-    //         },
-    //       ),
-    //     ],
-    //   ),
-    // );
+    state = ref.watch(manager.getNotifier());
+    if (state is ProfileUserState) {
+      return MainUserWidget(
+        history: (state as ProfileUserState).value.history,
+      );
+    } else if (state is ProfileLoadingState) {
+      return const LoadingWidget();
+    } else if (state is ProfileNoUserState) {
+      return const MainUserWidget(
+        history: [],
+      );
+    } else if (state is ProfileErrorState) {
+      return ErrorsWidget(
+        text: (state as ProfileErrorState).msg,
+        restart: () {
+          manager.loading();
+        },
+      );
+    } else {
+      return ErrorsWidget(
+        text: "Error",
+        restart: () {
+          manager.loading();
+        },
+      );
+    }
   }
 }
