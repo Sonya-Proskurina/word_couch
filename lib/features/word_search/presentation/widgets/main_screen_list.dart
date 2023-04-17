@@ -16,7 +16,6 @@ class MainScreenList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final arg = ref.read(DI.wordInfoArgNotifier.notifier);
     if (list.isEmpty) {
       return Column(
         children: [
@@ -39,7 +38,9 @@ class MainScreenList extends ConsumerWidget {
                   list.length,
                   (index) => ListTile(
                         onTap: () {
-                          arg.setState(list[index]);
+                          ref
+                              .read(DI.wordInfoArgNotifier.notifier)
+                              .setState(list[index]);
                           Navigator.pushNamed(
                               context, RouterPathContainer.wordInformationPage);
                         },

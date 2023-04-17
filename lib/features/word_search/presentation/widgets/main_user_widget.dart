@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/features/word_search/presentation/widgets/search_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../core/di.dart';
 import '../../../profile/presentation/pages/profile_drawer.dart';
 import 'main_screen_list.dart';
 
-class MainUserWidget extends StatefulWidget {
+class MainUserWidget extends ConsumerStatefulWidget {
   final List<String> history;
 
   const MainUserWidget({
@@ -13,10 +15,10 @@ class MainUserWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MainUserWidget> createState() => _MainUserWidgetState();
+  ConsumerState<MainUserWidget> createState() => _MainUserWidgetState();
 }
 
-class _MainUserWidgetState extends State<MainUserWidget> {
+class _MainUserWidgetState extends ConsumerState<MainUserWidget> {
   late GlobalKey<ScaffoldState> _scaffoldKey;
 
   @override
@@ -33,37 +35,41 @@ class _MainUserWidgetState extends State<MainUserWidget> {
         child: ProfileDrawer(),
       ),
       resizeToAvoidBottomInset: true,
-      body: Material(
-        child: Stack(
-          children: [
-            CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar.large(
-                  leading: IconButton(
-                      icon: const Icon(Icons.menu),
-                      onPressed: () {
-                        // Navigator.pushNamed(context, RouterPathContainer.authPage, arguments: "");
-                        _scaffoldKey.currentState!.openDrawer();
-                      }),
-                  title: Text(AppLocalizations.of(context)!.testText),
-                ),
-                SliverToBoxAdapter(
-                  child: Card(
-                      child: MainScreenList(
-                    list: widget.history,
-                  )),
-                )
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: SearchBar(),
+      body: Stack(
+        children: [
+          AnimatedOpacity(
+            opacity: ref.watch(DI.searchBarInFocusStateProvider) ? 0 : 1,
+            duration: const Duration(milliseconds: 200),
+            child: AbsorbPointer(
+              absorbing: ref.watch(DI.searchBarInFocusStateProvider),
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar.large(
+                    leading: IconButton(
+                        icon: const Icon(Icons.menu),
+                        onPressed: () {
+                          _scaffoldKey.currentState!.openDrawer();
+                        }),
+                    title: Text(AppLocalizations.of(context)!.testText),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Card(
+                        child: MainScreenList(
+                      list: widget.history,
+                    )),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: SearchBar(),
+            ),
+          )
+        ],
       ),
     );
   }
