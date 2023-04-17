@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:word_couch/features/profile/domain/entities/user_word_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/features/word_search/presentation/widgets/search_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,8 +7,9 @@ import '../../../../core/di.dart';
 import '../../../profile/presentation/pages/profile_drawer.dart';
 import 'main_screen_list.dart';
 
+
 class MainUserWidget extends ConsumerStatefulWidget {
-  final List<String> history;
+   final List<UserWordEntity> history;
 
   const MainUserWidget({
     Key? key,

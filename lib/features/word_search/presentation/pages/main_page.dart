@@ -30,7 +30,7 @@ class _MainPageState extends ConsumerState<MainPage> {
     state = ref.watch(manager.getNotifier());
     if (state is ProfileUserState) {
       return MainUserWidget(
-        history: (state as ProfileUserState).value.history,
+        history: (state as ProfileUserState).list,
       );
     } else if (state is ProfileLoadingState) {
       return const LoadingWidget();

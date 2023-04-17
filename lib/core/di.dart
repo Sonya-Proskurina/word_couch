@@ -40,6 +40,7 @@ class DI {
   static final userRepository = Provider(
     (ref) => UserRepositoryImpl(
       userAuthDataSource: ref.watch(userAuthDataSource),
+      wordInfoRepositoryImpl: ref.watch(wordInfoRepository),
     ),
   );
 
