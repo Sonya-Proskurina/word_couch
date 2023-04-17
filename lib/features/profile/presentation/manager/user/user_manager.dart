@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:word_couch/features/profile/domain/entities/user_word_entity.dart';
 import 'package:word_couch/features/profile/domain/repositories/user_repository.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_notifier.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_states.dart';
@@ -14,13 +15,15 @@ class ProfileManager {
 
   void loading() async {
     notifier.setLoading();
-    var res = await userRepository.getUser();
-    // await Future.delayed(Duration(seconds: 3));
+    List<UserWordEntity> list = [];
+    final resHistory = await userRepository.getWordsHistory();
+    resHistory.fold((l) => notifier.setError(l), (r) => list = r);
+    final res = await userRepository.getUser();
     res.fold(
       (l) => notifier.setError(l),
       (r) {
         if (r != null) {
-          notifier.setUser(r);
+          notifier.setUser(r, list);
         } else {
           notifier.setNoUser();
         }
