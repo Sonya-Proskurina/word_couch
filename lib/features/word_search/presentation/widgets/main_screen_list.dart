@@ -42,7 +42,7 @@ class MainScreenList extends ConsumerWidget {
                 userWordEntity: list[index],
                 tap: () {
                    ref.read(DI.wordInfoArgNotifier.notifier)
-                              .setState(list[index]);
+                              .setState(list[index].word);
                   Navigator.pushNamed(
                       context, RouterPathContainer.wordInformationPage);
                 },
