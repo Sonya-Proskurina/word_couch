@@ -59,4 +59,7 @@ class DI {
   static final authManager = Provider((ref) => AuthManager(
       notifier: ref.watch(authNotifier.notifier),
       userRepository: ref.watch(userRepository)));
+
+  static final searchBarInFocusStateProvider =
+      StateProvider<bool>((ref) => false);
 }

@@ -25,30 +25,17 @@ class _ProfileUserWidgetState extends ConsumerState<ProfileUserWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Material(
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(6.0)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.userEntity.email,
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                            Text("Test points: ${widget.userEntity.test}")
-                          ],
-                        )),
-                      ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.userEntity.email,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
-                  ),
+                    Text("Test points: ${widget.userEntity.test}")
+                  ],
                 ),
               ),
               const SizedBox(height: 16),
