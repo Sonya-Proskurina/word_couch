@@ -5,8 +5,8 @@ import 'package:word_couch/features/word_information/data/models/image/image_dat
 import 'package:word_couch/features/word_information/data/models/word_model.dart';
 import 'package:word_couch/features/word_information/domain/entities/word_info_state.dart';
 
-import '../entities/word_info.dart';
-import '../repositories/word_info_repository.dart';
+import '../../domain/entities/word_info.dart';
+import '../../domain/repositories/word_info_repository.dart';
 
 class WordInfoNotifier extends StateNotifier<WordInfoState> {
   WordInfoNotifier() : super(const WordInfoState.loading());
@@ -53,7 +53,15 @@ class WordInfoManager {
 
   void _getWordInfoRes(String word) async {
     var res = await _wordInfoRepository.getWordInfo(word);
-    res.fold((l) => notifier.setError(l), (r) => notifier.set(r));
+    res.fold((l) => notifier.setError(l), (r) {
+      notifier.set(r);
+      if (r.results.isNotEmpty) {
+        _getWordImage(
+            "$word ${r.results.first.synonyms?.take(2).join(' ') ?? ''}");
+      } else {
+        notifier.setError("Can't find word info");
+      }
+    });
   }
 
   void _getWordImage(String word) async {
@@ -63,7 +71,6 @@ class WordInfoManager {
 
   void getWordInfo(String word) {
     _getWordInfoRes(word);
-    _getWordImage(word);
   }
 
   void init() {
