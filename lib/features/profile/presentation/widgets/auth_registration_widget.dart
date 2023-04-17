@@ -46,6 +46,9 @@ class _AuthRegistrationWidgetState
               },
             ),
           ],
+          styles: const {
+            EmailFormStyle(signInButtonVariant: ButtonVariant.filled),
+          },
         ),
       ),
     );

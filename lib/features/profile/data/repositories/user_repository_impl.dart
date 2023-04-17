@@ -140,4 +140,44 @@ class UserRepositoryImpl implements UserRepository {
       return Left(e.toString());
     }
   }
+
+  @override
+  Future<Either<String, List<UserWordEntity>>> getWordsFavorite() async {
+    try {
+      List<UserWordEntity> list = [];
+      final user = await userAuthDataSource.getUser();
+      if (user == null) {
+        return Right(list);
+      }
+      for (int i = 0; i < user.favourite.length; i++) {
+        final descriptionRes =
+            await wordInfoRepositoryImpl.getWordInfo(user.favourite[i]);
+        String description = "";
+        descriptionRes.fold((l) => description = "",
+            (r) => description = r.results[0].definition ?? "");
+        UserWordEntity userWordEntity = UserWordEntity(
+          word: user.favourite[i],
+          isFavourite: true,
+          isHistory: true,
+          description: description,
+        );
+        list.add(userWordEntity);
+      }
+      return Right(list);
+    } catch (e) {
+      logger.e(e);
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, bool>> addHistory(String word) async {
+    try {
+      await userAuthDataSource.addHistory(word);
+      return const Right(true);
+    } catch (e) {
+      logger.e(e);
+      return Left(e.toString());
+    }
+  }
 }

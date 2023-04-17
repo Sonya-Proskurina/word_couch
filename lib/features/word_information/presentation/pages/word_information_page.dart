@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/core/ui/loading_widget.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_manager.dart';
+import 'package:word_couch/features/word_information/presentation/widgets/word_information_sections_list.dart';
 import '../../../../core/di.dart';
 import '../manager/manager.dart';
-import '../widgets/word_information_section.dart';
 import '../../../profile/presentation/manager/user/user_states.dart';
 
 class WordInformationPage extends ConsumerStatefulWidget {
@@ -31,13 +31,13 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
     manager.init();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       manager.notifier.setLoading();
+      ref.read(DI.profileManager).addHistory(manager.argNotifier.getState());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final wordInfoState = ref.watch(widget.notifier);
-
     return wordInfoState.when(success: (value) {
       if (ref.watch(managerUser.getNotifier()) is! ProfileUserState) {
         return const LoadingWidget();

@@ -96,4 +96,29 @@ class UserAuthDataSource {
     });
     // await firebaseFirestore.clearPersistence();
   }
+
+  Future<void> addHistory(String word) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user = auth.currentUser;
+    if (user == null) return;
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    final res = firebaseFirestore
+        .collection(FirebaseConst.pathUser)
+        .where(FirebaseConst.uid, isEqualTo: user.uid)
+        .snapshots();
+    final result = await res.first;
+    final data = result.docs[0].data();
+    List<String> list =
+        (data[FirebaseConst.history] as List<dynamic>).cast<String>();
+    if (!list.contains(word)) {
+      list.add(word);
+      firebaseFirestore
+          .collection(FirebaseConst.pathUser)
+          .doc(user.uid)
+          .update({
+        FirebaseConst.history: list,
+      });
+    }
+    // await firebaseFirestore.clearPersistence();
+  }
 }
