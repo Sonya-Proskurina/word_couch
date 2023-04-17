@@ -108,13 +108,11 @@ class UserRepositoryImpl implements UserRepository {
       if (user?.history != null) {
         final favourite = user?.favourite ?? [];
         for (int i = 0; i < user!.history.length; i++) {
-          logger.e(user.history[i]);
           final descriptionRes =
               await wordInfoRepositoryImpl.getWordInfo(user.history[i]);
           String description = "";
           descriptionRes.fold((l) => description = "",
               (r) => description = r.results[0].definition ?? "");
-          logger.e(description);
           UserWordEntity userWordEntity = UserWordEntity(
             word: user.history[i],
             isFavourite: favourite.contains(user.history[i]),
