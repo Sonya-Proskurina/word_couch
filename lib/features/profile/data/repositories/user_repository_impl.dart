@@ -129,4 +129,15 @@ class UserRepositoryImpl implements UserRepository {
       return Left(e.toString());
     }
   }
+
+  @override
+  Future<Either<String, bool>> addFavorite(String word) async {
+    try {
+      await userAuthDataSource.addFavorite(word);
+      return const Right(true);
+    } catch (e) {
+      logger.e(e);
+      return Left(e.toString());
+    }
+  }
 }
