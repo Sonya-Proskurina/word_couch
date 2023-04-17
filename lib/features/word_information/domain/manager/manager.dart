@@ -9,7 +9,8 @@ import '../entities/word_info.dart';
 import '../repositories/word_info_repository.dart';
 
 class WordInfoNotifier extends StateNotifier<WordInfoState> {
-  WordInfoNotifier() : super(WordInfoState.loading());
+  WordInfoNotifier() : super(const WordInfoState.loading());
+
   void setError(String msg) {
     state = WordInfoState.error(msg);
   }
@@ -19,19 +20,23 @@ class WordInfoNotifier extends StateNotifier<WordInfoState> {
   }
 
   void set(WordModel wordInfo) {
-    state = WordInfoState.success(WordInfo(wordInfo, null));
+    state.when(success: (value) {
+      state = WordInfoState.success(WordInfo(wordInfo, value.image));
+    }, error: (msg) {
+      state = WordInfoState.success(WordInfo(wordInfo, null));
+    }, loading: () {
+      state = WordInfoState.success(WordInfo(wordInfo, null));
+    });
   }
 
   void setImage(ImageData image) {
     state.when(success: (value) {
-       state = WordInfoState.success(WordInfo(value.wordInfo, image));
-      },
-        error: (error) {
-      state = WordInfoState.error(error);
-        },
-        loading: () {
-          state = WordInfoState.success(WordInfo(null, image));
-        });
+      state = WordInfoState.success(WordInfo(value.wordInfo, image));
+    }, error: (msg) {
+      state = WordInfoState.success(WordInfo(null, image));
+    }, loading: () {
+      state = WordInfoState.success(WordInfo(null, image));
+    });
   }
 
   void setLoading() {
@@ -43,6 +48,7 @@ class WordInfoManager {
   WordInfoNotifier notifier;
   final WordInfoRepository _wordInfoRepository;
   final WordInfoArgNotifier argNotifier;
+
   WordInfoManager(this.notifier, this._wordInfoRepository, this.argNotifier);
 
   void _getWordInfoRes(String word) async {
