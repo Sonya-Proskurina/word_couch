@@ -44,8 +44,24 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                 Navigator.pop(context);
               },
             ),
-            title: Text(manager.argNotifier.getState(),
-                style: Theme.of(context).textTheme.titleLarge),
+            title: Row(
+              textBaseline: TextBaseline.alphabetic,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              children: [
+                Text(manager.argNotifier.getState(),
+                    style: Theme.of(context).textTheme.titleLarge),
+                const SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  value.wordInfo?.results.first.partOfSpeech ?? "",
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium
+                      ?.apply(color: Colors.black54),
+                )
+              ],
+            ),
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 16.0),
