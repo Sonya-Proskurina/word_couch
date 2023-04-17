@@ -59,6 +59,7 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
           SliverToBoxAdapter(
             child: Column(
               children: [
+                if (value.image?.value?.first.thumbnailUrl != null)
                 Image.network(
                     value.image?.value?.first.thumbnailUrl ?? "",
                     fit: BoxFit.cover),
