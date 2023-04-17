@@ -1,4 +1,5 @@
 import 'package:word_couch/features/profile/domain/entities/user_entity.dart';
+import 'package:word_couch/features/profile/domain/entities/user_word_entity.dart';
 
 class ProfileState {
   ProfileState._();
@@ -9,7 +10,10 @@ class ProfileState {
 
   factory ProfileState.loading() = ProfileLoadingState;
 
-  factory ProfileState.user(UserEntity userEntity) = ProfileUserState;
+  factory ProfileState.user(
+    UserEntity userEntity,
+    List<UserWordEntity> list,
+  ) = ProfileUserState;
 }
 
 class ProfileErrorState extends ProfileState {
@@ -23,9 +27,13 @@ class ProfileNoUserState extends ProfileState {
 }
 
 class ProfileUserState extends ProfileState {
-  ProfileUserState(this.value) : super._();
+  ProfileUserState(
+    this.value,
+    this.list,
+  ) : super._();
 
   final UserEntity value;
+  final List<UserWordEntity> list;
 }
 
 class ProfileLoadingState extends ProfileState {
