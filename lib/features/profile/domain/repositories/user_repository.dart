@@ -12,4 +12,6 @@ abstract class UserRepository {
   Future<Either<String, List<UserWordEntity>>> getWordsHistory();
 
   Future<Either<String, bool>> exit();
+
+  Future<Either<String, bool>> addFavorite(String word);
 }
