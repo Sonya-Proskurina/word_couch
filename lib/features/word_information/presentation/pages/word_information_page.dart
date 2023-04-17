@@ -19,8 +19,6 @@ class WordInformationPage extends ConsumerStatefulWidget {
 class WordInformationPageState extends ConsumerState<WordInformationPage> {
   late WordInfoManager manager;
 
-  // late String arg;
-
   @override
   void initState() {
     super.initState();
@@ -29,7 +27,6 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       manager.notifier.setLoading();
     });
-    // arg = ref.watch(widget.argsNotifier);
   }
 
   @override
@@ -64,8 +61,15 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
               children: [
                 if (value.image?.value?.isNotEmpty == true &&
                     value.image?.value?.first.thumbnailUrl != null)
-                  Image.network(value.image?.value?.first.thumbnailUrl ?? "",
-                      fit: BoxFit.cover),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Image.network(
+                          value.image?.value?.first.thumbnailUrl ?? "",
+                          fit: BoxFit.cover),
+                    ),
+                  ),
                 Card(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
