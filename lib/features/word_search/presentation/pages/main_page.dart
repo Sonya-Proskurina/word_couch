@@ -35,7 +35,7 @@ class _MainPageState extends ConsumerState<MainPage> {
     } else if (state is ProfileLoadingState) {
       return const LoadingWidget();
     } else if (state is ProfileNoUserState) {
-      return const MainUserWidget(
+      return MainUserWidget(
         history: [],
       );
     } else if (state is ProfileErrorState) {

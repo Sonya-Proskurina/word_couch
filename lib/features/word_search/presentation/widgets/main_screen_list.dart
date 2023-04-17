@@ -18,7 +18,6 @@ class MainScreenList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final arg = ref.read(DI.wordInfoArgNotifier.notifier);
     if (list.isEmpty) {
       return Column(
         children: [
@@ -42,7 +41,8 @@ class MainScreenList extends ConsumerWidget {
               (index) => HistoryItemWidget(
                 userWordEntity: list[index],
                 tap: () {
-                  arg.setState(list[index].word);
+                   ref.read(DI.wordInfoArgNotifier.notifier)
+                              .setState(list[index]);
                   Navigator.pushNamed(
                       context, RouterPathContainer.wordInformationPage);
                 },
