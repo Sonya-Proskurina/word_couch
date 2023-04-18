@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:word_couch/features/word_information/data/models/image/image_data.dart';
-import 'package:word_couch/features/word_information/data/models/word_meaning_model.dart';
 
 import '../../domain/repositories/word_info_repository.dart';
 import '../models/word_model.dart';
@@ -247,5 +246,10 @@ class FakeWordInfoRepository implements WordInfoRepository {
           thumbnail: const Thumbnail(width: 0, height: 0),
           accentColor: '')
     ]));
+  }
+
+  @override
+  Future<Either<String, WordModel>> getRandomWord() {
+    throw UnimplementedError();
   }
 }
