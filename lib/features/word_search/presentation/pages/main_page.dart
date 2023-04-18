@@ -6,6 +6,7 @@ import 'package:word_couch/core/ui/loading_widget.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_manager.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_states.dart';
 import 'package:word_couch/features/word_search/presentation/widgets/main_user_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainPage extends ConsumerStatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -47,7 +48,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       );
     } else {
       return ErrorsWidget(
-        text: "Error",
+        text: AppLocalizations.of(context)!.error,
         restart: () {
           manager.loading();
         },

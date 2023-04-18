@@ -5,6 +5,7 @@ import 'package:word_couch/core/ui/loading_widget.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_manager.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_states.dart';
 import 'package:word_couch/features/profile/presentation/widgets/profile_no_user_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/ui/errors_widget.dart';
 import '../widgets/profile_user_widget.dart';
@@ -33,7 +34,7 @@ class ProfileDrawer extends ConsumerWidget {
       );
     } else {
       return ErrorsWidget(
-        text: "Error",
+        text: AppLocalizations.of(context)!.error,
         restart: () {
           manager.loading();
         },

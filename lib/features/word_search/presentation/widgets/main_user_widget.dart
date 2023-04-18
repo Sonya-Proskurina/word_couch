@@ -52,7 +52,7 @@ class _MainUserWidgetState extends ConsumerState<MainUserWidget> {
                         onPressed: () {
                           _scaffoldKey.currentState!.openDrawer();
                         }),
-                    title: Text(AppLocalizations.of(context)!.testText),
+                    title: Text(AppLocalizations.of(context)!.appName),
                   ),
                   SliverToBoxAdapter(
                     child: Card(

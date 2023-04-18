@@ -7,6 +7,7 @@ import 'package:word_couch/features/profile/presentation/manager/auth/auth_manag
 import 'package:word_couch/features/profile/presentation/manager/auth/auth_states.dart';
 import 'package:word_couch/features/profile/presentation/widgets/auth_loaded_widget.dart';
 import 'package:word_couch/features/profile/presentation/widgets/auth_registration_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       return const AuthRegistrationWidget();
     } else {
       return ErrorsWidget(
-          text: "Error",
+          text: AppLocalizations.of(context)!.error,
           restart: () {
             manager.loading();
           });

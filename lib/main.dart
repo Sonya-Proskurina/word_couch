@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -38,11 +39,12 @@ class MyApp extends StatelessWidget {
         darkTheme: themeWithBrightness(Brightness.dark),
         theme: themeWithBrightness(Brightness.light),
         supportedLocales: const [Locale('en'), Locale('ru')],
-        localizationsDelegates: const [
+        localizationsDelegates: [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
+          FirebaseUILocalizations.delegate,
         ],
         initialRoute: RouterPathContainer.mainPage,
         routes: RouterPathContainer.routes,
