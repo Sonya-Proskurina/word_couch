@@ -61,8 +61,12 @@ class _SearchBarState extends ConsumerState<SearchBar> {
             ),
           ),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.bookmark_outline),
+            onPressed: () {
+              ref.read(DI.profileManager).changeFilterMod();
+            },
+            icon: Icon(ref.read(DI.profileManager).favoriteMod
+                ? Icons.bookmark
+                : Icons.bookmark_outline),
           ),
         ],
       ),

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:word_couch/core/ui/loading_widget.dart';
+import 'package:word_couch/features/profile/presentation/manager/user/user_manager.dart';
+import 'package:word_couch/features/word_information/presentation/widgets/word_information_sections_list.dart';
 import '../../../../core/di.dart';
 import '../manager/manager.dart';
-import '../widgets/word_information_sections_list.dart';
+import '../../../profile/presentation/manager/user/user_states.dart';
 
 class WordInformationPage extends ConsumerStatefulWidget {
   WordInformationPage({Key? key}) : super(key: key);
 
   final manager = DI.wordInfoManager;
+  final managerUser = DI.profileManager;
   final notifier = DI.wordInfoNotifier;
 
   @override
@@ -18,22 +21,27 @@ class WordInformationPage extends ConsumerStatefulWidget {
 
 class WordInformationPageState extends ConsumerState<WordInformationPage> {
   late WordInfoManager manager;
+  late ProfileManager managerUser;
 
   @override
   void initState() {
     super.initState();
     manager = ref.read(widget.manager);
+    managerUser = ref.read(widget.managerUser);
     manager.init();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       manager.notifier.setLoading();
+      ref.read(DI.profileManager).addHistory(manager.argNotifier.getState());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final wordInfoState = ref.watch(widget.notifier);
-
     return wordInfoState.when(success: (value) {
+      if (ref.watch(managerUser.getNotifier()) is! ProfileUserState) {
+        return const LoadingWidget();
+      }
       return Material(
           child: CustomScrollView(
         slivers: <Widget>[
@@ -66,8 +74,16 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
               Padding(
                 padding: const EdgeInsets.only(right: 16.0),
                 child: TextButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.bookmark_outline),
+                    onPressed: () {
+                      managerUser.addFavorite(manager.argNotifier.getState());
+                    },
+                    icon: Icon((ref.watch(managerUser.getNotifier())
+                                as ProfileUserState)
+                            .value
+                            .favourite
+                            .contains(manager.argNotifier.getState())
+                        ? Icons.bookmark
+                        : Icons.bookmark_outline),
                     label: const Text("Bookmark")),
               )
             ],

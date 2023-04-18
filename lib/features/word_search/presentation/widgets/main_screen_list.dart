@@ -40,9 +40,13 @@ class MainScreenList extends ConsumerWidget {
               list.length,
               (index) => HistoryItemWidget(
                 userWordEntity: list[index],
+                addWord: () {
+                  ref.read(DI.profileManager).addFavorite(list[index].word);
+                },
                 tap: () {
-                   ref.read(DI.wordInfoArgNotifier.notifier)
-                              .setState(list[index].word);
+                  ref
+                      .read(DI.wordInfoArgNotifier.notifier)
+                      .setState(list[index].word);
                   Navigator.pushNamed(
                       context, RouterPathContainer.wordInformationPage);
                 },
