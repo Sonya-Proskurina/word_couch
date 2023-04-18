@@ -9,6 +9,7 @@ import '../models/word_model.dart';
 class WordInfoRepositoryImpl implements WordInfoRepository {
   final WordsApiClient _wordsApiClient;
   final ImageApiClient _imageApiClient;
+
   WordInfoRepositoryImpl(this._wordsApiClient, this._imageApiClient);
 
   static const String _wordInfoUrl = '/words/';
@@ -16,7 +17,8 @@ class WordInfoRepositoryImpl implements WordInfoRepository {
   @override
   Future<Either<String, WordModel>> getWordInfo(String word) async {
     try {
-      var res = WordModel.fromJson(await _wordsApiClient.get(_wordInfoUrl + word));
+      var res =
+          WordModel.fromJson(await _wordsApiClient.get(_wordInfoUrl + word));
       return Right(res);
     } catch (e) {
       logger.e(e);
@@ -28,21 +30,21 @@ class WordInfoRepositoryImpl implements WordInfoRepository {
   Future<Either<String, ImageData>> getWordImage(String word) async {
     try {
       var res = ImageData.fromJson(await _imageApiClient.get(word));
-    return Right(res);
+      return Right(res);
     } catch (e) {
-    logger.e(e);
-    return Left('Error getting word image: $e');
+      logger.e(e);
+      return Left('Error getting word image: $e');
     }
   }
 
   @override
   Future<Either<String, WordModel>> getRandomWord() async {
     try {
-      var res = WordModel.fromJson(await _wordsApiClient.random());
-    return Right(res);
+      Map<String, dynamic> random = await _wordsApiClient.random();
+      return getWordInfo(random['word']);
     } catch (e) {
-    logger.e(e);
-    return Left('Error getting random word: $e');
+      logger.e(e);
+      return Left('Error getting random word: $e');
     }
   }
 }
