@@ -21,6 +21,7 @@ code_quality:
 
 build_android:
   stage: test
+  image: "cirrusci/flutter:1.22.5"
   script: flutter build apk --build-number=$CI_PIPELINE_ID
   artifacts:
     paths:
