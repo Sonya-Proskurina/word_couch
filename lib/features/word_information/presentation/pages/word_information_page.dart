@@ -195,10 +195,37 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
         ),
       );
     }, error: (error) {
-      return const Material(
-        child: Center(
-          child: Text("Couldn't load the data"),
-        ),
+      if (ref.watch(managerUser.getNotifier()) is! ProfileUserState &&
+          ref.watch(managerUser.getNotifier()) is! ProfileNoUserState) {
+        return const LoadingWidget();
+      }
+      return Material(
+        child: CustomScrollView(slivers: [
+          SliverAppBar.large(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            title: Row(
+              textBaseline: TextBaseline.alphabetic,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              children: [
+                Text(manager.argNotifier.getState(),
+                    style: Theme.of(context).textTheme.titleLarge),
+                const SizedBox(
+                  width: 4,
+                ),
+              ],
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Center(
+              child: Text("Couldn't load the data"),
+            ),
+          ),
+        ]),
       );
     }, loading: () {
       return const Material(
