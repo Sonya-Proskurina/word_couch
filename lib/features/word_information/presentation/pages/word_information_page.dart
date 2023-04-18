@@ -39,91 +39,161 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
   Widget build(BuildContext context) {
     final wordInfoState = ref.watch(widget.notifier);
     return wordInfoState.when(success: (value) {
-      if (ref.watch(managerUser.getNotifier()) is! ProfileUserState) {
+      if (ref.watch(managerUser.getNotifier()) is! ProfileUserState &&
+          ref.watch(managerUser.getNotifier()) is! ProfileNoUserState) {
         return const LoadingWidget();
       }
-      return Material(
+      if (ref.watch(managerUser.getNotifier()) is ProfileNoUserState) {
+        return Material(
           child: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar.large(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            title: Row(
-              textBaseline: TextBaseline.alphabetic,
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              children: [
-                Text(manager.argNotifier.getState(),
-                    style: Theme.of(context).textTheme.titleLarge),
-                const SizedBox(
-                  width: 4,
+            slivers: <Widget>[
+              SliverAppBar.large(
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
-                Text(
-                  value.wordInfo?.results.first.partOfSpeech ?? "",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelMedium
-                      ?.apply(color: Colors.black54),
-                )
-              ],
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: TextButton.icon(
-                    onPressed: () {
-                      managerUser.addFavorite(manager.argNotifier.getState());
-                    },
-                    icon: Icon((ref.watch(managerUser.getNotifier())
-                                as ProfileUserState)
-                            .value
-                            .favourite
-                            .contains(manager.argNotifier.getState())
-                        ? Icons.bookmark
-                        : Icons.bookmark_outline),
-                    label: const Text("Bookmark")),
+                title: Row(
+                  textBaseline: TextBaseline.alphabetic,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  children: [
+                    Text(manager.argNotifier.getState(),
+                        style: Theme.of(context).textTheme.titleLarge),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      value.wordInfo?.results.first.partOfSpeech ?? "",
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium
+                          ?.apply(color: Colors.black54),
+                    )
+                  ],
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    if (value.image?.value?.isNotEmpty == true &&
+                        value.image?.value?.first.thumbnailUrl != null)
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12.0),
+                          child: Image.network(
+                              value.image?.value?.first.thumbnailUrl ?? "",
+                              fit: BoxFit.cover),
+                        ),
+                      ),
+                    Card(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              value.wordInfo?.results[0].definition ??
+                                  manager.argNotifier.getState(),
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ),
+                          WordInformationSectionsList(
+                              wordInfo: value.wordInfo?.results.first)
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               )
             ],
           ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                if (value.image?.value?.isNotEmpty == true &&
-                    value.image?.value?.first.thumbnailUrl != null)
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child: Image.network(
-                          value.image?.value?.first.thumbnailUrl ?? "",
-                          fit: BoxFit.cover),
-                    ),
+        );
+      }
+      return Material(
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar.large(
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              title: Row(
+                textBaseline: TextBaseline.alphabetic,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                children: [
+                  Text(manager.argNotifier.getState(),
+                      style: Theme.of(context).textTheme.titleLarge),
+                  const SizedBox(
+                    width: 4,
                   ),
-                Card(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          value.wordInfo?.results[0].definition ??
-                              manager.argNotifier.getState(),
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ),
-                      WordInformationSectionsList(
-                          wordInfo: value.wordInfo?.results.first)
-                    ],
-                  ),
-                ),
+                  Text(
+                    value.wordInfo?.results.first.partOfSpeech ?? "",
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelMedium
+                        ?.apply(color: Colors.black54),
+                  )
+                ],
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: TextButton.icon(
+                      onPressed: () {
+                        managerUser.addFavorite(manager.argNotifier.getState());
+                      },
+                      icon: Icon((ref.watch(managerUser.getNotifier())
+                                  as ProfileUserState)
+                              .value
+                              .favourite
+                              .contains(manager.argNotifier.getState())
+                          ? Icons.bookmark
+                          : Icons.bookmark_outline),
+                      label: const Text("Bookmark")),
+                )
               ],
             ),
-          )
-        ],
-      ));
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  if (value.image?.value?.isNotEmpty == true &&
+                      value.image?.value?.first.thumbnailUrl != null)
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: Image.network(
+                            value.image?.value?.first.thumbnailUrl ?? "",
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                  Card(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            value.wordInfo?.results[0].definition ??
+                                manager.argNotifier.getState(),
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ),
+                        WordInformationSectionsList(
+                            wordInfo: value.wordInfo?.results.first)
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      );
     }, error: (error) {
       return const Material(
         child: Center(
