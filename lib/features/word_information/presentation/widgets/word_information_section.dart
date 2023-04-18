@@ -21,15 +21,15 @@ class WordInformationSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
-                    child: Text(
-                      sectionName!,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
-                ] +
-                section!.map((e) => Text(e)).toList(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4.0),
+                child: Text(
+                  sectionName!,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+              ...section!.map((e) => Text(e)).toList()
+            ],
           ),
         )
       ],
