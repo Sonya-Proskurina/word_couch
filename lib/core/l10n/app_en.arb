@@ -14,6 +14,7 @@
  "derivation": "Derivation",
  "logIn": "Log in",
  "noAccount": "Don't have an account? Register",
+ "safeSearch": "Safe search",
  "noUserText": "Log in to your profile to save your favorite words, query history, and test points",
  "testPoint" : "Test point {parameter}",
  "@testPoint": {

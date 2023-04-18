@@ -48,7 +48,7 @@ class _ProfileUserWidgetState extends ConsumerState<ProfileUserWidget> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    const Text("Safe search"),
+                    Text(AppLocalizations.of(context)!.safeSearch),
                     const Spacer(),
                     Switch(
                       value: ref.watch(DI.safeSearch),
