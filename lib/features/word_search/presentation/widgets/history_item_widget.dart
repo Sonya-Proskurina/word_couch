@@ -20,13 +20,16 @@ class HistoryItemWidget extends StatelessWidget {
       onTap: () {
         tap();
       },
-      trailing: IconButton(
-          onPressed: () {
-            addWord();
-          },
-          icon: (userWordEntity.isFavourite)
-              ? const Icon(CupertinoIcons.bookmark_fill)
-              : const Icon(CupertinoIcons.bookmark)),
+      trailing: Visibility(
+        visible: userWordEntity.description.isNotEmpty,
+        child: IconButton(
+            onPressed: () {
+              addWord();
+            },
+            icon: (userWordEntity.isFavourite)
+                ? const Icon(CupertinoIcons.bookmark_fill)
+                : const Icon(CupertinoIcons.bookmark)),
+      ),
       title: Text(
         userWordEntity.word,
         style: Theme.of(context).textTheme.titleLarge,
