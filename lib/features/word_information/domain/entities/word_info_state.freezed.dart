@@ -18,22 +18,22 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WordInfoState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WordInfo foo) success,
-    required TResult Function(String foo) error,
+    required TResult Function(WordInfo info) success,
+    required TResult Function(String msg) error,
     required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WordInfo foo)? success,
-    TResult? Function(String foo)? error,
+    TResult? Function(WordInfo info)? success,
+    TResult? Function(String msg)? error,
     TResult? Function()? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WordInfo foo)? success,
-    TResult Function(String foo)? error,
+    TResult Function(WordInfo info)? success,
+    TResult Function(String msg)? error,
     TResult Function()? loading,
     required TResult orElse(),
   }) =>
@@ -86,7 +86,7 @@ abstract class _$$WordInfoSuccessStateCopyWith<$Res> {
           $Res Function(_$WordInfoSuccessState) then) =
       __$$WordInfoSuccessStateCopyWithImpl<$Res>;
   @useResult
-  $Res call({WordInfo foo});
+  $Res call({WordInfo info});
 }
 
 /// @nodoc
@@ -100,12 +100,12 @@ class __$$WordInfoSuccessStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? foo = null,
+    Object? info = null,
   }) {
     return _then(_$WordInfoSuccessState(
-      null == foo
-          ? _value.foo
-          : foo // ignore: cast_nullable_to_non_nullable
+      null == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
               as WordInfo,
     ));
   }
@@ -114,14 +114,14 @@ class __$$WordInfoSuccessStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$WordInfoSuccessState implements WordInfoSuccessState {
-  const _$WordInfoSuccessState(this.foo);
+  const _$WordInfoSuccessState(this.info);
 
   @override
-  final WordInfo foo;
+  final WordInfo info;
 
   @override
   String toString() {
-    return 'WordInfoState.success(foo: $foo)';
+    return 'WordInfoState.success(info: $info)';
   }
 
   @override
@@ -129,11 +129,11 @@ class _$WordInfoSuccessState implements WordInfoSuccessState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WordInfoSuccessState &&
-            (identical(other.foo, foo) || other.foo == foo));
+            (identical(other.info, info) || other.info == info));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, foo);
+  int get hashCode => Object.hash(runtimeType, info);
 
   @JsonKey(ignore: true)
   @override
@@ -145,33 +145,33 @@ class _$WordInfoSuccessState implements WordInfoSuccessState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WordInfo foo) success,
-    required TResult Function(String foo) error,
+    required TResult Function(WordInfo info) success,
+    required TResult Function(String msg) error,
     required TResult Function() loading,
   }) {
-    return success(foo);
+    return success(info);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WordInfo foo)? success,
-    TResult? Function(String foo)? error,
+    TResult? Function(WordInfo info)? success,
+    TResult? Function(String msg)? error,
     TResult? Function()? loading,
   }) {
-    return success?.call(foo);
+    return success?.call(info);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WordInfo foo)? success,
-    TResult Function(String foo)? error,
+    TResult Function(WordInfo info)? success,
+    TResult Function(String msg)? error,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(foo);
+      return success(info);
     }
     return orElse();
   }
@@ -212,10 +212,10 @@ class _$WordInfoSuccessState implements WordInfoSuccessState {
 }
 
 abstract class WordInfoSuccessState implements WordInfoState {
-  const factory WordInfoSuccessState(final WordInfo foo) =
+  const factory WordInfoSuccessState(final WordInfo info) =
       _$WordInfoSuccessState;
 
-  WordInfo get foo;
+  WordInfo get info;
   @JsonKey(ignore: true)
   _$$WordInfoSuccessStateCopyWith<_$WordInfoSuccessState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -227,7 +227,7 @@ abstract class _$$WordInfoErrorStateCopyWith<$Res> {
           $Res Function(_$WordInfoErrorState) then) =
       __$$WordInfoErrorStateCopyWithImpl<$Res>;
   @useResult
-  $Res call({String foo});
+  $Res call({String msg});
 }
 
 /// @nodoc
@@ -241,12 +241,12 @@ class __$$WordInfoErrorStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? foo = null,
+    Object? msg = null,
   }) {
     return _then(_$WordInfoErrorState(
-      null == foo
-          ? _value.foo
-          : foo // ignore: cast_nullable_to_non_nullable
+      null == msg
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -255,14 +255,14 @@ class __$$WordInfoErrorStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$WordInfoErrorState implements WordInfoErrorState {
-  const _$WordInfoErrorState(this.foo);
+  const _$WordInfoErrorState(this.msg);
 
   @override
-  final String foo;
+  final String msg;
 
   @override
   String toString() {
-    return 'WordInfoState.error(foo: $foo)';
+    return 'WordInfoState.error(msg: $msg)';
   }
 
   @override
@@ -270,11 +270,11 @@ class _$WordInfoErrorState implements WordInfoErrorState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WordInfoErrorState &&
-            (identical(other.foo, foo) || other.foo == foo));
+            (identical(other.msg, msg) || other.msg == msg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, foo);
+  int get hashCode => Object.hash(runtimeType, msg);
 
   @JsonKey(ignore: true)
   @override
@@ -286,33 +286,33 @@ class _$WordInfoErrorState implements WordInfoErrorState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WordInfo foo) success,
-    required TResult Function(String foo) error,
+    required TResult Function(WordInfo info) success,
+    required TResult Function(String msg) error,
     required TResult Function() loading,
   }) {
-    return error(foo);
+    return error(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WordInfo foo)? success,
-    TResult? Function(String foo)? error,
+    TResult? Function(WordInfo info)? success,
+    TResult? Function(String msg)? error,
     TResult? Function()? loading,
   }) {
-    return error?.call(foo);
+    return error?.call(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WordInfo foo)? success,
-    TResult Function(String foo)? error,
+    TResult Function(WordInfo info)? success,
+    TResult Function(String msg)? error,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(foo);
+      return error(msg);
     }
     return orElse();
   }
@@ -353,9 +353,9 @@ class _$WordInfoErrorState implements WordInfoErrorState {
 }
 
 abstract class WordInfoErrorState implements WordInfoState {
-  const factory WordInfoErrorState(final String foo) = _$WordInfoErrorState;
+  const factory WordInfoErrorState(final String msg) = _$WordInfoErrorState;
 
-  String get foo;
+  String get msg;
   @JsonKey(ignore: true)
   _$$WordInfoErrorStateCopyWith<_$WordInfoErrorState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -399,8 +399,8 @@ class _$WordInfoLoadingState implements WordInfoLoadingState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WordInfo foo) success,
-    required TResult Function(String foo) error,
+    required TResult Function(WordInfo info) success,
+    required TResult Function(String msg) error,
     required TResult Function() loading,
   }) {
     return loading();
@@ -409,8 +409,8 @@ class _$WordInfoLoadingState implements WordInfoLoadingState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WordInfo foo)? success,
-    TResult? Function(String foo)? error,
+    TResult? Function(WordInfo info)? success,
+    TResult? Function(String msg)? error,
     TResult? Function()? loading,
   }) {
     return loading?.call();
@@ -419,8 +419,8 @@ class _$WordInfoLoadingState implements WordInfoLoadingState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WordInfo foo)? success,
-    TResult Function(String foo)? error,
+    TResult Function(WordInfo info)? success,
+    TResult Function(String msg)? error,
     TResult Function()? loading,
     required TResult orElse(),
   }) {

@@ -7,6 +7,7 @@ part of 'word_model.dart';
 // **************************************************************************
 
 _$_WordModel _$$_WordModelFromJson(Map<String, dynamic> json) => _$_WordModel(
+      word: json['word'] as String,
       results: (json['results'] as List<dynamic>)
           .map((e) => WordMeaningModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -20,6 +21,7 @@ _$_WordModel _$$_WordModelFromJson(Map<String, dynamic> json) => _$_WordModel(
 
 Map<String, dynamic> _$$_WordModelToJson(_$_WordModel instance) =>
     <String, dynamic>{
+      'word': instance.word,
       'results': instance.results,
       'syllables': instance.syllables,
       'pronunciation': instance.pronunciation,

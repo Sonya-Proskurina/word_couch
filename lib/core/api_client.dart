@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:word_couch/apikey.dart';
-import 'package:word_couch/core/di.dart';
 
+import '../features/profile/presentation/manager/user/safe_search_notifier.dart';
 import 'logger.dart';
 
 abstract class ApiClient {
@@ -31,11 +31,15 @@ class WordsApiClient extends ApiClient {
     ..interceptors.add(LoggerInterceptor());
 
   Future<T?> random<T>() async {
-    return super.get("words", query: { 'random' : true});
+    return super.get("words", query: {'random': true});
   }
 }
 
 class ImageApiClient extends ApiClient {
+  SafeSearchNotifier safeSearchNotifier;
+
+  ImageApiClient(this.safeSearchNotifier);
+
   static const baseUrl =
       'https://bing-image-search1.p.rapidapi.com/images/search';
 
@@ -54,7 +58,7 @@ class ImageApiClient extends ApiClient {
     return super.get("", query: {
       'q': request,
       'count': 1,
-      if (DI.safeSearchFlag) 'safeSearch': 'Off'
+      if (!safeSearchNotifier.getState()) 'safeSearch': 'Off'
     });
   }
 }

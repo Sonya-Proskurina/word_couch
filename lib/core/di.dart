@@ -18,8 +18,6 @@ class DI {
   static final safeSearch = StateNotifierProvider<SafeSearchNotifier, bool>(
       (ref) => SafeSearchNotifier(true));
 
-  static bool safeSearchFlag = true;
-
   static final wordInfoNotifier =
       StateNotifierProvider<WordInfoNotifier, WordInfoState>(
           (ref) => WordInfoNotifier());
@@ -35,7 +33,7 @@ class DI {
 
   static final wordsApiClient = Provider((ref) => WordsApiClient());
 
-  static final imageSearchApiClient = Provider((ref) => ImageApiClient());
+  static final imageSearchApiClient = Provider((ref) => ImageApiClient(ref.watch(safeSearch.notifier)));
 
   static final wordInfoRepository = Provider((ref) => WordInfoRepositoryImpl(
       ref.watch(wordsApiClient), ref.watch(imageSearchApiClient)));

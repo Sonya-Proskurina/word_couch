@@ -20,6 +20,8 @@ WordModel _$WordModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WordModel {
+  @JsonKey(name: 'word')
+  String get word => throw _privateConstructorUsedError;
   @JsonKey(name: 'results')
   List<WordMeaningModel> get results => throw _privateConstructorUsedError;
   @JsonKey(name: 'syllables')
@@ -39,7 +41,8 @@ abstract class $WordModelCopyWith<$Res> {
       _$WordModelCopyWithImpl<$Res, WordModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'results') List<WordMeaningModel> results,
+      {@JsonKey(name: 'word') String word,
+      @JsonKey(name: 'results') List<WordMeaningModel> results,
       @JsonKey(name: 'syllables') SyllablesModel? syllables,
       @JsonKey(name: 'pronunciation') Map<String, String>? pronunciation});
 
@@ -59,11 +62,16 @@ class _$WordModelCopyWithImpl<$Res, $Val extends WordModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? word = null,
     Object? results = null,
     Object? syllables = freezed,
     Object? pronunciation = freezed,
   }) {
     return _then(_value.copyWith(
+      word: null == word
+          ? _value.word
+          : word // ignore: cast_nullable_to_non_nullable
+              as String,
       results: null == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
@@ -100,7 +108,8 @@ abstract class _$$_WordModelCopyWith<$Res> implements $WordModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'results') List<WordMeaningModel> results,
+      {@JsonKey(name: 'word') String word,
+      @JsonKey(name: 'results') List<WordMeaningModel> results,
       @JsonKey(name: 'syllables') SyllablesModel? syllables,
       @JsonKey(name: 'pronunciation') Map<String, String>? pronunciation});
 
@@ -119,11 +128,16 @@ class __$$_WordModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? word = null,
     Object? results = null,
     Object? syllables = freezed,
     Object? pronunciation = freezed,
   }) {
     return _then(_$_WordModel(
+      word: null == word
+          ? _value.word
+          : word // ignore: cast_nullable_to_non_nullable
+              as String,
       results: null == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
@@ -144,7 +158,9 @@ class __$$_WordModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_WordModel implements _WordModel {
   const _$_WordModel(
-      {@JsonKey(name: 'results')
+      {@JsonKey(name: 'word')
+          required this.word,
+      @JsonKey(name: 'results')
           required final List<WordMeaningModel> results,
       @JsonKey(name: 'syllables')
           required this.syllables,
@@ -156,6 +172,9 @@ class _$_WordModel implements _WordModel {
   factory _$_WordModel.fromJson(Map<String, dynamic> json) =>
       _$$_WordModelFromJson(json);
 
+  @override
+  @JsonKey(name: 'word')
+  final String word;
   final List<WordMeaningModel> _results;
   @override
   @JsonKey(name: 'results')
@@ -181,7 +200,7 @@ class _$_WordModel implements _WordModel {
 
   @override
   String toString() {
-    return 'WordModel(results: $results, syllables: $syllables, pronunciation: $pronunciation)';
+    return 'WordModel(word: $word, results: $results, syllables: $syllables, pronunciation: $pronunciation)';
   }
 
   @override
@@ -189,6 +208,7 @@ class _$_WordModel implements _WordModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_WordModel &&
+            (identical(other.word, word) || other.word == word) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
             (identical(other.syllables, syllables) ||
                 other.syllables == syllables) &&
@@ -200,6 +220,7 @@ class _$_WordModel implements _WordModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      word,
       const DeepCollectionEquality().hash(_results),
       syllables,
       const DeepCollectionEquality().hash(_pronunciation));
@@ -220,7 +241,9 @@ class _$_WordModel implements _WordModel {
 
 abstract class _WordModel implements WordModel {
   const factory _WordModel(
-      {@JsonKey(name: 'results')
+      {@JsonKey(name: 'word')
+          required final String word,
+      @JsonKey(name: 'results')
           required final List<WordMeaningModel> results,
       @JsonKey(name: 'syllables')
           required final SyllablesModel? syllables,
@@ -230,6 +253,9 @@ abstract class _WordModel implements WordModel {
   factory _WordModel.fromJson(Map<String, dynamic> json) =
       _$_WordModel.fromJson;
 
+  @override
+  @JsonKey(name: 'word')
+  String get word;
   @override
   @JsonKey(name: 'results')
   List<WordMeaningModel> get results;
