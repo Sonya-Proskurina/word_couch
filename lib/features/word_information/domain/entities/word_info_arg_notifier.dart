@@ -1,11 +1,5 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:word_couch/core/simple_state_notifier.dart';
 
-class WordInfoArgNotifier extends StateNotifier<String> {
-  WordInfoArgNotifier(super.state);
-
-  void setState(String newState) {
-    state = newState;
-  }
-
-  String getState() => state;
+class WordInfoArgNotifier extends SimpleStateNotifier<String> {
+  WordInfoArgNotifier(String state) : super(state);
 }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:word_couch/apikey.dart';
+import 'package:word_couch/core/di.dart';
 
 import 'logger.dart';
 
@@ -44,9 +45,13 @@ class ImageApiClient extends ApiClient {
     ..interceptors.add(LoggerInterceptor());
 
   @override
-  Future<T?> get<T>(String request, {Map<String, dynamic> query = const {}}) async {
-    return super
-        .get("", query: {'q': request, 'count': 1, 'safeSearch': 'Off'});
+  Future<T?> get<T>(String request,
+      {Map<String, dynamic> query = const {}}) async {
+    return super.get("", query: {
+      'q': request,
+      'count': 1,
+      if (DI.safeSearchFlag) 'safeSearch': 'Off'
+    });
   }
 }
 

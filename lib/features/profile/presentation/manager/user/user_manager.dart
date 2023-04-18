@@ -1,17 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/features/profile/domain/entities/user_word_entity.dart';
 import 'package:word_couch/features/profile/domain/repositories/user_repository.dart';
+import 'package:word_couch/features/profile/presentation/manager/user/safe_search_notifier.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_notifier.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_states.dart';
 
 class ProfileManager {
   ProfileNotifier notifier;
   UserRepository userRepository;
+  SafeSearchNotifier safeSearchNotifier;
   bool favoriteMod = false;
 
   ProfileManager({
     required this.notifier,
     required this.userRepository,
+    required this.safeSearchNotifier,
   });
 
   void loading() async {
@@ -104,6 +107,12 @@ class ProfileManager {
         }
       },
     );
+  }
+
+  bool get isSafeSearch => safeSearchNotifier.getState();
+
+  void setSafeSearch(bool isSafe) {
+    safeSearchNotifier.setState(isSafe);
   }
 
   StateNotifierProvider<ProfileNotifier, ProfileState> getNotifier() {
