@@ -10,6 +10,7 @@ part 'word_model.g.dart';
 @freezed
 class WordModel with _$WordModel {
   const factory WordModel({
+    @JsonKey(name: 'word') required String word,
     @JsonKey(name: 'results') required List<WordMeaningModel> results,
     @JsonKey(name: 'syllables') required SyllablesModel? syllables,
     @JsonKey(name: 'pronunciation') required Map<String, String>? pronunciation,
