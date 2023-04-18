@@ -118,6 +118,7 @@ class CreateChallengeUseCase {
               break;
             }
           // We already know it's not none
+          // empty comment fuck you
           case QuestionType.none:
             break;
         }
