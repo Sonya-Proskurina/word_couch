@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 
-class LoadingWidget extends StatefulWidget {
+class LoadingWidget extends StatelessWidget {
   const LoadingWidget({Key? key}) : super(key: key);
 
   @override
-  State<LoadingWidget> createState() => _LoadingWidgetState();
-}
-
-class _LoadingWidgetState extends State<LoadingWidget> {
-  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return const Material(
+      child: Center(
         child: CircularProgressIndicator(),
       ),
     );

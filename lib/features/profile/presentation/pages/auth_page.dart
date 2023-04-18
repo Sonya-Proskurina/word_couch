@@ -43,7 +43,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       return ErrorsWidget(
           text: state.msg,
           restart: () {
-            manager.loading();
+            manager.loaded();
           });
     } else if (state is AuthRegistrationState) {
       return const AuthRegistrationWidget();
@@ -51,7 +51,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       return ErrorsWidget(
           text: AppLocalizations.of(context)!.error,
           restart: () {
-            manager.loading();
+            manager.loaded();
           });
     }
   }

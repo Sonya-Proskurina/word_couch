@@ -23,7 +23,7 @@ class ProfileDrawer extends ConsumerWidget {
       return const ProfileNoUserWidget();
     } else if (state is ProfileUserState) {
       return ProfileUserWidget(
-        userEntity: state.value,
+        userEntity: state.user,
       );
     } else if (state is ProfileErrorState) {
       return ErrorsWidget(

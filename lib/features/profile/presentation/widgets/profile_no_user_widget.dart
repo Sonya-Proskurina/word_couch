@@ -30,7 +30,7 @@ class _ProfileNoUserWidgetState extends ConsumerState<ProfileNoUserWidget> {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  ref.read(DI.authManager).loading();
+                  ref.read(DI.authManager).loaded();
                   Navigator.pushNamed(context, RouterPathContainer.authPage);
                 },
                 child: SizedBox(

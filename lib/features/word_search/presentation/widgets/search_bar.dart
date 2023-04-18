@@ -57,20 +57,30 @@ class _SearchBarState extends ConsumerState<SearchBar> {
                 },
                 onSubmitted: (word) {
                   ref.read(DI.wordInfoArgNotifier.notifier).setState(word);
+                  bool favorite = ref
+                      .watch(DI.profileManager)
+                      .words
+                      .where((element) => element.isFavourite)
+                      .toList()
+                      .where((element) => element.word == word)
+                      .isNotEmpty;
                   Navigator.pushNamed(
-                      context, RouterPathContainer.wordInformationPage);
+                    context,
+                    RouterPathContainer.wordInformationPage,
+                    arguments: favorite,
+                  );
                 },
               ),
             ),
           ),
           Visibility(
-            visible: ref.watch(ref.read(DI.profileManager).getNotifier())
+            visible: ref.watch(ref.watch(DI.profileManager).getNotifier())
                 is ProfileUserState,
             child: IconButton(
               onPressed: () {
                 ref.read(DI.profileManager).changeFilterMod();
               },
-              icon: Icon(ref.read(DI.profileManager).favoriteMod
+              icon: Icon(ref.watch(DI.profileManager).favoriteMod
                   ? Icons.bookmark
                   : Icons.bookmark_outline),
             ),
