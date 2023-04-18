@@ -5,6 +5,7 @@ import 'package:word_couch/core/di.dart';
 import 'package:word_couch/features/profile/domain/entities/user_word_entity.dart';
 import 'package:word_couch/features/word_search/presentation/widgets/history_item_widget.dart';
 import 'package:word_couch/features/word_search/presentation/widgets/start_challenge_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/navigation/router_path.dart';
 
@@ -25,7 +26,7 @@ class MainScreenList extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(32),
             child: Text(
-              "Empty search history",
+              AppLocalizations.of(context)!.errorEmptySearch,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),

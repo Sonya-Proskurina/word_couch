@@ -6,6 +6,7 @@ import 'package:word_couch/features/word_information/presentation/widgets/word_i
 import '../../../../core/di.dart';
 import '../manager/manager.dart';
 import '../../../profile/presentation/manager/user/user_states.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WordInformationPage extends ConsumerStatefulWidget {
   WordInformationPage({Key? key}) : super(key: key);
@@ -153,7 +154,7 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                               .contains(manager.argNotifier.getState())
                           ? Icons.bookmark
                           : Icons.bookmark_outline),
-                      label: const Text("Bookmark")),
+                      label: Text(AppLocalizations.of(context)!.bookmark)),
                 )
               ],
             ),
@@ -220,9 +221,9 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
               ],
             ),
           ),
-          const SliverToBoxAdapter(
+           SliverToBoxAdapter(
             child: Center(
-              child: Text("Couldn't load the data"),
+              child: Text(AppLocalizations.of(context)!.errorLoad),
             ),
           ),
         ]),

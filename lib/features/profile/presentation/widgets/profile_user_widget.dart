@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/core/di.dart';
 import 'package:word_couch/features/profile/domain/entities/user_entity.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileUserWidget extends ConsumerStatefulWidget {
   final UserEntity userEntity;
@@ -34,7 +35,8 @@ class _ProfileUserWidgetState extends ConsumerState<ProfileUserWidget> {
                       widget.userEntity.email,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    Text("Test points: ${widget.userEntity.test}")
+                    // Text("Test points: ${widget.userEntity.test}")
+                    Text(AppLocalizations.of(context)!.testPoint(widget.userEntity.test.toString()))
                   ],
                 ),
               ),
@@ -43,10 +45,10 @@ class _ProfileUserWidgetState extends ConsumerState<ProfileUserWidget> {
                 onPressed: () {
                   ref.read(DI.profileManager).exit();
                 },
-                child: const SizedBox(
+                child: SizedBox(
                     width: double.infinity,
                     child: Text(
-                      "Exit",
+                      AppLocalizations.of(context)!.exit,
                       textAlign: TextAlign.center,
                     )),
               ),

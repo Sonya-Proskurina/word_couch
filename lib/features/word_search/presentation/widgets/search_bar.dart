@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_states.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/di.dart';
 import '../../../../core/navigation/router_path.dart';
@@ -48,8 +49,9 @@ class _SearchBarState extends ConsumerState<SearchBar> {
                 controller: textController,
                 focusNode: focusNode,
                 cursorColor: Theme.of(context).primaryColor,
-                decoration: const InputDecoration(
-                    hintText: 'Search', border: InputBorder.none),
+                decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context)!.search,
+                    border: InputBorder.none),
                 onTapOutside: (_) {
                   focusNode.unfocus();
                 },
@@ -62,7 +64,8 @@ class _SearchBarState extends ConsumerState<SearchBar> {
             ),
           ),
           Visibility(
-            visible: ref.watch(ref.read(DI.profileManager).getNotifier()) is ProfileUserState,
+            visible: ref.watch(ref.read(DI.profileManager).getNotifier())
+                is ProfileUserState,
             child: IconButton(
               onPressed: () {
                 ref.read(DI.profileManager).changeFilterMod();

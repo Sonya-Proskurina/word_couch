@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/core/di.dart';
 import 'package:word_couch/features/profile/presentation/manager/auth/auth_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AuthLoadedWidget extends ConsumerStatefulWidget {
   const AuthLoadedWidget({Key? key}) : super(key: key);
@@ -34,18 +35,13 @@ class _AuthLoadedWidgetState extends ConsumerState<AuthLoadedWidget> {
         ),
         body: SafeArea(
           child: SignInScreen(
-            // headerBuilder: (context, box, d) {
-            //   return Container(
-            //     color: Colors.red,
-            //   );
-            // },
             subtitleBuilder: (context, action) {
               return GestureDetector(
                 onTap: () {
                   manager.goToRegistration();
                 },
                 child: Text(
-                  "Don't have an account? Register",
+                  AppLocalizations.of(context)!.noAccount,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge

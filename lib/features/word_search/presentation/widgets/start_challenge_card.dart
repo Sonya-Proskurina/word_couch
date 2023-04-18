@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/navigation/router_path.dart';
 
 class StartChallengeCard extends StatelessWidget {
@@ -30,10 +30,10 @@ class StartChallengeCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Test your knowledge!",
+                        AppLocalizations.of(context)!.testItemTitle,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
-                      const Text("Play a game where you guess words meaning")
+                      Text(AppLocalizations.of(context)!.testItemText)
                     ],
                   )),
                   const Icon(Icons.keyboard_arrow_right_outlined)
