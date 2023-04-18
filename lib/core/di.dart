@@ -1,4 +1,5 @@
 import 'package:riverpod/riverpod.dart';
+import 'package:word_couch/features/profile/presentation/manager/user/safe_search_notifier.dart';
 import 'package:word_couch/features/word_information/domain/entities/word_info_arg_notifier.dart';
 import '../features/word_information/domain/entities/word_info_state.dart';
 import 'package:word_couch/core/api_client.dart';
@@ -14,6 +15,11 @@ import 'package:word_couch/features/profile/presentation/manager/user/user_state
 import '../features/word_information/presentation/manager/manager.dart';
 
 class DI {
+  static final safeSearch = StateNotifierProvider<SafeSearchNotifier, bool>(
+      (ref) => SafeSearchNotifier(true));
+
+  static bool safeSearchFlag = true;
+
   static final wordInfoNotifier =
       StateNotifierProvider<WordInfoNotifier, WordInfoState>(
           (ref) => WordInfoNotifier());
@@ -33,6 +39,7 @@ class DI {
 
   static final wordInfoRepository = Provider((ref) => WordInfoRepositoryImpl(
       ref.watch(wordsApiClient), ref.watch(imageSearchApiClient)));
+
   // static final wordInfoRepository = Provider((ref) => FakeWordInfoRepository());
 
   static final userAuthDataSource = Provider((ref) => UserAuthDataSource());
@@ -50,8 +57,10 @@ class DI {
   });
 
   static final profileManager = Provider((ref) => ProfileManager(
-      notifier: ref.watch(profileNotifier.notifier),
-      userRepository: ref.watch(userRepository)));
+        notifier: ref.watch(profileNotifier.notifier),
+        userRepository: ref.watch(userRepository),
+        safeSearchNotifier: ref.watch(safeSearch.notifier),
+      ));
 
   static final authNotifier =
       StateNotifierProvider<AuthNotifier, AuthState>((ref) {

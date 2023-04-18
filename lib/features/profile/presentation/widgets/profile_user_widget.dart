@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/core/di.dart';
 import 'package:word_couch/features/profile/domain/entities/user_entity.dart';
 
+import '../../../../core/logger.dart';
+
 class ProfileUserWidget extends ConsumerStatefulWidget {
   final UserEntity userEntity;
 
@@ -39,6 +41,23 @@ class _ProfileUserWidgetState extends ConsumerState<ProfileUserWidget> {
                 ),
               ),
               const SizedBox(height: 16),
+              // switch with text "safe search"
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    const Text("Safe search"),
+                    const Spacer(),
+                    Switch(
+                      value: ref.watch(DI.safeSearch),
+                      onChanged: (value) {
+                        logger.d("Safe search: $value");
+                        ref.read(DI.profileManager).setSafeSearch(value);
+                      },
+                    ),
+                  ],
+                ),
+              ),
               ElevatedButton(
                 onPressed: () {
                   ref.read(DI.profileManager).exit();
