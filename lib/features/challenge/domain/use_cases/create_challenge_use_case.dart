@@ -42,7 +42,7 @@ class CreateChallengeUseCase {
     yield QuestionType.none;
   }
 
-  QuestionEntity? buildAntonymQuestion(WordModel model, String word) {
+  QuestionEntity? buildAntonymQuestion(WordModel model) {
     final antonyms = model.results[0].antonyms;
     final similar = model.results[0].similarTo;
     if (antonyms != null &&
@@ -52,7 +52,7 @@ class CreateChallengeUseCase {
       final antonymWord = antonyms[random.nextInt(antonyms.length)];
       final similarWord = similar[random.nextInt(similar.length)];
       return QuestionEntity(
-          question: 'What is antonymous to the $word?',
+          question: 'What is antonymous to the ${model.word}?',
           answers: [
             BinaryAnswerEntity(answer: antonymWord, isCorrect: true),
             BinaryAnswerEntity(answer: similarWord, isCorrect: false)
@@ -62,7 +62,7 @@ class CreateChallengeUseCase {
     return null;
   }
 
-  QuestionEntity? buildSynonymQuestion(WordModel model, String word) {
+  QuestionEntity? buildSynonymQuestion(WordModel model) {
     final synonyms = model.results[0].synonyms;
     final similar = model.results[0].similarTo;
     if (synonyms != null &&
@@ -77,7 +77,7 @@ class CreateChallengeUseCase {
         final randomSimilarWord =
             similarButNotSynonym[random.nextInt(similarButNotSynonym.length)];
         return QuestionEntity(
-          question: 'What is synonymous to the $word?',
+          question: 'What is synonymous to the ${model.word}?',
           answers: [
             BinaryAnswerEntity(answer: randomSynonymWord, isCorrect: true),
             BinaryAnswerEntity(answer: randomSimilarWord, isCorrect: false)
@@ -109,14 +109,12 @@ class CreateChallengeUseCase {
         switch (type) {
           case QuestionType.findSynonym:
             {
-              // TODO add word
-              question = buildSynonymQuestion(r, "");
+              question = buildSynonymQuestion(r);
               break;
             }
           case QuestionType.findAntonym:
             {
-              // TODO add word
-              question = buildAntonymQuestion(r, "");
+              question = buildAntonymQuestion(r);
               break;
             }
           // We already know it's not none
