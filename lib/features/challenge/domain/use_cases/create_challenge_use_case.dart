@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:dartz/dartz.dart';
 import 'package:word_couch/features/challenge/domain/entities/binary_answer_entity.dart';
 import 'package:word_couch/features/challenge/domain/use_cases/question_type_generator.dart';
 
@@ -8,7 +7,6 @@ import '../../../../core/logger.dart';
 import '../../../word_information/data/models/word_model.dart';
 import '../../../word_information/domain/repositories/word_info_repository.dart';
 import '../entities/question_entity.dart';
-import '../entities/empty_question_entity.dart';
 
 class CreateChallengeUseCase {
   final WordInfoRepository rep;
@@ -112,13 +110,13 @@ class CreateChallengeUseCase {
           case QuestionType.findSynonym:
             {
               // TODO add word
-              question = buildSynonymQuestion(r);
+              question = buildSynonymQuestion(r, "");
               break;
             }
           case QuestionType.findAntonym:
             {
               // TODO add word
-              question = buildAntonymQuestion(r);
+              question = buildAntonymQuestion(r, "");
               break;
             }
           // We already know it's not none
