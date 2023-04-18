@@ -18,21 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WordInfoState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WordInfo info) success,
+    required TResult Function(WordInfo info, bool? isFavorite) success,
     required TResult Function(String msg) error,
     required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WordInfo info)? success,
+    TResult? Function(WordInfo info, bool? isFavorite)? success,
     TResult? Function(String msg)? error,
     TResult? Function()? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WordInfo info)? success,
+    TResult Function(WordInfo info, bool? isFavorite)? success,
     TResult Function(String msg)? error,
     TResult Function()? loading,
     required TResult orElse(),
@@ -86,7 +86,7 @@ abstract class _$$WordInfoSuccessStateCopyWith<$Res> {
           $Res Function(_$WordInfoSuccessState) then) =
       __$$WordInfoSuccessStateCopyWithImpl<$Res>;
   @useResult
-  $Res call({WordInfo info});
+  $Res call({WordInfo info, bool? isFavorite});
 }
 
 /// @nodoc
@@ -101,12 +101,17 @@ class __$$WordInfoSuccessStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? info = null,
+    Object? isFavorite = freezed,
   }) {
     return _then(_$WordInfoSuccessState(
       null == info
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as WordInfo,
+      freezed == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -114,14 +119,16 @@ class __$$WordInfoSuccessStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$WordInfoSuccessState implements WordInfoSuccessState {
-  const _$WordInfoSuccessState(this.info);
+  const _$WordInfoSuccessState(this.info, this.isFavorite);
 
   @override
   final WordInfo info;
+  @override
+  final bool? isFavorite;
 
   @override
   String toString() {
-    return 'WordInfoState.success(info: $info)';
+    return 'WordInfoState.success(info: $info, isFavorite: $isFavorite)';
   }
 
   @override
@@ -129,11 +136,13 @@ class _$WordInfoSuccessState implements WordInfoSuccessState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WordInfoSuccessState &&
-            (identical(other.info, info) || other.info == info));
+            (identical(other.info, info) || other.info == info) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, info);
+  int get hashCode => Object.hash(runtimeType, info, isFavorite);
 
   @JsonKey(ignore: true)
   @override
@@ -145,33 +154,33 @@ class _$WordInfoSuccessState implements WordInfoSuccessState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WordInfo info) success,
+    required TResult Function(WordInfo info, bool? isFavorite) success,
     required TResult Function(String msg) error,
     required TResult Function() loading,
   }) {
-    return success(info);
+    return success(info, isFavorite);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WordInfo info)? success,
+    TResult? Function(WordInfo info, bool? isFavorite)? success,
     TResult? Function(String msg)? error,
     TResult? Function()? loading,
   }) {
-    return success?.call(info);
+    return success?.call(info, isFavorite);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WordInfo info)? success,
+    TResult Function(WordInfo info, bool? isFavorite)? success,
     TResult Function(String msg)? error,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(info);
+      return success(info, isFavorite);
     }
     return orElse();
   }
@@ -212,10 +221,11 @@ class _$WordInfoSuccessState implements WordInfoSuccessState {
 }
 
 abstract class WordInfoSuccessState implements WordInfoState {
-  const factory WordInfoSuccessState(final WordInfo info) =
-      _$WordInfoSuccessState;
+  const factory WordInfoSuccessState(
+      final WordInfo info, final bool? isFavorite) = _$WordInfoSuccessState;
 
   WordInfo get info;
+  bool? get isFavorite;
   @JsonKey(ignore: true)
   _$$WordInfoSuccessStateCopyWith<_$WordInfoSuccessState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -286,7 +296,7 @@ class _$WordInfoErrorState implements WordInfoErrorState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WordInfo info) success,
+    required TResult Function(WordInfo info, bool? isFavorite) success,
     required TResult Function(String msg) error,
     required TResult Function() loading,
   }) {
@@ -296,7 +306,7 @@ class _$WordInfoErrorState implements WordInfoErrorState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WordInfo info)? success,
+    TResult? Function(WordInfo info, bool? isFavorite)? success,
     TResult? Function(String msg)? error,
     TResult? Function()? loading,
   }) {
@@ -306,7 +316,7 @@ class _$WordInfoErrorState implements WordInfoErrorState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WordInfo info)? success,
+    TResult Function(WordInfo info, bool? isFavorite)? success,
     TResult Function(String msg)? error,
     TResult Function()? loading,
     required TResult orElse(),
@@ -399,7 +409,7 @@ class _$WordInfoLoadingState implements WordInfoLoadingState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WordInfo info) success,
+    required TResult Function(WordInfo info, bool? isFavorite) success,
     required TResult Function(String msg) error,
     required TResult Function() loading,
   }) {
@@ -409,7 +419,7 @@ class _$WordInfoLoadingState implements WordInfoLoadingState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WordInfo info)? success,
+    TResult? Function(WordInfo info, bool? isFavorite)? success,
     TResult? Function(String msg)? error,
     TResult? Function()? loading,
   }) {
@@ -419,7 +429,7 @@ class _$WordInfoLoadingState implements WordInfoLoadingState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WordInfo info)? success,
+    TResult Function(WordInfo info, bool? isFavorite)? success,
     TResult Function(String msg)? error,
     TResult Function()? loading,
     required TResult orElse(),
