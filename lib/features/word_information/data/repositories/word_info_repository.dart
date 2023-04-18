@@ -7,12 +7,13 @@ import '../../domain/repositories/word_info_repository.dart';
 import '../models/word_model.dart';
 
 class WordInfoRepositoryImpl implements WordInfoRepository {
-  WordsApiClient _wordsApiClient;
-  ImageApiClient _imageApiClient;
+  final WordsApiClient _wordsApiClient;
+  final ImageApiClient _imageApiClient;
   WordInfoRepositoryImpl(this._wordsApiClient, this._imageApiClient);
 
   static const String _wordInfoUrl = '/words/';
 
+  @override
   Future<Either<String, WordModel>> getWordInfo(String word) async {
     try {
       var res = WordModel.fromJson(await _wordsApiClient.get(_wordInfoUrl + word));
@@ -31,6 +32,17 @@ class WordInfoRepositoryImpl implements WordInfoRepository {
     } catch (e) {
     logger.e(e);
     return Left('Error getting word image: $e');
+    }
+  }
+
+  @override
+  Future<Either<String, WordModel>> getRandomWord() async {
+    try {
+      var res = WordModel.fromJson(await _wordsApiClient.random());
+    return Right(res);
+    } catch (e) {
+    logger.e(e);
+    return Left('Error getting random word: $e');
     }
   }
 }

@@ -28,6 +28,10 @@ class WordsApiClient extends ApiClient {
     'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
   }))
     ..interceptors.add(LoggerInterceptor());
+
+  Future<T?> random<T>() async {
+    return super.get("words", query: { 'random' : true});
+  }
 }
 
 class ImageApiClient extends ApiClient {
