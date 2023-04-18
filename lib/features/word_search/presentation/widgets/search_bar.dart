@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:word_couch/features/profile/presentation/manager/user/user_states.dart';
 
 import '../../../../core/di.dart';
 import '../../../../core/navigation/router_path.dart';
@@ -60,13 +61,16 @@ class _SearchBarState extends ConsumerState<SearchBar> {
               ),
             ),
           ),
-          IconButton(
-            onPressed: () {
-              ref.read(DI.profileManager).changeFilterMod();
-            },
-            icon: Icon(ref.read(DI.profileManager).favoriteMod
-                ? Icons.bookmark
-                : Icons.bookmark_outline),
+          Visibility(
+            visible: ref.watch(ref.read(DI.profileManager).getNotifier()) is ProfileUserState,
+            child: IconButton(
+              onPressed: () {
+                ref.read(DI.profileManager).changeFilterMod();
+              },
+              icon: Icon(ref.read(DI.profileManager).favoriteMod
+                  ? Icons.bookmark
+                  : Icons.bookmark_outline),
+            ),
           ),
         ],
       ),
