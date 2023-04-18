@@ -1,7 +1,22 @@
 {
- "testText": "Test text",
- "parametersText" : "Text {parameter}",
- "@parametersText":{
+ "appName": "Words Couch",
+ "exit": "Exit",
+ "testItemTitle": "Test your knowledge!",
+ "testItemText": "Play a game where you guess words meaning",
+ "search": "Search",
+ "bookmark": "Bookmark",
+ "errorLoad": "Couldn't load the data",
+ "error": "Error",
+ "errorEmptySearch": "Empty search history",
+ "synonyms": "Synonyms",
+ "antonyms": "Antonyms",
+ "typeOf": "Type of",
+ "derivation": "Derivation",
+ "logIn": "Log in",
+ "noAccount": "Don't have an account? Register",
+ "noUserText": "Log in to your profile to save your favorite words, query history, and test points",
+ "testPoint" : "Test point {parameter}",
+ "@testPoint": {
  "placeholders": {
  "parameter": {
          "type":"String"
