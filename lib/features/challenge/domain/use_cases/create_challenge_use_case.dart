@@ -95,6 +95,7 @@ class CreateChallengeUseCase {
 
   Future<QuestionEntity?> buildQuestion() async {
     final type = _buildQuestionType().first;
+    logger.d(type);
     if (type == QuestionType.none) {
       return null;
     }
@@ -104,6 +105,7 @@ class CreateChallengeUseCase {
     // It may happen there is not enough similar or synonym words for a random
     // word, so it will try to generate one 10 times, and give up if it's unlucky.
     while (question == null && i < 10) {
+      logger.d(question);
       final word = await wordInfoRepository.getRandomWord();
       word.fold((l) {
         logger.e(l);
