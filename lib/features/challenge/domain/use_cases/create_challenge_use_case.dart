@@ -94,14 +94,12 @@ class CreateChallengeUseCase {
 
   Future<Either<String, QuestionEntity>?> buildQuestion() async {
     final type = _buildQuestionType();
-    logger.d(type);
     switch (type) {
       case QuestionType.none:
         return null;
       case QuestionType.findSynonym:
         {
           final question = await _challengesRepository.getSynonymQuestion();
-          // Return null if we have an error while loading the synonym question
           return question.fold((l) => Left(l), (r) {
             currentQuestion++;
             return Right(r);
@@ -110,7 +108,6 @@ class CreateChallengeUseCase {
       case QuestionType.findAntonym:
         {
           final question = await _challengesRepository.getAntonymQuestion();
-          // Return null if we have an error while loading the antonym question
           return question.fold((l) => Left(l), (r) {
             currentQuestion++;
             return Right(r);

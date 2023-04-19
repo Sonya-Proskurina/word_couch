@@ -53,6 +53,7 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
         ),
       );
     } else if (state is EndChallengeState) {
+      // TODO Make it look beautiful
       return Scaffold(
         body: Center(
           child: Column(

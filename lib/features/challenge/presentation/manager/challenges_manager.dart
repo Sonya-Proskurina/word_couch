@@ -10,6 +10,7 @@ class ChallengesManager {
 
   ChallengesManager(this._notifier, this._challenge);
 
+  // TODO Make it take unused before questions
   Future<void> getQuestion() async {
     _notifier.setLoading();
     final question = await _challenge.buildQuestion();
