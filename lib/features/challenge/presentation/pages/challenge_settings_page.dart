@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/core/navigation/router_path.dart';
+import 'package:word_couch/features/challenge/domain/use_cases/create_challenge_use_case.dart';
 
-class ChallengeSettingsPage extends StatefulWidget {
+import '../../../../core/di.dart';
+
+class ChallengeSettingsPage extends ConsumerStatefulWidget {
   const ChallengeSettingsPage({Key? key}) : super(key: key);
 
   @override
-  State<ChallengeSettingsPage> createState() => _ChallengeSettingsPageState();
+  ConsumerState<ChallengeSettingsPage> createState() =>
+      _ChallengeSettingsPageState();
 }
 
-class _ChallengeSettingsPageState extends State<ChallengeSettingsPage> {
-  double _sliderSynonymsValue = 5;
-  double _sliderAntonymsValue = 5;
+class _ChallengeSettingsPageState extends ConsumerState<ChallengeSettingsPage> {
+  int _sliderSynonymsValue = 5;
+  int _sliderAntonymsValue = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +46,12 @@ class _ChallengeSettingsPageState extends State<ChallengeSettingsPage> {
                       const Text(
                           "Select the amount of synonyms you want to guess"),
                       Slider(
-                        value: _sliderSynonymsValue,
+                        value: _sliderSynonymsValue.toDouble(),
                         max: 20,
-                        label: _sliderSynonymsValue.round().toString(),
+                        label: _sliderSynonymsValue.toString(),
                         onChanged: (double value) {
                           setState(() {
-                            _sliderSynonymsValue = value;
+                            _sliderSynonymsValue = value.round();
                           });
                         },
                       ),
@@ -56,12 +61,12 @@ class _ChallengeSettingsPageState extends State<ChallengeSettingsPage> {
                       const Text(
                           "Select the amount of antonyms you want to guess"),
                       Slider(
-                        value: _sliderAntonymsValue,
+                        value: _sliderAntonymsValue.toDouble(),
                         max: 20,
-                        label: _sliderAntonymsValue.round().toString(),
+                        label: _sliderAntonymsValue.toString(),
                         onChanged: (double value) {
                           setState(() {
-                            _sliderAntonymsValue = value;
+                            _sliderAntonymsValue = value.round();
                           });
                         },
                       ),
@@ -70,6 +75,14 @@ class _ChallengeSettingsPageState extends State<ChallengeSettingsPage> {
                       ),
                       ElevatedButton(
                           onPressed: () {
+                            ref
+                                    .read(DI.createChallengeStateProvider.notifier)
+                                    .state =
+                                CreateChallengeUseCase(
+                                    synonymsAmount: _sliderSynonymsValue,
+                                    antonymsAmount: _sliderAntonymsValue,
+                                    wordInfoRepository:
+                                        ref.watch(DI.wordInfoRepository));
                             Navigator.pushNamed(
                                 context, RouterPathContainer.challengePage);
                           },

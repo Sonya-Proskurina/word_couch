@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:logger/logger.dart';
 import 'package:word_couch/features/challenge/domain/entities/binary_answer_entity.dart';
 import 'package:word_couch/features/challenge/domain/use_cases/question_type_generator.dart';
 
@@ -9,15 +10,18 @@ import '../../../word_information/domain/repositories/word_info_repository.dart'
 import '../entities/question_entity.dart';
 
 class CreateChallengeUseCase {
-  final WordInfoRepository rep;
+  final WordInfoRepository wordInfoRepository;
   final int synonymsAmount;
   final int antonymsAmount;
+  late final int questionsAmount;
+  int currentQuestion = 0;
   final Random random = Random();
 
   CreateChallengeUseCase(
       {required this.synonymsAmount,
       required this.antonymsAmount,
-      required this.rep});
+      required this.wordInfoRepository})
+      : questionsAmount = synonymsAmount + antonymsAmount;
 
   Iterable<QuestionType> _buildQuestionType() sync* {
     final generators = [
@@ -29,7 +33,7 @@ class CreateChallengeUseCase {
     Set<int> full = List.generate(generators.length, (index) => index).toSet();
     while (full.isNotEmpty) {
       QuestionType type = QuestionType.none;
-      while (type != QuestionType.none) {
+      while (type == QuestionType.none) {
         final list = full.toList();
         final i = random.nextInt(list.length);
         type = generators[list[i]].generate();
@@ -100,7 +104,7 @@ class CreateChallengeUseCase {
     // It may happen there is not enough similar or synonym words for a random
     // word, so it will try to generate one 10 times, and give up if it's unlucky.
     while (question == null && i < 10) {
-      final word = await rep.getRandomWord();
+      final word = await wordInfoRepository.getRandomWord();
       word.fold((l) {
         logger.e(l);
         // Something wrong with the internet, no need to try again, return null
@@ -124,6 +128,7 @@ class CreateChallengeUseCase {
       });
       i++;
     }
+    currentQuestion++;
     return question;
   }
 }
