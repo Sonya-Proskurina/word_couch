@@ -21,7 +21,7 @@ void main() async {
     ),
   );
   FlutterError.onError = (errorDetails) {
-     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
   };
   PlatformDispatcher.instance.onError = (error, stack) {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
@@ -34,10 +34,12 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   ThemeData themeWithBrightness(Brightness brightness) => ThemeData(
-        brightness: brightness,
-        useMaterial3: true,
-        colorSchemeSeed: Colors.orangeAccent,
-      );
+      brightness: brightness,
+      useMaterial3: true,
+      colorSchemeSeed: Colors.orangeAccent,
+      sliderTheme: const SliderThemeData(
+        showValueIndicator: ShowValueIndicator.always,
+      ));
 
   @override
   Widget build(BuildContext context) {

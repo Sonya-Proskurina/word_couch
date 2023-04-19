@@ -54,15 +54,17 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
               ),
               actions: [
                 Visibility(
-                  visible: isFavorite!=null,
+                  visible: isFavorite != null,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 16.0),
                     child: TextButton.icon(
                         onPressed: () {
                           manager.changeFavorite();
-                          ref.read(widget.managerUser).addFavorite(manager.argNotifier.getState(), !(isFavorite??false));
+                          ref.read(widget.managerUser).addFavorite(
+                              manager.argNotifier.getState(),
+                              !(isFavorite ?? false));
                         },
-                        icon: Icon(isFavorite??false
+                        icon: Icon(isFavorite ?? false
                             ? Icons.bookmark
                             : Icons.bookmark_outline),
                         label: Text(AppLocalizations.of(context)!.bookmark)),
