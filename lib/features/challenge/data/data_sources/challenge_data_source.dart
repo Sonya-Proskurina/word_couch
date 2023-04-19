@@ -14,24 +14,37 @@ class ChallengeDataSource {
     // get the synonyms tests collection
     final collection =
         firebase.collection(FirebaseConst.pathFindSynonymChallenges);
-    // get the amount of questions in the collection
-    final count = (await collection.count().get()).count;
-    // retrieve the first N elements, where N is a random number,
-    // and take the last as the future question
-    final questionMap =
-        (await collection.limit(random.nextInt(count) + 1).snapshots().last)
-            .docs[0]
-            .data();
+    final snapshot = await collection.get();
+    final docIndex = random.nextInt(snapshot.docs.length);
+    final questionMap = snapshot.docs[docIndex].data();
     final question = questionMap['word'];
     // build answers as BinaryAnswerEntity from the firebase map
-    final answers = (questionMap['answers'] as List<Map<String, dynamic>>)
-        .map<BinaryAnswerEntity>((element) {
+    final answers = (questionMap['answers']).map<BinaryAnswerEntity>((element) {
       return BinaryAnswerEntity(
           answer: element["word"], isCorrect: element["isCorrect"]);
     }).toList();
     return QuestionEntity(
-        question: "What is synonymous to $question?",
+        question: "What is synonymous to the '$question'?",
         answers: answers,
         type: QuestionType.findSynonym);
+  }
+
+  Future<QuestionEntity> getAntonymQuestion() async {
+    // get the antonyms tests collection
+    final collection =
+        firebase.collection(FirebaseConst.pathFindAntonymChallenges);
+    final snapshot = await collection.get();
+    final docIndex = random.nextInt(snapshot.docs.length);
+    final questionMap = snapshot.docs[docIndex].data();
+    final question = questionMap['word'];
+    // build answers as BinaryAnswerEntity from the firebase map
+    final answers = (questionMap['answers']).map<BinaryAnswerEntity>((element) {
+      return BinaryAnswerEntity(
+          answer: element["word"], isCorrect: element["isCorrect"]);
+    }).toList();
+    return QuestionEntity(
+        question: "What is antonymous to '$question?'",
+        answers: answers,
+        type: QuestionType.findAntonym);
   }
 }

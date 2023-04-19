@@ -10,5 +10,5 @@ class FirebaseConst {
   static const description = "description";
 
   static const pathFindSynonymChallenges = "findSynonymChallenges";
-  static const pathFindAntonymChallenges = "findAntonymChallenges";
+  static const pathFindAntonymChallenges = "findAntonymsChallenge";
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:word_couch/features/challenge/presentation/manager/challenges_manager.dart';
 
 import '../../../../core/di.dart';
-import '../../domain/entities/question_entity.dart';
-import '../../domain/use_cases/create_challenge_use_case.dart';
+import '../../../../core/navigation/router_path.dart';
+import '../manager/challenge_states.dart';
+import '../widgets/challenge_ready_widget.dart';
 
 class ChallengePage extends ConsumerStatefulWidget {
   const ChallengePage({Key? key}) : super(key: key);
@@ -13,79 +15,73 @@ class ChallengePage extends ConsumerStatefulWidget {
 }
 
 class ChallengePageState extends ConsumerState<ChallengePage> {
-  late CreateChallengeUseCase challenge;
-  QuestionEntity? question;
+  late final ChallengesManager manager;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    challenge = ref.read(DI.createChallengeStateProvider);
-    // Set the question to the loading state
-    ref.read(DI.questionLoadedStateProvider.notifier).state = false;
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      question = await challenge.buildQuestion();
-      // Data is loaded, the question is ready to be shown
-      ref.read(DI.questionLoadedStateProvider.notifier).state = true;
-    });
+  void initState() {
+    manager = ref.read(DI.challengesManager);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // If the question is loading
-    if (!ref.watch(DI.questionLoadedStateProvider)) {
+    ChallengeState state = ref.watch(manager.getNotifier());
+
+    if (state is LoadingChallengeState) {
       return const Scaffold(
-        body: CircularProgressIndicator(),
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       );
-      // If the question is null, no more question could be loaded
-    } else if (question == null) {
-      return const Scaffold(body: Text("The challenge is finished"));
-    }
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(
-              "${challenge.currentQuestion} out of ${challenge.questionsAmount}"),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back),
+    } else if (state is ErrorChallengeState) {
+      return Scaffold(
+        body: Center(
+          child: Column(
+            children: [
+              Text(state.errorMessage),
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.popUntil(context,
+                          ModalRoute.withName(RouterPathContainer.mainPage));
+                    },
+                    child: const Text("Go home")),
+              )
+            ],
           ),
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Text(
-                  question!.question,
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: question!.answers
-                            .map<Widget>(
-                              (e) => Padding(
-                                padding: const EdgeInsets.only(bottom: 4.0),
-                                child: ElevatedButton(
-                                    onPressed: () {}, child: Text(e.answer)),
-                              ),
-                            )
-                            .toList() +
-                        <Widget>[
-                          TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                "I don't know, next",
-                                textAlign: TextAlign.end,
-                              ))
-                        ],
-                  ),
-                ),
-              ],
-            ),
+      );
+    } else if (state is EndChallengeState) {
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("The challenge is finished!"),
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.popUntil(context,
+                          ModalRoute.withName(RouterPathContainer.mainPage));
+                    },
+                    child: const Text("Go home")),
+              )
+            ],
           ),
-        ));
+        ),
+      );
+    } else if (state is ReadyChallengeState) {
+      return ChallengeReadyWidget(
+        manager: manager,
+        question: state.question,
+      );
+    }
+    return const Scaffold(
+      body: Center(
+        child: Text("Something went really wrong..."),
+      ),
+    );
   }
 }
