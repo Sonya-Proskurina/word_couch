@@ -6,8 +6,7 @@ class UserTransformer {
     return UserEntity(
       email: user.email ?? "",
       uid: user.uid,
-      favourite: [],
-      history: [],
+      words: [],
       test: 0,
     );
   }

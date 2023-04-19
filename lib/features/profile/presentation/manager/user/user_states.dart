@@ -12,7 +12,7 @@ class ProfileState {
 
   factory ProfileState.user(
     UserEntity userEntity,
-    List<UserWordEntity> list,
+    List<UserWordEntity> words,
   ) = ProfileUserState;
 }
 
@@ -28,12 +28,12 @@ class ProfileNoUserState extends ProfileState {
 
 class ProfileUserState extends ProfileState {
   ProfileUserState(
-    this.value,
-    this.list,
+    this.user,
+    this.words,
   ) : super._();
 
-  final UserEntity value;
-  final List<UserWordEntity> list;
+  final UserEntity user;
+  final List<UserWordEntity> words;
 }
 
 class ProfileLoadingState extends ProfileState {

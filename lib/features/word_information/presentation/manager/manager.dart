@@ -15,27 +15,27 @@ class WordInfoNotifier extends StateNotifier<WordInfoState> {
     state = WordInfoState.error(msg);
   }
 
-  void setSuccess(WordInfo value) {
-    state = WordInfoState.success(value);
+  void setSuccess(WordInfo value, bool? favorite) {
+    state = WordInfoState.success(value,favorite);
   }
 
-  void set(WordModel wordInfo) {
-    state.when(success: (value) {
-      state = WordInfoState.success(WordInfo(wordInfo, value.image));
+  void set(WordModel wordInfo, bool? favorite) {
+    state.when(success: (value,isFavorite) {
+      state = WordInfoState.success(WordInfo(wordInfo, value.image),isFavorite);
     }, error: (msg) {
-      state = WordInfoState.success(WordInfo(wordInfo, null));
+      state = WordInfoState.success(WordInfo(wordInfo, null),favorite);
     }, loading: () {
-      state = WordInfoState.success(WordInfo(wordInfo, null));
+      state = WordInfoState.success(WordInfo(wordInfo, null),favorite);
     });
   }
 
-  void setImage(ImageData image) {
-    state.when(success: (value) {
-      state = WordInfoState.success(WordInfo(value.wordInfo, image));
+  void setImage(ImageData image,bool? favorite) {
+    state.when(success: (value,isFavorite) {
+      state = WordInfoState.success(WordInfo(value.wordInfo, image),isFavorite);
     }, error: (msg) {
-      state = WordInfoState.success(WordInfo(null, image));
+      state = WordInfoState.success(WordInfo(null, image), favorite);
     }, loading: () {
-      state = WordInfoState.success(WordInfo(null, image));
+      state = WordInfoState.success(WordInfo(null, image),favorite);
     });
   }
 
@@ -46,6 +46,8 @@ class WordInfoNotifier extends StateNotifier<WordInfoState> {
 
 class WordInfoManager {
   WordInfoNotifier notifier;
+  bool? isFavorite;
+  late WordModel wordModel;
   final WordInfoRepository _wordInfoRepository;
   final WordInfoArgNotifier argNotifier;
 
@@ -54,7 +56,8 @@ class WordInfoManager {
   void _getWordInfoRes(String word) async {
     var res = await _wordInfoRepository.getWordInfo(word);
     res.fold((l) => notifier.setError(l), (r) {
-      notifier.set(r);
+      notifier.set(r,isFavorite);
+      wordModel = r;
       if (r.results.isNotEmpty) {
         _getWordImage(
             "$word ${r.results.first.synonyms?.take(2).join(' ') ?? ''}");
@@ -66,15 +69,22 @@ class WordInfoManager {
 
   void _getWordImage(String word) async {
     var res = await _wordInfoRepository.getWordImage(word);
-    res.fold((l) => {}, (r) => notifier.setImage(r));
+    res.fold((l) => {}, (r) => notifier.setImage(r,isFavorite));
   }
 
   void getWordInfo(String word) {
     _getWordInfoRes(word);
   }
 
-  void init() {
+  void changeFavorite() {
+    notifier.setLoading();
+    isFavorite=!(isFavorite!);
+    notifier.set(wordModel,isFavorite);
+  }
+
+  void init(bool? favorite) {
     final word = argNotifier.getState();
+    isFavorite = favorite;
     logger.d("WordInfoManager init: $word");
     getWordInfo(word);
   }

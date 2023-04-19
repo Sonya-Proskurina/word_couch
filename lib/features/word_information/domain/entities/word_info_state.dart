@@ -5,7 +5,7 @@ part 'word_info_state.freezed.dart';
 
 @freezed
 class WordInfoState with _$WordInfoState {
-  const factory WordInfoState.success(WordInfo info) = WordInfoSuccessState;
+  const factory WordInfoState.success(WordInfo info,bool? isFavorite) = WordInfoSuccessState;
   const factory WordInfoState.error(String msg) =
   WordInfoErrorState;
   const factory WordInfoState.loading() = WordInfoLoadingState;

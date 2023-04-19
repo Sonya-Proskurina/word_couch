@@ -42,14 +42,16 @@ class MainScreenList extends ConsumerWidget {
               (index) => HistoryItemWidget(
                 userWordEntity: list[index],
                 addWord: () {
-                  ref.read(DI.profileManager).addFavorite(list[index].word);
+                  ref
+                      .read(DI.profileManager)
+                      .addFavorite(list[index].word, !list[index].isFavourite);
                 },
                 tap: () {
                   ref
                       .read(DI.wordInfoArgNotifier.notifier)
                       .setState(list[index].word);
                   Navigator.pushNamed(
-                      context, RouterPathContainer.wordInformationPage);
+                      context, RouterPathContainer.wordInformationPage, arguments: list[index].isFavourite);
                 },
               ),
             ),
