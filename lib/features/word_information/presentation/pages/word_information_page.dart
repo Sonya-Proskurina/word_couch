@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/core/ui/loading_widget.dart';
@@ -99,9 +100,16 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                       padding: const EdgeInsets.all(4.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12.0),
-                        child: Image.network(
-                            value.image?.value?.first.thumbnailUrl ?? "",
-                            fit: BoxFit.cover),
+                        child: CachedNetworkImage(
+                          imageUrl: value.image?.value?.first.thumbnailUrl ?? "",
+                          height: 200,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => const LoadingWidget(),
+                          errorWidget: (context, url, error) {return Center(child: Text("error"),);},
+                        ),
+                        // Image.network(
+                        //     value.image?.value?.first.thumbnailUrl ?? "",
+                        //     fit: BoxFit.cover),
                       ),
                     ),
                   Card(

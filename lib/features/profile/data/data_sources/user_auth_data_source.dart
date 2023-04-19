@@ -80,9 +80,9 @@ class UserAuthDataSource {
         .doc(user.uid)
         .collection(FirebaseConst.pathWord)
         .doc(word)
-        .update({
+        .set({
       FirebaseConst.isFavourite: add,
-    });
+    }, SetOptions(merge: true));
   }
 
   Future<void> addHistory(String word, String description) async {
