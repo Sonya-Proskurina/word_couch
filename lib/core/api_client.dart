@@ -31,7 +31,7 @@ class WordsApiClient extends ApiClient {
     ..interceptors.add(LoggerInterceptor());
 
   Future<T?> random<T>() async {
-    return super.get("words", query: {'random': true});
+    return super.get("/words", query: {'random': true});
   }
 }
 

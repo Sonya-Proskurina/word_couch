@@ -36,9 +36,6 @@ class AuthManager {
     });
   }
 
-  StateNotifierProvider<AuthNotifier, AuthState> getNotifier() {
-    return StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-      return notifier;
-    });
-  }
+  StateNotifierProvider<AuthNotifier, AuthState> getNotifier() =>
+      StateNotifierProvider<AuthNotifier, AuthState>((ref) => notifier);
 }

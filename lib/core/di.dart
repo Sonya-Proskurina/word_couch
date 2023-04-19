@@ -1,4 +1,8 @@
 import 'package:riverpod/riverpod.dart';
+import 'package:word_couch/features/challenge/data/repositories/challenges_repository.dart';
+import 'package:word_couch/features/challenge/domain/use_cases/create_challenge_use_case.dart';
+import 'package:word_couch/features/challenge/presentation/manager/challenges_manager.dart';
+import 'package:word_couch/features/challenge/presentation/manager/challenges_state_notifier.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/safe_search_notifier.dart';
 import 'package:word_couch/features/word_information/domain/entities/word_info_arg_notifier.dart';
 import '../features/word_information/domain/entities/word_info_state.dart';
@@ -33,7 +37,8 @@ class DI {
 
   static final wordsApiClient = Provider((ref) => WordsApiClient());
 
-  static final imageSearchApiClient = Provider((ref) => ImageApiClient(ref.watch(safeSearch.notifier)));
+  static final imageSearchApiClient =
+      Provider((ref) => ImageApiClient(ref.watch(safeSearch.notifier)));
 
   static final wordInfoRepository = Provider((ref) => WordInfoRepositoryImpl(
       ref.watch(wordsApiClient), ref.watch(imageSearchApiClient)));
@@ -69,6 +74,19 @@ class DI {
       notifier: ref.watch(authNotifier.notifier),
       userRepository: ref.watch(userRepository)));
 
+  static final challengesNotifier =
+      StateNotifierProvider((ref) => ChallengeStateNotifier());
+
+  static final challengesManager = Provider((ref) => ChallengesManager(
+      ref.watch(challengesNotifier.notifier),
+      ref.watch(createChallengeStateProvider)));
+
   static final searchBarInFocusStateProvider =
       StateProvider<bool>((ref) => false);
+
+  static final createChallengeStateProvider =
+      StateProvider<CreateChallengeUseCase>((ref) => CreateChallengeUseCase(
+          ChallengesRepositoryImpl(),
+          antonymsAmount: 0,
+          synonymsAmount: 0));
 }

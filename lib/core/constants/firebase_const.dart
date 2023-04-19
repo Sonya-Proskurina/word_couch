@@ -8,4 +8,7 @@ class FirebaseConst {
   static const title = "title";
   static const isFavourite = "favorite";
   static const description = "description";
+
+  static const pathFindSynonymChallenges = "findSynonymChallenges";
+  static const pathFindAntonymChallenges = "findAntonymsChallenge";
 }

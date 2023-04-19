@@ -1,45 +1,48 @@
 import 'dart:math';
 
+import 'package:dartz/dartz.dart';
 import 'package:word_couch/features/challenge/domain/entities/binary_answer_entity.dart';
+import 'package:word_couch/features/challenge/domain/repositories/challenges_repository.dart';
 import 'package:word_couch/features/challenge/domain/use_cases/question_type_generator.dart';
 
 import '../../../../core/logger.dart';
 import '../../../word_information/data/models/word_model.dart';
-import '../../../word_information/domain/repositories/word_info_repository.dart';
 import '../entities/question_entity.dart';
 
 class CreateChallengeUseCase {
-  final WordInfoRepository rep;
   final int synonymsAmount;
   final int antonymsAmount;
-  final Random random = Random();
+  late final int questionsAmount;
+  int currentQuestion = 0;
+  final Random _random = Random();
+  final ChallengesRepository _challengesRepository;
+  final List<QuestionTypeGenerator> generators;
+  late final Set<int> categories;
 
-  CreateChallengeUseCase(
-      {required this.synonymsAmount,
-      required this.antonymsAmount,
-      required this.rep});
+  CreateChallengeUseCase(this._challengesRepository,
+      {required this.synonymsAmount, required this.antonymsAmount})
+      : questionsAmount = synonymsAmount + antonymsAmount,
+        generators = [
+          QuestionTypeGenerator(
+              amount: synonymsAmount, type: QuestionType.findSynonym),
+          QuestionTypeGenerator(
+              amount: antonymsAmount, type: QuestionType.findAntonym)
+        ] {
+    categories = List.generate(generators.length, (index) => index).toSet();
+  }
 
-  Iterable<QuestionType> _buildQuestionType() sync* {
-    final generators = [
-      QuestionTypeGenerator(
-          amount: synonymsAmount, type: QuestionType.findSynonym),
-      QuestionTypeGenerator(
-          amount: antonymsAmount, type: QuestionType.findAntonym)
-    ];
-    Set<int> full = List.generate(generators.length, (index) => index).toSet();
-    while (full.isNotEmpty) {
-      QuestionType type = QuestionType.none;
-      while (type != QuestionType.none) {
-        final list = full.toList();
-        final i = random.nextInt(list.length);
-        type = generators[list[i]].generate();
-        if (type == QuestionType.none) {
-          full.remove(list[i]);
-        }
-      }
-      yield type;
+  QuestionType _buildQuestionType() {
+    if (categories.isEmpty) {
+      return QuestionType.none;
     }
-    yield QuestionType.none;
+    final list = categories.toList();
+    final i = _random.nextInt(list.length);
+    final type = generators[list[i]].generate();
+    if (type == QuestionType.none) {
+      categories.remove(list[i]);
+      return _buildQuestionType();
+    }
+    return type;
   }
 
   QuestionEntity? buildAntonymQuestion(WordModel model) {
@@ -49,8 +52,8 @@ class CreateChallengeUseCase {
         antonyms.isNotEmpty &&
         similar != null &&
         similar.isNotEmpty) {
-      final antonymWord = antonyms[random.nextInt(antonyms.length)];
-      final similarWord = similar[random.nextInt(similar.length)];
+      final antonymWord = antonyms[_random.nextInt(antonyms.length)];
+      final similarWord = similar[_random.nextInt(similar.length)];
       return QuestionEntity(
           question: 'What is antonymous to the ${model.word}?',
           answers: [
@@ -69,13 +72,13 @@ class CreateChallengeUseCase {
         synonyms.isNotEmpty &&
         similar != null &&
         similar.isNotEmpty) {
-      final randomSynonymWord = synonyms[random.nextInt(synonyms.length)];
+      final randomSynonymWord = synonyms[_random.nextInt(synonyms.length)];
       // Find words that are similar to the original one, but not synonyms
       final similarButNotSynonym =
           similar.toSet().difference(synonyms.toSet()).toList();
       if (similarButNotSynonym.isNotEmpty) {
         final randomSimilarWord =
-            similarButNotSynonym[random.nextInt(similarButNotSynonym.length)];
+            similarButNotSynonym[_random.nextInt(similarButNotSynonym.length)];
         return QuestionEntity(
           question: 'What is synonymous to the ${model.word}?',
           answers: [
@@ -89,42 +92,30 @@ class CreateChallengeUseCase {
     return null;
   }
 
-  Future<QuestionEntity?> buildQuestion() async {
-    final type = _buildQuestionType().first;
-    if (type == QuestionType.none) {
-      return null;
-    }
-    QuestionEntity? question;
-    int i = 0;
-    // Try to generate a question of the specified QuestionType.
-    // It may happen there is not enough similar or synonym words for a random
-    // word, so it will try to generate one 10 times, and give up if it's unlucky.
-    while (question == null && i < 10) {
-      final word = await rep.getRandomWord();
-      word.fold((l) {
-        logger.e(l);
-        // Something wrong with the internet, no need to try again, return null
+  Future<Either<String, QuestionEntity>?> buildQuestion() async {
+    final type = _buildQuestionType();
+    logger.d(type);
+    switch (type) {
+      case QuestionType.none:
         return null;
-      }, (r) {
-        switch (type) {
-          case QuestionType.findSynonym:
-            {
-              question = buildSynonymQuestion(r);
-              break;
-            }
-          case QuestionType.findAntonym:
-            {
-              question = buildAntonymQuestion(r);
-              break;
-            }
-          // We already know it's not none
-          // empty comment fuck you
-          case QuestionType.none:
-            break;
+      case QuestionType.findSynonym:
+        {
+          final question = await _challengesRepository.getSynonymQuestion();
+          // Return null if we have an error while loading the synonym question
+          return question.fold((l) => Left(l), (r) {
+            currentQuestion++;
+            return Right(r);
+          });
         }
-      });
-      i++;
+      case QuestionType.findAntonym:
+        {
+          final question = await _challengesRepository.getAntonymQuestion();
+          // Return null if we have an error while loading the antonym question
+          return question.fold((l) => Left(l), (r) {
+            currentQuestion++;
+            return Right(r);
+          });
+        }
     }
-    return question;
   }
 }

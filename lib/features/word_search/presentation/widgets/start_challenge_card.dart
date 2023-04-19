@@ -18,7 +18,7 @@ class StartChallengeCard extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(
                 context,
-                RouterPathContainer.challengePage,
+                RouterPathContainer.challengeSettingsPage,
               );
             },
             child: Padding(
