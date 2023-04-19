@@ -19,11 +19,11 @@ code_quality:
     reports:
       codequality: gl-code-quality-report.json
 
-build_android:
-  stage: test
-  image: "cirrusci/flutter:1.22.5"
-  script: flutter build apk --build-number=$CI_PIPELINE_ID
-  artifacts:
-    paths:
-      - build/app/outputs/apk/release/app-release.apk
-    expire_in: 1 day
+# build_android:
+#   stage: test
+#   image: "cirrusci/flutter:1.22.5"
+#   script: flutter build apk --build-number=$CI_PIPELINE_ID
+#   artifacts:
+#     paths:
+#       - build/app/outputs/apk/release/app-release.apk
+#     expire_in: 1 day
