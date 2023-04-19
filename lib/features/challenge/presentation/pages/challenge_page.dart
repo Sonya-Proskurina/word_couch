@@ -80,7 +80,7 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
     }
     return const Scaffold(
       body: Center(
-        child: Text("Something went really wrong..."),
+        child: Text("Something went really wrong... "),
       ),
     );
   }
