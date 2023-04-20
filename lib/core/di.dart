@@ -9,7 +9,7 @@ import 'package:word_couch/features/word_information/domain/entities/word_info_a
 import '../features/word_information/domain/entities/word_info_state.dart';
 import 'package:word_couch/core/api_client.dart';
 import '../features/word_information/data/repositories/word_info_repository.dart';
-import 'package:word_couch/features/profile/data/data_sources/user_auth_data_source.dart';
+import 'package:word_couch/features/profile/data/data_sources/user_data_source.dart';
 import 'package:word_couch/features/profile/data/repositories/user_repository_impl.dart';
 import 'package:word_couch/features/profile/presentation/manager/auth/auth_manager.dart';
 import 'package:word_couch/features/profile/presentation/manager/auth/auth_notifier.dart';
@@ -65,11 +65,10 @@ class DI {
   });
 
   static final profileManager = Provider((ref) => ProfileManager(
-        notifier: ref.watch(profileNotifier.notifier),
-        userRepository: ref.watch(userRepository),
-        safeSearchNotifier: ref.watch(safeSearch.notifier),
-        challengePointsNotifier: ref.watch(challengePoints.notifier)
-      ));
+      notifier: ref.watch(profileNotifier.notifier),
+      userRepository: ref.watch(userRepository),
+      safeSearchNotifier: ref.watch(safeSearch.notifier),
+      challengePointsNotifier: ref.watch(challengePoints.notifier)));
 
   static final authNotifier =
       StateNotifierProvider<AuthNotifier, AuthState>((ref) {

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:word_couch/core/logger.dart';
-import 'package:word_couch/features/profile/data/data_sources/user_auth_data_source.dart';
+import 'package:word_couch/features/profile/data/data_sources/user_data_source.dart';
 import 'package:word_couch/features/profile/domain/entities/user_entity.dart';
 import 'package:word_couch/features/profile/domain/repositories/user_repository.dart';
 import 'package:word_couch/features/word_information/domain/repositories/word_info_repository.dart';

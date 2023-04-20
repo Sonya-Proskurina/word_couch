@@ -18,7 +18,7 @@ class ProfileNotifier extends StateNotifier<ProfileState> {
     state = ProfileState.loading();
   }
 
-  void setUser(UserEntity userEntity,List<UserWordEntity> words) {
+  void setUser(UserEntity userEntity, List<UserWordEntity> words) {
     state = ProfileState.user(
       userEntity,
       words,

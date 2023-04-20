@@ -19,13 +19,17 @@ class WordInformationSectionsList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         WordInformationSection(
-            section: wordInfo!.synonyms, sectionName: AppLocalizations.of(context)!.synonyms),
+            section: wordInfo!.synonyms,
+            sectionName: AppLocalizations.of(context)!.synonyms),
         WordInformationSection(
-            section: wordInfo!.antonyms, sectionName: AppLocalizations.of(context)!.antonyms),
+            section: wordInfo!.antonyms,
+            sectionName: AppLocalizations.of(context)!.antonyms),
         WordInformationSection(
-            section: wordInfo!.typeOf, sectionName: AppLocalizations.of(context)!.typeOf),
+            section: wordInfo!.typeOf,
+            sectionName: AppLocalizations.of(context)!.typeOf),
         WordInformationSection(
-            section: wordInfo!.derivation, sectionName: AppLocalizations.of(context)!.derivation),
+            section: wordInfo!.derivation,
+            sectionName: AppLocalizations.of(context)!.derivation),
         const SizedBox(
           height: 16.0,
         )

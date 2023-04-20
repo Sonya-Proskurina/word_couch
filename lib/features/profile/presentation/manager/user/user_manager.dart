@@ -42,7 +42,7 @@ class ProfileManager {
   }
 
   void addFavorite(String word, bool add) async {
-    if (userEntity!=null) {
+    if (userEntity != null) {
       notifier.setLoading();
       final res = await userRepository.addFavorite(word, add);
       res.fold((l) => notifier.setError(l), (r) {
@@ -53,8 +53,7 @@ class ProfileManager {
           }
         }
         if (favoriteMod) {
-          notifier.setUser(
-              userEntity!,
+          notifier.setUser(userEntity!,
               words.where((element) => element.isFavourite).toList());
         } else {
           notifier.setUser(userEntity!, words);
@@ -64,19 +63,16 @@ class ProfileManager {
   }
 
   void addHistory(String word, String description) async {
-    if (userEntity!=null) {
+    if (userEntity != null) {
       notifier.setLoading();
       final res = await userRepository.addHistory(word, description);
       res.fold((l) => notifier.setError(l), (r) {
-        if (words
-            .where((element) => element.word == word)
-            .isEmpty) {
+        if (words.where((element) => element.word == word).isEmpty) {
           words.add(UserWordEntity(
               word: word, isFavourite: false, description: description));
         }
         if (favoriteMod) {
-          notifier.setUser(
-              userEntity!,
+          notifier.setUser(userEntity!,
               words.where((element) => element.isFavourite).toList());
         } else {
           notifier.setUser(userEntity!, words);
