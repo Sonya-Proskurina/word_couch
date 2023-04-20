@@ -105,7 +105,7 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                           height: 200,
                           fit: BoxFit.cover,
                           placeholder: (context, url) => const LoadingWidget(),
-                          errorWidget: (context, url, error) {return Center(child: Text("error"),);},
+                          errorWidget: (context, url, error) {return const Center(child: Text("error"),);},
                         ),
                         // Image.network(
                         //     value.image?.value?.first.thumbnailUrl ?? "",

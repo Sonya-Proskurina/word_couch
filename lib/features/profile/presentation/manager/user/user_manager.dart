@@ -36,7 +36,7 @@ class ProfileManager {
         } else {
           words = r.words;
         }
-        notifier.setUser(r, words);
+        notifier.setUser(r, words.reversed.toList());
       }
     });
   }
