@@ -3,7 +3,7 @@ import 'package:word_couch/features/word_information/data/models/image/image_dat
 
 import '../../data/models/word_model.dart';
 
-mixin WordInfoRepository {
+abstract class WordInfoRepository {
   Future<Either<String, WordModel>> getRandomWord();
   Future<Either<String, WordModel>> getWordInfo(String word);
   Future<Either<String, ImageData>> getWordImage(String word);
