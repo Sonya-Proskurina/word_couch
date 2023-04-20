@@ -86,7 +86,7 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium
-                        ?.apply(color: Colors.black54),
+                        ?.apply(color: Theme.of(context).colorScheme.secondary),
                   )
                 ],
               ),
