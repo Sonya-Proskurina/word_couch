@@ -26,6 +26,7 @@ class _MainPageState extends ConsumerState<MainPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) => manager.loading());
   }
 
+
   @override
   Widget build(BuildContext context) {
     state = ref.watch(manager.getNotifier());

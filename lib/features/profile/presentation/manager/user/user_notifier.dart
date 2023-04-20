@@ -21,7 +21,7 @@ class ProfileNotifier extends StateNotifier<ProfileState> {
   void setUser(UserEntity userEntity, List<UserWordEntity> words) {
     state = ProfileState.user(
       userEntity,
-      words,
+      words.reversed.toList(),
     );
   }
 }
