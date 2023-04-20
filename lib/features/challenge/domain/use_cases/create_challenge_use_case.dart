@@ -23,6 +23,8 @@ class CreateChallengeUseCase {
   }
 
   void initChallenge(int synonyms, int antonyms) {
+    synonymsAmount = synonyms;
+    antonymsAmount = antonyms;
     questionsAmount = synonymsAmount + antonymsAmount;
     currentQuestion = 0;
     generators = [
