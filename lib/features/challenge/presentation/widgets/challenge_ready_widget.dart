@@ -49,7 +49,9 @@ class ChallengeReadyWidget extends ConsumerWidget {
                                     Navigator.pushNamed(context,
                                         RouterPathContainer.challengePage);
                                     // TODO Do something if the answer is correct
-                                    ref.read(DI.profileManager).addPoints(1);
+                                    if (e.isCorrect) {
+                                      ref.read(DI.profileManager).addPoints(1);
+                                    }
                                   },
                                   child: Text(e.answer)),
                             ),
