@@ -57,13 +57,16 @@ class _SearchBarState extends ConsumerState<SearchBar> {
                 },
                 onSubmitted: (word) {
                   ref.read(DI.wordInfoArgNotifier.notifier).setState(word);
-                  bool favorite = ref
+                  bool? favorite = ref
                       .watch(DI.profileManager)
                       .words
                       .where((element) => element.isFavourite)
                       .toList()
                       .where((element) => element.word == word)
                       .isNotEmpty;
+                  if (ref.read(DI.profileManager).userEntity == null) {
+                    favorite = null;
+                  }
                   Navigator.pushNamed(
                     context,
                     RouterPathContainer.wordInformationPage,
