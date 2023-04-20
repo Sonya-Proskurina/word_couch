@@ -5,6 +5,7 @@ import 'package:word_couch/features/challenge/presentation/manager/challenges_ma
 import '../../../../core/di.dart';
 import '../../../../core/navigation/router_path.dart';
 import '../manager/challenge_states.dart';
+import '../widgets/challenge_finished_widget.dart';
 import '../widgets/challenge_ready_widget.dart';
 
 class ChallengePage extends ConsumerStatefulWidget {
@@ -53,25 +54,8 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
         ),
       );
     } else if (state is EndChallengeState) {
-      // TODO Make it look beautiful
-      return Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("The challenge is finished!"),
-              Padding(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.popUntil(context,
-                          ModalRoute.withName(RouterPathContainer.mainPage));
-                    },
-                    child: const Text("Go home")),
-              )
-            ],
-          ),
-        ),
+      return ChallengeFinishedWidget(
+        manager: manager,
       );
     } else if (state is ReadyChallengeState) {
       return ChallengeReadyWidget(

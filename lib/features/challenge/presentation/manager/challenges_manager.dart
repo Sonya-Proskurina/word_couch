@@ -1,12 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/features/challenge/presentation/manager/challenge_states.dart';
 import 'package:word_couch/features/challenge/presentation/manager/challenges_state_notifier.dart';
+import 'package:word_couch/features/challenge/presentation/manager/test_progress_entity.dart';
 
 import '../../domain/use_cases/create_challenge_use_case.dart';
 
 class ChallengesManager {
   final ChallengeStateNotifier _notifier;
   final CreateChallengeUseCase _challenge;
+  TestProgressEntity progress = TestProgressEntity();
 
   ChallengesManager(this._notifier, this._challenge);
 
@@ -16,6 +18,7 @@ class ChallengesManager {
 
   void initChallenge(int synonyms, int antonyms) {
     _challenge.initChallenge(synonyms, antonyms);
+    progress = TestProgressEntity();
   }
 
   void getQuestion() {
