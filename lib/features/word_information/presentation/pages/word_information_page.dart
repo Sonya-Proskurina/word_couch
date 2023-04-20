@@ -101,15 +101,17 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12.0),
                         child: CachedNetworkImage(
-                          imageUrl: value.image?.value?.first.thumbnailUrl ?? "",
+                          imageUrl:
+                              value.image?.value?.first.thumbnailUrl ?? "",
                           height: 200,
                           fit: BoxFit.cover,
                           placeholder: (context, url) => const LoadingWidget(),
-                          errorWidget: (context, url, error) {return const Center(child: Text("error"),);},
+                          errorWidget: (context, url, error) {
+                            return const Center(
+                              child: Text("error"),
+                            );
+                          },
                         ),
-                        // Image.network(
-                        //     value.image?.value?.first.thumbnailUrl ?? "",
-                        //     fit: BoxFit.cover),
                       ),
                     ),
                   Card(

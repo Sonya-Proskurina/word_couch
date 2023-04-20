@@ -55,9 +55,7 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
         ),
       );
     } else if (state is EndChallengeState) {
-      return ChallengeFinishedWidget(
-        manager: manager,
-      );
+      return const ChallengeFinishedWidget();
     } else if (state is ReadyChallengeState) {
       return ChallengeReadyWidget(
         manager: manager,

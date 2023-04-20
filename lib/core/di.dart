@@ -48,8 +48,6 @@ class DI {
   static final wordInfoRepository = Provider((ref) => WordInfoRepositoryImpl(
       ref.watch(wordsApiClient), ref.watch(imageSearchApiClient)));
 
-  // static final wordInfoRepository = Provider((ref) => FakeWordInfoRepository());
-
   static final userAuthDataSource = Provider((ref) => UserAuthDataSource());
 
   static final userRepository = Provider(
@@ -65,11 +63,10 @@ class DI {
   });
 
   static final profileManager = Provider((ref) => ProfileManager(
-        notifier: ref.watch(profileNotifier.notifier),
-        userRepository: ref.watch(userRepository),
-        safeSearchNotifier: ref.watch(safeSearch.notifier),
-        challengePointsNotifier: ref.watch(challengePoints.notifier)
-      ));
+      notifier: ref.watch(profileNotifier.notifier),
+      userRepository: ref.watch(userRepository),
+      safeSearchNotifier: ref.watch(safeSearch.notifier),
+      challengePointsNotifier: ref.watch(challengePoints.notifier)));
 
   static final authNotifier =
       StateNotifierProvider<AuthNotifier, AuthState>((ref) {
