@@ -38,7 +38,8 @@ class _ProfileUserWidgetState extends ConsumerState<ProfileUserWidget> {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     // Text("Test points: ${widget.userEntity.test}")
-                    Text(AppLocalizations.of(context)!.testPoint(widget.userEntity.test.toString()))
+                    Text(AppLocalizations.of(context)!
+                        .testPoint(ref.watch(DI.challengePoints).toString()))
                   ],
                 ),
               ),
