@@ -85,14 +85,18 @@ class DI {
 
   static final challengesManager = Provider((ref) => ChallengesManager(
       ref.watch(challengesNotifier.notifier),
-      ref.watch(createChallengeStateProvider)));
+      CreateChallengeUseCase(ChallengesRepositoryImpl(),
+          antonymsAmount: 0, synonymsAmount: 0)));
 
   static final searchBarInFocusStateProvider =
       StateProvider<bool>((ref) => false);
 
-  static final createChallengeStateProvider =
-      StateProvider<CreateChallengeUseCase>((ref) => CreateChallengeUseCase(
-          ChallengesRepositoryImpl(),
-          antonymsAmount: 0,
-          synonymsAmount: 0));
+  // static final createChallengeStateProvider =
+  //     StateProvider<CreateChallengeUseCase>((ref) {
+  //   return CreateChallengeUseCase(ChallengesRepositoryImpl(),
+  //       antonymsAmount: 0, synonymsAmount: 0);
+  // });
+
+  static final questionsDatabaseLoadedStateProvider =
+      StateProvider<bool>((ref) => false);
 }

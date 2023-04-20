@@ -5,19 +5,34 @@ import 'package:word_couch/features/challenge/domain/entities/binary_answer_enti
 import 'package:word_couch/features/challenge/domain/repositories/challenges_repository.dart';
 import 'package:word_couch/features/challenge/domain/use_cases/question_type_generator.dart';
 
-import '../../../../core/logger.dart';
 import '../../../word_information/data/models/word_model.dart';
 import '../entities/question_entity.dart';
 
 class CreateChallengeUseCase {
-  final int synonymsAmount;
-  final int antonymsAmount;
-  late final int questionsAmount;
+  int synonymsAmount;
+  int antonymsAmount;
+  int questionsAmount;
   int currentQuestion = 0;
   final Random _random = Random();
   final ChallengesRepository _challengesRepository;
-  final List<QuestionTypeGenerator> generators;
-  late final Set<int> categories;
+  List<QuestionTypeGenerator> generators;
+  late Set<int> categories;
+
+  Future<void> initRepository() async {
+    await _challengesRepository.init();
+  }
+
+  void initChallenge(int synonyms, int antonyms) {
+    questionsAmount = synonymsAmount + antonymsAmount;
+    currentQuestion = 0;
+    generators = [
+      QuestionTypeGenerator(
+          amount: synonymsAmount, type: QuestionType.findSynonym),
+      QuestionTypeGenerator(
+          amount: antonymsAmount, type: QuestionType.findAntonym)
+    ];
+    categories = List.generate(generators.length, (index) => index).toSet();
+  }
 
   CreateChallengeUseCase(this._challengesRepository,
       {required this.synonymsAmount, required this.antonymsAmount})
@@ -92,14 +107,14 @@ class CreateChallengeUseCase {
     return null;
   }
 
-  Future<Either<String, QuestionEntity>?> buildQuestion() async {
+  Either<String, QuestionEntity>? buildQuestion() {
     final type = _buildQuestionType();
     switch (type) {
       case QuestionType.none:
         return null;
       case QuestionType.findSynonym:
         {
-          final question = await _challengesRepository.getSynonymQuestion();
+          final question = _challengesRepository.getSynonymQuestion();
           return question.fold((l) => Left(l), (r) {
             currentQuestion++;
             return Right(r);
@@ -107,7 +122,7 @@ class CreateChallengeUseCase {
         }
       case QuestionType.findAntonym:
         {
-          final question = await _challengesRepository.getAntonymQuestion();
+          final question = _challengesRepository.getAntonymQuestion();
           return question.fold((l) => Left(l), (r) {
             currentQuestion++;
             return Right(r);

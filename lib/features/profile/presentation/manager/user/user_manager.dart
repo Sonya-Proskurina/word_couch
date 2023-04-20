@@ -42,39 +42,47 @@ class ProfileManager {
   }
 
   void addFavorite(String word, bool add) async {
-    notifier.setLoading();
-    final res = await userRepository.addFavorite(word, add);
-    res.fold((l) => notifier.setError(l), (r) {
-      for (final w in words) {
-        if (w.word == word) {
-          w.isFavourite = add;
-          break;
+    if (userEntity!=null) {
+      notifier.setLoading();
+      final res = await userRepository.addFavorite(word, add);
+      res.fold((l) => notifier.setError(l), (r) {
+        for (final w in words) {
+          if (w.word == word) {
+            w.isFavourite = add;
+            break;
+          }
         }
-      }
-      if (favoriteMod) {
-        notifier.setUser(userEntity!,
-            words.where((element) => element.isFavourite).toList());
-      } else {
-        notifier.setUser(userEntity!, words);
-      }
-    });
+        if (favoriteMod) {
+          notifier.setUser(
+              userEntity!,
+              words.where((element) => element.isFavourite).toList());
+        } else {
+          notifier.setUser(userEntity!, words);
+        }
+      });
+    }
   }
 
   void addHistory(String word, String description) async {
-    notifier.setLoading();
-    final res = await userRepository.addHistory(word, description);
-    res.fold((l) => notifier.setError(l), (r) {
-      if (words.where((element) => element.word == word).isEmpty) {
-        words.add(UserWordEntity(
-            word: word, isFavourite: false, description: description));
-      }
-      if (favoriteMod) {
-        notifier.setUser(userEntity!,
-            words.where((element) => element.isFavourite).toList());
-      } else {
-        notifier.setUser(userEntity!, words);
-      }
-    });
+    if (userEntity!=null) {
+      notifier.setLoading();
+      final res = await userRepository.addHistory(word, description);
+      res.fold((l) => notifier.setError(l), (r) {
+        if (words
+            .where((element) => element.word == word)
+            .isEmpty) {
+          words.add(UserWordEntity(
+              word: word, isFavourite: false, description: description));
+        }
+        if (favoriteMod) {
+          notifier.setUser(
+              userEntity!,
+              words.where((element) => element.isFavourite).toList());
+        } else {
+          notifier.setUser(userEntity!, words);
+        }
+      });
+    }
   }
 
   void exit() async {
