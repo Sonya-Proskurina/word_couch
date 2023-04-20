@@ -7,12 +7,20 @@ import 'package:word_couch/features/challenge/domain/entities/question_entity.da
 import '../../domain/repositories/challenges_repository.dart';
 
 class ChallengesRepositoryImpl implements ChallengesRepository {
-  final challengesDataSource = ChallengeDataSource();
+  late ChallengeDataSource _challengesDataSource;
 
   @override
-  Future<Either<String, QuestionEntity>> getAntonymQuestion() async {
+  Future<void> init() async {
+    _challengesDataSource = await ChallengeDataSource.initAll();
+  }
+
+  @override
+  Either<String, QuestionEntity> getAntonymQuestion() {
     try {
-      final question = await challengesDataSource.getAntonymQuestion();
+      final question = _challengesDataSource.getAntonymQuestion();
+      if (question == null) {
+        return const Left("No more questions left");
+      }
       return Right(question);
     } catch (e) {
       logger.e(e);
@@ -21,9 +29,12 @@ class ChallengesRepositoryImpl implements ChallengesRepository {
   }
 
   @override
-  Future<Either<String, QuestionEntity>> getSynonymQuestion() async {
+  Either<String, QuestionEntity> getSynonymQuestion() {
     try {
-      final question = await challengesDataSource.getSynonymQuestion();
+      final question = _challengesDataSource.getSynonymQuestion();
+      if (question == null) {
+        return const Left("No more questions left");
+      }
       return Right(question);
     } catch (e) {
       logger.e(e);

@@ -13,4 +13,12 @@ class QuestionEntity {
 
   QuestionEntity(
       {required this.question, required this.answers, required this.type});
+
+  @override
+  bool operator ==(Object other) {
+    if (other is QuestionEntity) {
+      return other.question == question;
+    }
+    return false;
+  }
 }
