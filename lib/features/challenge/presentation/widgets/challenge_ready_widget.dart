@@ -46,12 +46,14 @@ class ChallengeReadyWidget extends ConsumerWidget {
                               child: ElevatedButton(
                                   onPressed: () {
                                     manager.getQuestion();
-                                    Navigator.pushNamed(context,
-                                        RouterPathContainer.challengePage);
-                                    // TODO Do something if the answer is correct
                                     if (e.isCorrect) {
                                       ref.read(DI.profileManager).addPoints(1);
+                                      manager.progress.addCorrect();
+                                    } else {
+                                      manager.progress.addIncorrect();
                                     }
+                                    Navigator.pushNamed(context,
+                                        RouterPathContainer.challengePage);
                                   },
                                   child: Text(e.answer)),
                             ),
@@ -61,9 +63,9 @@ class ChallengeReadyWidget extends ConsumerWidget {
                         TextButton(
                             onPressed: () {
                               manager.getQuestion();
+                              manager.progress.addSkipped();
                               Navigator.pushNamed(
                                   context, RouterPathContainer.challengePage);
-                              // TODO Do something if you skip the question
                             },
                             child: const Text(
                               "I don't know, next",
