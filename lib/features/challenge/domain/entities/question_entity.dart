@@ -7,17 +7,17 @@ enum QuestionType {
 }
 
 class QuestionEntity {
-  final String question;
+  final String word;
   final List<BinaryAnswerEntity> answers;
   final QuestionType type;
 
   QuestionEntity(
-      {required this.question, required this.answers, required this.type});
+      {required this.word, required this.answers, required this.type});
 
   @override
   bool operator ==(Object other) {
     if (other is QuestionEntity) {
-      return other.question == question;
+      return other.word == word;
     }
     return false;
   }

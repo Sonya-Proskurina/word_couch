@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/core/di.dart';
 import 'package:word_couch/features/challenge/domain/entities/question_entity.dart';
 import 'package:word_couch/features/challenge/presentation/manager/challenges_manager.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:word_couch/features/challenge/presentation/widgets/question_title.dart';
 import '../../../../core/navigation/router_path.dart';
 
 class ChallengeReadyWidget extends ConsumerWidget {
@@ -16,8 +17,9 @@ class ChallengeReadyWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) => Scaffold(
       appBar: AppBar(
-        title: Text(
-            "${manager.getCurrentQuestion()} out of ${manager.getTotalQuestions()}"),
+        title: Text(AppLocalizations.of(context)!.questionProgress(
+            manager.getCurrentQuestion().toString(),
+            manager.getTotalQuestions().toString())),
         leading: IconButton(
           onPressed: () {
             Navigator.popUntil(
@@ -31,10 +33,7 @@ class ChallengeReadyWidget extends ConsumerWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Text(
-                question.question,
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
+              QuestionTitle(type: question.type, word: question.word),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -67,8 +66,8 @@ class ChallengeReadyWidget extends ConsumerWidget {
                               Navigator.pushNamed(
                                   context, RouterPathContainer.challengePage);
                             },
-                            child: const Text(
-                              "I don't know, next",
+                            child: Text(
+                              AppLocalizations.of(context)!.iDoNotKnow,
                               textAlign: TextAlign.end,
                             ))
                       ],

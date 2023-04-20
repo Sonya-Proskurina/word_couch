@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/core/navigation/router_path.dart';
 import '../../../../core/di.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChallengeSettingsPage extends ConsumerStatefulWidget {
   const ChallengeSettingsPage({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class _ChallengeSettingsPageState extends ConsumerState<ChallengeSettingsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Set your challenge",
+                    AppLocalizations.of(context)!.setChallenge,
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
                   Expanded(
@@ -57,8 +58,8 @@ class _ChallengeSettingsPageState extends ConsumerState<ChallengeSettingsPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Text(
-                            "Select the amount of synonyms you want to guess"),
+                        Text(
+                            AppLocalizations.of(context)!.selectAmountSynonyms),
                         Slider(
                           value: _sliderSynonymsValue.toDouble(),
                           max: 20,
@@ -72,8 +73,8 @@ class _ChallengeSettingsPageState extends ConsumerState<ChallengeSettingsPage> {
                         const SizedBox(
                           height: 16,
                         ),
-                        const Text(
-                            "Select the amount of antonyms you want to guess"),
+                        Text(
+                            AppLocalizations.of(context)!.selectAmountAntonyms),
                         Slider(
                           value: _sliderAntonymsValue.toDouble(),
                           max: 20,
@@ -102,16 +103,18 @@ class _ChallengeSettingsPageState extends ConsumerState<ChallengeSettingsPage> {
                                     context, RouterPathContainer.challengePage);
                               }
                             },
-                            child: const Text("Start the challenge")),
+                            child: Text(
+                                AppLocalizations.of(context)!.startChallenge)),
                         AnimatedOpacity(
                           opacity: showErrorMessage ? 1 : 0,
                           duration: const Duration(milliseconds: 200),
-                          child: const Padding(
-                            padding: EdgeInsets.only(top: 16.0),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
                             child: Text(
-                              "You cannot start a challenge with no questions",
+                              AppLocalizations.of(context)!
+                                  .cannotStartNoQuestions,
                               textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red),
+                              style: const TextStyle(color: Colors.red),
                             ),
                           ),
                         )

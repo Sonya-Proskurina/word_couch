@@ -35,9 +35,7 @@ class ChallengeDataSource {
             answer: element["word"], isCorrect: element["isCorrect"]);
       }).toList();
       return QuestionEntity(
-          question: "What is synonymous to the '$question'?",
-          answers: answers,
-          type: QuestionType.findSynonym);
+          word: question, answers: answers, type: QuestionType.findSynonym);
     }).toList();
   }
 
@@ -54,9 +52,7 @@ class ChallengeDataSource {
             answer: element["word"], isCorrect: element["isCorrect"]);
       }).toList();
       return QuestionEntity(
-          question: "What is antonymous to the '$question'?",
-          answers: answers,
-          type: QuestionType.findAntonym);
+          word: question, answers: answers, type: QuestionType.findAntonym);
     }).toList();
   }
 

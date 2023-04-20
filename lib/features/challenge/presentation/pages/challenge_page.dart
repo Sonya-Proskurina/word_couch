@@ -7,6 +7,7 @@ import '../../../../core/navigation/router_path.dart';
 import '../manager/challenge_states.dart';
 import '../widgets/challenge_finished_widget.dart';
 import '../widgets/challenge_ready_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChallengePage extends ConsumerStatefulWidget {
   const ChallengePage({Key? key}) : super(key: key);
@@ -47,7 +48,7 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
                       Navigator.popUntil(context,
                           ModalRoute.withName(RouterPathContainer.mainPage));
                     },
-                    child: const Text("Go home")),
+                    child: Text(AppLocalizations.of(context)!.goHome)),
               )
             ],
           ),
