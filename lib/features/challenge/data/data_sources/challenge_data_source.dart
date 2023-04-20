@@ -7,7 +7,9 @@ import '../../domain/entities/question_entity.dart';
 class ChallengeDataSource {
   final _firebase = FirebaseFirestore.instance;
   List<QuestionEntity> _synonymQuestionsList = [];
+  int _iSynonym = 0;
   List<QuestionEntity> _antonymQuestionsList = [];
+  int _iAntonym = 0;
 
   static Future<ChallengeDataSource> initAll() async {
     final obj = ChallengeDataSource();
@@ -62,13 +64,17 @@ class ChallengeDataSource {
     if (_synonymQuestionsList.isEmpty) {
       return null;
     }
-    return _synonymQuestionsList.first;
+    final q = _synonymQuestionsList[_iSynonym];
+    _iSynonym++;
+    return q;
   }
 
   QuestionEntity? getAntonymQuestion() {
     if (_antonymQuestionsList.isEmpty) {
       return null;
     }
-    return _antonymQuestionsList.first;
+    final q = _antonymQuestionsList[_iAntonym];
+    _iAntonym++;
+    return q;
   }
 }

@@ -1,16 +1,12 @@
-import 'dart:collection';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/features/challenge/presentation/manager/challenge_states.dart';
 import 'package:word_couch/features/challenge/presentation/manager/challenges_state_notifier.dart';
 
-import '../../domain/entities/question_entity.dart';
 import '../../domain/use_cases/create_challenge_use_case.dart';
 
 class ChallengesManager {
   final ChallengeStateNotifier _notifier;
   final CreateChallengeUseCase _challenge;
-  final HashSet<QuestionEntity> _shownQuestions = HashSet();
 
   ChallengesManager(this._notifier, this._challenge);
 
@@ -31,12 +27,7 @@ class ChallengesManager {
       eitherQuestion.fold((l) {
         _notifier.setError(l);
       }, (r) {
-        if (_shownQuestions.contains(r)) {
-          getQuestion();
-        } else {
-          _shownQuestions.add(r);
-          _notifier.setReady(r);
-        }
+        _notifier.setReady(r);
       });
     }
   }
