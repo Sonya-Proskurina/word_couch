@@ -104,6 +104,15 @@ class WordInformationPageState extends ConsumerState<WordInformationPage> {
                           imageUrl:
                               value.image?.value?.first.thumbnailUrl ?? "",
                           height: 200,
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.fitWidth,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                          ),
                           fit: BoxFit.cover,
                           placeholder: (context, url) => const LoadingWidget(),
                           errorWidget: (context, url, error) {
