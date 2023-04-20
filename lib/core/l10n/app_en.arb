@@ -1,6 +1,6 @@
 {
  "appName": "Words Couch",
- "exit": "Exit",
+ "exit": "Sign out",
  "testItemTitle": "Test your knowledge!",
  "testItemText": "Play a game where you guess words meaning",
  "search": "Search",
@@ -13,15 +13,54 @@
  "typeOf": "Type of",
  "derivation": "Derivation",
  "logIn": "Log in",
- "noAccount": "Don't have an account? Register",
+ "noAccount": "Don't have an account? Register!",
  "safeSearch": "Safe search",
- "noUserText": "Log in to your profile to save your favorite words, query history, and test points",
- "testPoint" : "Test point {parameter}",
+ "noUserText": "Log in to your profile to save your favorite words, search history, and game points",
+ "testPoint" : "Game points: {parameter}",
  "@testPoint": {
  "placeholders": {
  "parameter": {
          "type":"String"
          }
        }
+    },
+ "goHome": "Go to the main screen",
+ "setChallenge": "Set your game!",
+ "selectAmountSynonyms": "Pick the amount of synonyms you want to guess",
+ "selectAmountAntonyms": "Pick the amount of antonyms you want to guess",
+ "startChallenge": "Start the game",
+ "cannotStartNoQuestions": "You cannot start a game with no questions",
+ "questionProgress": "{p1} out of {p2}",
+ "@questionProgress": {
+    "placeholders": {
+     "p1": {
+         "type":"String"
+         },
+         "p2": {
+         "type": "String"
+       }
     }
+ },
+ "questionSynonymous": "What is synonymous to the '{word}'?",
+ "@questionSynonymous": {
+     "placeholders": {
+         "word": {
+            "type":"String"
+         }
+     }
+ },
+ "questionAntonymous": "What is antonymous to the '{word}'?",
+  "@questionAntonymous": {
+      "placeholders": {
+          "word": {
+             "type":"String"
+          }
+      }
+  },
+  "iDoNotKnow": "I don't know, skip",
+  "challengeFinished": "The game is finished!",
+  "correct": "Correct",
+  "incorrect": "Incorrect",
+  "skipped": "Skipped"
+
 }

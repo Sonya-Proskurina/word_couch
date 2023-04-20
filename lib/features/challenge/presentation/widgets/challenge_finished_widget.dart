@@ -5,6 +5,7 @@ import 'package:pie_chart/pie_chart.dart';
 
 import '../../../../core/navigation/router_path.dart';
 import '../manager/challenges_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChallengeFinishedWidget extends ConsumerWidget {
   const ChallengeFinishedWidget({super.key, required this.manager});
@@ -24,16 +25,19 @@ class ChallengeFinishedWidget extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: Text(
-                  "The challenge is finished!",
+                  AppLocalizations.of(context)!.challengeFinished,
                   style: Theme.of(context).textTheme.headlineLarge,
                   textAlign: TextAlign.center,
                 ),
               ),
               PieChart(
                 dataMap: {
-                  "Correct": manager.progress.getCorrect().toDouble(),
-                  "Incorrect": manager.progress.getIncorrect().toDouble(),
-                  "Skipped": manager.progress.getSkipped().toDouble()
+                  AppLocalizations.of(context)!.correct:
+                      manager.progress.getCorrect().toDouble(),
+                  AppLocalizations.of(context)!.incorrect:
+                      manager.progress.getIncorrect().toDouble(),
+                  AppLocalizations.of(context)!.skipped:
+                      manager.progress.getSkipped().toDouble()
                 },
                 colorList: const [
                   Colors.green,
@@ -53,7 +57,7 @@ class ChallengeFinishedWidget extends ConsumerWidget {
                       Navigator.popUntil(context,
                           ModalRoute.withName(RouterPathContainer.mainPage));
                     },
-                    child: const Text("Go home")),
+                    child: Text(AppLocalizations.of(context)!.goHome)),
               )
             ],
           ),

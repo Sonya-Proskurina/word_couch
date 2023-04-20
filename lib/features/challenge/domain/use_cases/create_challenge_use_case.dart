@@ -72,7 +72,7 @@ class CreateChallengeUseCase {
       final antonymWord = antonyms[_random.nextInt(antonyms.length)];
       final similarWord = similar[_random.nextInt(similar.length)];
       return QuestionEntity(
-          question: 'What is antonymous to the ${model.word}?',
+          word: 'What is antonymous to the ${model.word}?',
           answers: [
             BinaryAnswerEntity(answer: antonymWord, isCorrect: true),
             BinaryAnswerEntity(answer: similarWord, isCorrect: false)
@@ -97,7 +97,7 @@ class CreateChallengeUseCase {
         final randomSimilarWord =
             similarButNotSynonym[_random.nextInt(similarButNotSynonym.length)];
         return QuestionEntity(
-          question: 'What is synonymous to the ${model.word}?',
+          word: 'What is synonymous to the ${model.word}?',
           answers: [
             BinaryAnswerEntity(answer: randomSynonymWord, isCorrect: true),
             BinaryAnswerEntity(answer: randomSimilarWord, isCorrect: false)
