@@ -3,6 +3,7 @@ import 'package:word_couch/features/challenge/data/repositories/challenges_repos
 import 'package:word_couch/features/challenge/domain/use_cases/create_challenge_use_case.dart';
 import 'package:word_couch/features/challenge/presentation/manager/challenges_manager.dart';
 import 'package:word_couch/features/challenge/presentation/manager/challenges_state_notifier.dart';
+import 'package:word_couch/features/profile/presentation/manager/user/challenge_points_notifier.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/safe_search_notifier.dart';
 import 'package:word_couch/features/word_information/domain/entities/word_info_arg_notifier.dart';
 import '../features/word_information/domain/entities/word_info_state.dart';
@@ -21,6 +22,10 @@ import '../features/word_information/presentation/manager/manager.dart';
 class DI {
   static final safeSearch = StateNotifierProvider<SafeSearchNotifier, bool>(
       (ref) => SafeSearchNotifier(true));
+
+  static final challengePoints =
+      StateNotifierProvider<ChallengePointsNotifier, int>(
+          (ref) => ChallengePointsNotifier(0));
 
   static final wordInfoNotifier =
       StateNotifierProvider<WordInfoNotifier, WordInfoState>(
@@ -63,6 +68,7 @@ class DI {
         notifier: ref.watch(profileNotifier.notifier),
         userRepository: ref.watch(userRepository),
         safeSearchNotifier: ref.watch(safeSearch.notifier),
+        challengePointsNotifier: ref.watch(challengePoints.notifier)
       ));
 
   static final authNotifier =

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:word_couch/core/di.dart';
 import 'package:word_couch/features/challenge/domain/entities/question_entity.dart';
 import 'package:word_couch/features/challenge/presentation/manager/challenges_manager.dart';
 
@@ -48,6 +49,7 @@ class ChallengeReadyWidget extends ConsumerWidget {
                                     Navigator.pushNamed(context,
                                         RouterPathContainer.challengePage);
                                     // TODO Do something if the answer is correct
+                                    ref.read(DI.profileManager).addPoints(1);
                                   },
                                   child: Text(e.answer)),
                             ),

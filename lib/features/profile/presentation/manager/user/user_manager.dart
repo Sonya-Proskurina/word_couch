@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_couch/features/profile/domain/entities/user_word_entity.dart';
 import 'package:word_couch/features/profile/domain/repositories/user_repository.dart';
+import 'package:word_couch/features/profile/presentation/manager/user/challenge_points_notifier.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/safe_search_notifier.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_notifier.dart';
 import 'package:word_couch/features/profile/presentation/manager/user/user_states.dart';
@@ -10,6 +11,7 @@ class ProfileManager {
   ProfileNotifier notifier;
   UserRepository userRepository;
   SafeSearchNotifier safeSearchNotifier;
+  ChallengePointsNotifier challengePointsNotifier;
   bool favoriteMod = false;
   UserEntity? userEntity;
   List<UserWordEntity> words = [];
@@ -18,6 +20,7 @@ class ProfileManager {
     required this.notifier,
     required this.userRepository,
     required this.safeSearchNotifier,
+    required this.challengePointsNotifier,
   });
 
   void loading() async {
@@ -49,8 +52,8 @@ class ProfileManager {
         }
       }
       if (favoriteMod) {
-        notifier.setUser(
-            userEntity!, words.where((element) => element.isFavourite).toList());
+        notifier.setUser(userEntity!,
+            words.where((element) => element.isFavourite).toList());
       } else {
         notifier.setUser(userEntity!, words);
       }
@@ -61,13 +64,13 @@ class ProfileManager {
     notifier.setLoading();
     final res = await userRepository.addHistory(word, description);
     res.fold((l) => notifier.setError(l), (r) {
-      if (words.where((element) => element.word==word).isEmpty) {
+      if (words.where((element) => element.word == word).isEmpty) {
         words.add(UserWordEntity(
-          word: word, isFavourite: false, description: description));
+            word: word, isFavourite: false, description: description));
       }
       if (favoriteMod) {
-        notifier.setUser(
-            userEntity!, words.where((element) => element.isFavourite).toList());
+        notifier.setUser(userEntity!,
+            words.where((element) => element.isFavourite).toList());
       } else {
         notifier.setUser(userEntity!, words);
       }
@@ -99,6 +102,11 @@ class ProfileManager {
   void setSafeSearch(bool isSafe) {
     safeSearchNotifier.setState(isSafe);
   }
+
+  int get challengePoints => challengePointsNotifier.getState();
+
+  void addPoints(int points) =>
+      challengePointsNotifier.setState(challengePoints + points);
 
   StateNotifierProvider<ProfileNotifier, ProfileState> getNotifier() {
     return StateNotifierProvider<ProfileNotifier, ProfileState>((ref) {
