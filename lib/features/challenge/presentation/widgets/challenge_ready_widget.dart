@@ -15,66 +15,71 @@ class ChallengeReadyWidget extends ConsumerWidget {
   final QuestionEntity question;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.questionProgress(
-            manager.getCurrentQuestion().toString(),
-            manager.getTotalQuestions().toString())),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.popUntil(
-                context, ModalRoute.withName(RouterPathContainer.mainPage));
-          },
-          icon: const Icon(Icons.arrow_back),
-        ),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              QuestionTitle(type: question.type, word: question.word),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: question.answers
-                          .map<Widget>(
-                            (e) => Padding(
-                              padding: const EdgeInsets.only(bottom: 4.0),
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    manager.getQuestion();
-                                    if (e.isCorrect) {
-                                      ref.read(DI.profileManager).addPoints(1);
-                                      manager.progress.addCorrect();
-                                    } else {
-                                      manager.progress.addIncorrect();
-                                    }
-                                    Navigator.pushNamed(context,
-                                        RouterPathContainer.challengePage);
-                                  },
-                                  child: Text(e.answer)),
-                            ),
-                          )
-                          .toList() +
-                      <Widget>[
-                        TextButton(
-                            onPressed: () {
-                              manager.getQuestion();
-                              manager.progress.addSkipped();
-                              Navigator.pushNamed(
-                                  context, RouterPathContainer.challengePage);
-                            },
-                            child: Text(
-                              AppLocalizations.of(context)!.iDoNotKnow,
-                              textAlign: TextAlign.end,
-                            ))
-                      ],
-                ),
-              ),
-            ],
+  Widget build(BuildContext context, WidgetRef ref) {
+    final answersShuffled = question.answers..shuffle();
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.questionProgress(
+              manager.getCurrentQuestion().toString(),
+              manager.getTotalQuestions().toString())),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.popUntil(
+                  context, ModalRoute.withName(RouterPathContainer.mainPage));
+            },
+            icon: const Icon(Icons.arrow_back),
           ),
         ),
-      ));
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                QuestionTitle(type: question.type, word: question.word),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: answersShuffled
+                            .map<Widget>(
+                              (e) => Padding(
+                                padding: const EdgeInsets.only(bottom: 4.0),
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      manager.getQuestion();
+                                      if (e.isCorrect) {
+                                        ref
+                                            .read(DI.profileManager)
+                                            .addPoints(1);
+                                        manager.progress.addCorrect();
+                                      } else {
+                                        manager.progress.addIncorrect();
+                                      }
+                                      Navigator.pushNamed(context,
+                                          RouterPathContainer.challengePage);
+                                    },
+                                    child: Text(e.answer)),
+                              ),
+                            )
+                            .toList() +
+                        <Widget>[
+                          TextButton(
+                              onPressed: () {
+                                manager.getQuestion();
+                                manager.progress.addSkipped();
+                                Navigator.pushNamed(
+                                    context, RouterPathContainer.challengePage);
+                              },
+                              child: Text(
+                                AppLocalizations.of(context)!.iDoNotKnow,
+                                textAlign: TextAlign.end,
+                              ))
+                        ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
+  }
 }
