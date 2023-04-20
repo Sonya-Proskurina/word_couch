@@ -5,7 +5,7 @@ import 'package:word_couch/core/ui/errors_widget.dart';
 import 'package:word_couch/core/ui/loading_widget.dart';
 import 'package:word_couch/features/profile/presentation/manager/auth/auth_manager.dart';
 import 'package:word_couch/features/profile/presentation/manager/auth/auth_states.dart';
-import 'package:word_couch/features/profile/presentation/widgets/auth_loaded_widget.dart';
+import 'package:word_couch/features/profile/presentation/widgets/auth_widget.dart';
 import 'package:word_couch/features/profile/presentation/widgets/auth_registration_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -32,7 +32,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     if (state is AuthLoadingState) {
       return const LoadingWidget();
     } else if (state is AuthLoadedState) {
-      return const AuthLoadedWidget();
+      return const AuthWidget();
     } else if (state is AuthUserState) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pop(context);

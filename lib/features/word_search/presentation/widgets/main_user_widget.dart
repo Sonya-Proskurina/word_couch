@@ -7,9 +7,8 @@ import '../../../../core/di.dart';
 import '../../../profile/presentation/pages/profile_drawer.dart';
 import 'main_screen_list.dart';
 
-
 class MainUserWidget extends ConsumerStatefulWidget {
-   final List<UserWordEntity> history;
+  final List<UserWordEntity> history;
 
   const MainUserWidget({
     Key? key,

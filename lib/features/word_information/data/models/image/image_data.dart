@@ -10,7 +10,8 @@ class ImageData with _$ImageData {
     List<Value>? value,
   }) = _ImageData;
 
-  factory ImageData.fromJson(Map<String, dynamic> json) => _$ImageDataFromJson(json);
+  factory ImageData.fromJson(Map<String, dynamic> json) =>
+      _$ImageDataFromJson(json);
 }
 
 @freezed
@@ -38,5 +39,6 @@ class Thumbnail with _$Thumbnail {
     int? height,
   }) = _Thumbnail;
 
-  factory Thumbnail.fromJson(Map<String, dynamic> json) => _$ThumbnailFromJson(json);
+  factory Thumbnail.fromJson(Map<String, dynamic> json) =>
+      _$ThumbnailFromJson(json);
 }

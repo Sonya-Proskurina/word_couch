@@ -5,14 +5,14 @@ import 'package:word_couch/core/di.dart';
 import 'package:word_couch/features/profile/presentation/manager/auth/auth_manager.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AuthLoadedWidget extends ConsumerStatefulWidget {
-  const AuthLoadedWidget({Key? key}) : super(key: key);
+class AuthWidget extends ConsumerStatefulWidget {
+  const AuthWidget({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<AuthLoadedWidget> createState() => _AuthLoadedWidgetState();
+  ConsumerState<AuthWidget> createState() => _AuthLoadedWidgetState();
 }
 
-class _AuthLoadedWidgetState extends ConsumerState<AuthLoadedWidget> {
+class _AuthLoadedWidgetState extends ConsumerState<AuthWidget> {
   late AuthManager manager;
 
   @override

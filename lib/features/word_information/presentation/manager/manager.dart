@@ -86,7 +86,7 @@ class WordInfoManager {
     notifier.setLoading();
     isFavorite = !(isFavorite!);
     notifier.set(wordModel, isFavorite);
-    if (wordModel.results.isNotEmpty&&image!=null) {
+    if (wordModel.results.isNotEmpty && image != null) {
       notifier.setImage(image!, isFavorite);
     }
   }

@@ -1,4 +1,3 @@
-
 import 'package:word_couch/features/word_information/data/models/image/image_data.dart';
 import 'package:word_couch/features/word_information/data/models/word_model.dart';
 
